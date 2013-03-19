@@ -1,0 +1,253 @@
+article.main {
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    bottom: 32px;
+    left: 0;
+    right: 0;
+    padding-top: @headerHeight;
+    // background-color: @colorLightGray;
+    .box-shadow(0 0 20px rgba(0,0,0,0.5));
+
+    // font
+    font-size: 16px;
+
+    a.close {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: @headerHeight;
+        height: @headerHeight;
+        width: @headerHeight;
+        background-color: @colorLightGray;
+
+        span {
+            position: absolute;
+            top: -2px;
+            left: 6px;
+            font-family: @headlineFont;
+            font-size: 100px;
+            line-height: @headerHeight;
+            color: @colorGray;
+        }
+
+        &:hover,
+        &:focus {
+            span {
+                color: darken(@colorGray, 20%);
+            }
+        }
+        &:active {
+            background-color: @colorGray;
+            span {
+                color: @colorLightGray;
+            }
+        }
+    }
+
+
+    aside.left,
+    aside.right,
+    div.medium {
+        display: block;
+        position: relative;
+        top: 0;
+        float: left;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    aside.left,
+    aside.right {
+        width: 25%;
+        background-color: @colorGray;
+
+    }
+
+    aside.left {
+        z-index: 2;
+        overflow: visible;
+
+        .image,
+        .imageZoom {
+            z-index: 2;
+            position: relative;
+            float:left;
+            width: 100%;
+            height: 0;
+            padding-bottom: 75%;
+
+            &.small {
+                width: 50%;
+                padding-bottom: 37.5%;
+            }
+        }
+
+        .image {
+            &:hover:before,
+            &:focus:before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-color: fadeout(@colorBlack,50%);
+            }
+        }
+
+        // .perspective(600px);
+
+        .imageZoom {
+            z-index: 0;
+            position: absolute;
+            visibility: hidden;
+
+            overflow: hidden;
+            background-position: center top; //left top
+            background-repeat: no-repeat;
+
+            .background-size(cover);
+
+            .transform-origin(left top);
+            .transition-property(padding-bottom, height, width, left, visibility, background-size, background-position-y);
+            .transition-delay(0s, 0s, 0s, @animationDuration/1.5, @animationDuration/1.5, @animationDuration/1.5, @animationDuration/1.5);
+            .transition-duration(@animationDuration/1.5);
+            // .transform(rotateY(179deg));
+            // .backface-visibility(hidden);
+            // .transform-style(preserve-3d);
+
+            img {
+                // visibility: hidden;
+            }
+        }
+
+        .image:hover + .imageZoom {
+            z-index: 1;
+            visibility: visible;
+            left: 100%;
+            width: 300%;
+            height: 100%;
+            padding-bottom: 0;
+
+            .background-size(100%, auto);
+            .transition-property(left, background-position-y, background-size, width, height, padding-bottom);
+            .transition-delay(0s, 0s, @animationDuration/1.5, @animationDuration/1.5, @animationDuration/1.5, @animationDuration/1.5);
+            // .transition-property(width, height, padding-bottom);
+            // .transition-delay(0s, 0s, 0s);
+            // .transition-duration(@animationDuration*4);
+
+            // .transform(rotateY(0deg));
+        }
+    }
+    aside.right {
+        position: absolute;
+        top: @headerHeight;
+        right: 0;
+        width: 60px;
+        margin-left: 0;
+        padding-left: 60px;
+        .box-sizing(border-box);
+        .transition(all @animationDuration);
+        .transition-timing-function(cubic-bezier(0.595, 0.855, 0.000, 1.165));
+
+        &:hover,
+        &:focus {
+            // width: 660px; // set in responsiveness.less
+            .box-shadow(0 0 15px rgba(0,0,0,0.5));
+
+            h1.title {
+                width: 60px;
+            }
+        }
+
+        h1.title {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            height: 100%;
+            width: 60px;
+            margin: 0;
+            background-color: lighten(@colorGray,10%);
+
+            span, i {
+                position: relative;
+                color: darken(@colorGray,10%);
+            }
+
+            > span.rotated {
+                // position: relative;
+                top: 49%;
+                left: -170px;
+                width: 400px;
+                display: inline-block;
+                // color: darken(@colorGray,10%);
+                font-family: @headlineFont;
+                text-align: center;
+                .transform-origin(center center);
+                .rotate(-90deg);
+            }
+
+            i {
+                left: 15px;
+
+            }
+            span.count {
+                display: inline-block;
+                top: -10px;
+                width: 60px;
+                text-align: center;
+                font-size: 0.5em;
+            }
+        }
+    }
+
+    a.articleLink {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 25%;
+        right: 0;
+        height: 60px;
+        line-height: 60px;
+        padding: 0 20px;
+        background-color: fadeout(@colorRed,5%);
+        font-size: 1.5em;
+        color: #fff;
+        -webkit-font-smoothing: antialiased;
+
+        &:hover,
+        &:focus {
+            background-color: darken(@colorRed,10%);
+        }
+    }
+    div.medium {
+        position: relative;
+        width: 75%;
+        background-color: @colorLightGray;
+
+        > div.content {
+            height: 100%;
+            padding: 20px 40px;
+            padding-bottom: 90px;
+            overflow: auto;
+            margin-right: 60px;
+            .box-sizing(border-box);
+        }
+
+        h1 {
+            font-family: @headlineFont;
+            font-size: 2.3em;
+            margin-bottom: 1.5em;
+        }
+        h2 {
+            font-family: @subHeadlineFont;
+            font-size: 1.8em;
+            margin-bottom: 1.5em;
+        }
+        p {
+            font-family: @contentFont;
+            font-size: 1.0em;
+            line-height: 2em;
+        }
+    }
+}

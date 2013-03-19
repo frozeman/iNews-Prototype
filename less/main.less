@@ -1,0 +1,81 @@
+// CODEKIT Frameworks
+// @import 'bootstrap';
+@import 'lesshat';
+
+// thirdparty
+@import 'thirdparty/font-awesome.less';
+@import 'thirdparty/etalage.less';
+
+/* ==========================================================================
+   APP STYLES
+   ========================================================================== */
+
+/* 960gs */
+div.gridSystem {
+  z-index: 999;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 1200px;
+  background-position: top center !important;
+  display: none;
+}
+div.gridSystem.gs12 {
+  background: url("../img/gs/960_grid_12_col.png") repeat-y;
+}
+div.gridSystem.gs16 {
+  background: url("../img/gs/960_grid_16_col.png") repeat-y;
+}
+div.gridSystem.gs24 {
+  background: url("../img/gs/960_grid_24_col.png") repeat-y;
+}
+
+
+// RESET
+a, a:visited {
+  text-decoration: none;
+}
+
+// VARS
+
+// layout
+@headerHeight: 60px;
+@leftsideBarWidth: 250px;
+
+// font
+@headlineFont: 'Source Sans Pro','Sintony', 'Helvetica Neue', sans-serif;
+@subHeadlineFont: 'Sintony', 'Helvetica Neue', sans-serif;
+@contentFont: 'Sintony', 'Helvetica Neue', sans-serif;
+@offlineFont: 'Helvetica Neue', sans-serif;
+@animationDuration: .3s;
+@animationType: ease-out;
+
+// colors
+@transparentBlack: rgba(0,0,0,1); //0.85
+@colorBlack: #111;
+@colorRed: #c54806;
+@colorGray: #c0b9ac;
+@colorLightGray: #edeae3;
+
+// grid
+@dividerWidth: 50px;
+@gridSpacing: 8px;
+@gridLeftBgColor: #7A7468;//fadeout(@colorGray, 60%);
+@gridRightBgColor: #635D51;//fadeout(@colorGray, 80%);
+@cornerButtonSize: 35px;
+
+@import 'layout.less';
+@import 'tilesGrid.less';
+@import 'articleView.less';
+@import 'responsiveness.less';
+
+
+
+
+
+
+
+
+
+
+

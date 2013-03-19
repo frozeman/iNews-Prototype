@@ -1,0 +1,356 @@
+
+/* DESKTOP */
+
+/* small desktop */
+@media (min-width: 769px) {
+
+    // text sizes
+    body {
+        font-size: 12px;
+    }
+
+    article.main {
+        aside.right {
+
+            &:hover,
+            &:focus {
+                width: 460px;
+            }
+        }
+    }
+}
+
+/* normal desktop */
+@media (min-width: 1024px) {
+
+    // text sizes
+    body {
+        font-size: 15px;
+    }
+
+    article.main {
+        aside.right {
+
+            &:hover,
+            &:focus {
+                width: 560px;
+            }
+        }
+    }
+
+    // GRID
+    .tile {
+        &.medium {
+            .front {
+                a.title {
+                    font-family: @headlineFont;
+                }
+            }
+        }
+    }
+}
+
+/* large desktop */
+@media (min-width: 1280px) {
+    // text sizes
+    body {
+        font-size: 18px;
+    }
+}
+
+/* extra large desktop */
+@media (min-width: 1440px) {
+    // text sizes
+    body {
+        font-size: 19px;
+    }
+}
+
+/* huge desktop */
+@media (min-width: 1600px) {
+
+    // text sizes
+    body {
+        font-size: 12px;
+    }
+
+    article.main {
+        aside.right {
+
+            &:hover,
+            &:focus {
+                width: 660px;
+            }
+        }
+    }
+}
+
+/* extra huge desktop */
+@media (min-width: 1900px) {
+
+    // text sizes
+    body {
+        font-size: 14px;
+    }
+
+}
+
+/* TABLETS */
+/* tablet portrait */
+@media (max-width: 768px) {
+
+    // text sizes
+    body {
+        font-size: 18px;
+    }
+
+    .dimContainer {
+        position: absolute;
+    }
+
+    footer.main {
+        bottom: -60px;
+    }
+
+    // GRID
+    .tile {
+        &.medium {
+            .front {
+                a.title {
+                    font-family: @headlineFont;
+                }
+            }
+        }
+    }
+
+    article.main {
+        bottom: auto;
+        left: 0;
+        right: 0;
+
+        a.close {
+            left: 0;
+        }
+
+        aside.left,
+        aside.right,
+        div.medium {
+            position: relative;
+            height: auto;
+            width: 100%;
+            float: none;
+        }
+        aside.left {
+
+            .imageZoom {
+                display: none;
+            }
+            .image {
+                &:hover:before,
+                &:focus:before {
+                    content: none;
+                    width: 0;
+                    height: 0;
+                }
+            }
+        }
+        div.medium {
+            > div.content {
+                padding: 20px 40px;
+                margin: 0;
+            }
+        }
+        aside.right {
+            padding-left: 0;
+
+            &:hover,
+            &:focus {
+                .box-shadow(none);
+
+                h1.title {
+                    width: 100%;
+                }
+            }
+
+            h1.title {
+                position: relative;
+                height: 60px;
+                width: 100%;
+                text-align: center;
+
+                > span.rotated {
+                    display: inline;
+                    top: 10px;
+                    left: auto;
+                    width: auto;
+                    .rotate(0deg);
+                }
+
+                i {
+                    position: absolute;
+                    display: inline-block;
+                    top: 13px;
+                    right: 20px;
+                    left: auto;
+                }
+                span.count {
+                    position: absolute;
+                    display: inline-block;
+                    top: 21px;
+                    right: 70px;
+                    width: auto;
+                    text-align: right;
+                }
+            }
+        }
+
+        a.articleLink {
+            position: relative;
+            left: 0;
+        }
+    }
+}
+
+/* small tablet landscape */
+@media (max-width: 640px) {
+
+    // text sizes
+    body {
+        font-size: 16px;
+    }
+}
+
+/* smartphone landscape | small tablet portrait */
+@media (max-width: 480px) {
+
+    // text sizes
+    body {
+        font-size: 13px;
+    }
+
+    // arrows
+    .arrowTop,
+    .arrowBottom {
+        border-width: @headerHeight/4 !important;
+        margin-left: -(@headerHeight/4) !important;
+    }
+
+    header.main {
+        height: @headerHeight/2;
+
+        .arrowTop {
+            top: @headerHeight/2;
+        }
+    }
+    footer.main {
+        .arrowBottom {
+            top: -(@headerHeight/2);
+        }
+    }
+
+    // GRID
+    div.divider {
+
+        div.pro,
+        div.con {
+            span {
+                top: @headerHeight;
+            }
+        }
+    }
+    .gridContainer {
+        &.mainGrid {
+            padding-top: @headerHeight/2;
+        }
+    }
+    .tile {
+
+        &.medium {
+            div.textBox {
+                a.title {
+                    font-family: @subHeadlineFont !important;
+                }
+            }
+        }
+    }
+
+    // ARTICLE
+    article.main {
+        padding-top: @headerHeight/2;
+
+        a.close {
+            height: @headerHeight/2;
+            width: @headerHeight/2;
+
+            span {
+                top: 0;
+                left: 3px;
+                font-size: 50px;
+                line-height: @headerHeight/2;
+            }
+        }
+
+        div.medium {
+
+            > div.content {
+                padding: 10px 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 1.4em;
+            }
+            h2 {
+                font-size: 1.5em;
+                margin-bottom: 1.4em;
+            }
+            p {
+                font-size: 0.9em;
+                line-height: 1.8em;
+            }
+        }
+        aside.right {
+            top: 0;
+
+            h1.title {
+                text-align: left;
+                padding-left: 20px;
+
+                i {
+                    right: 40px;
+                }
+                span.count {
+                    right: 85px;
+                }
+            }
+        }
+    }
+}
+
+/* smartphone portrait */
+@media (max-width: 320px) {
+
+        // text sizes
+    body {
+        font-size: 8px;
+    }
+
+    // GRID
+    .tile {
+
+        div.textBox {
+
+            a.title {
+                font-family: @subHeadlineFont !important;
+            }
+
+            // a.cornerButton {
+            //     border-width: 25px 25px 0 0;
+            // }
+
+            // a.cornerButton {
+            //     border-width: 25px 0 0 25px;
+            // }
+        }
+    }
+}
