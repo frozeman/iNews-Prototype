@@ -8,11 +8,6 @@ div.divider {
     height: 100%;
     width: @dividerWidth;
     pointer-events: none;
-    .transition(margin-left @animationDuration);
-
-    &.slideRight {
-        margin-left: @leftsideBarWidth - @dividerWidth/2;
-    }
 
     div.pro,
     div.con {
@@ -28,29 +23,28 @@ div.divider {
             .transform-origin(center center);
             top: @headerHeight * 2;
             font-size: 23px;
+            .rotate(-90deg);
         }
     }
     div.pro {
         left: 0;
-        // background-color: @gridLeftBgColor;
-        @gridLeftBgColorDarker: darken(@gridLeftBgColor, 10%);
-        // .gradient(~"linear-gradient(90deg, @{gridLeftBgColor} 0%, @{gridLeftBgColorDarker} 100%)");
+        @gridLeftBgColorLight: darken(@gridLeftBgColor,15%);
+        @gridLeftBgColorDarker: darken(@gridLeftBgColor, 20%);
+        .gradient(~"linear-gradient(90deg, @{gridLeftBgColorLight} 0%, @{gridLeftBgColorDarker} 100%)");
         span {
             left: -12px;
-            .rotate(-90deg);
-            color: darken(@colorGray, 15%);
+            color: lighten(@gridLeftBgColor, 30%);
         }
     }
     div.con {
         right: 0;
-        // background-color: @gridRightBgColor;
-        @gridRightBgColorDarker: darken(@gridRightBgColor, 10%);
-        // .gradient(~"linear-gradient(90deg, @{gridRightBgColor} 0%, @{gridRightBgColorDarker} 100%)");
+        @gridRightBgColorLight: darken(@gridRightBgColor,15%);
+        @gridRightBgColorDarker: darken(@gridRightBgColor, 20%);
+        .gradient(~"linear-gradient(90deg, @{gridRightBgColorDarker} 0%, @{gridRightBgColorLight} 100%)");
 
         span {
             left: -8px;
-            .rotate(-90deg);
-            color: darken(@colorGray, 50%);
+            color: lighten(@gridRightBgColor, 30%);
         }
     }
 }
@@ -62,37 +56,32 @@ div.divider {
     margin-left: auto;
     margin-right: auto;
     padding: 4px 0;
+    padding-bottom: 0;
     overflow: hidden;
-    background-color: @gridLeftBgColor;
     // display: table;
     // line-height: 0;
 
     // MAIN GRID
     &.mainGrid {
         padding-top: @headerHeight;
-        .box-shadow(0 0 10px rgba(0,0,0,0.5));
-        .transition(left @animationDuration);
-
-        &.slideRight {
-            left: @leftsideBarWidth;
-        }
-
+        background-color: darken(@gridLeftBgColor,15%);
+        .box-shadow(0 0 30px rgba(0,0,0,0.6));
 
 
         // MAINGRID CONTAINER LEFT/RIGHT
         > div.containerLeft,
         > div.containerRight {
-            padding-top: @gridSpacing/2;
-            padding-bottom: @gridSpacing/2;
+            padding-top: @gridSpacing * 2;
+            padding-bottom: @gridSpacing * 2;
         }
 
         > div.containerLeft {
             padding-right: @dividerWidth/2 + @gridSpacing/2;
-            background-color: @gridLeftBgColor;
+            background-color: darken(@gridLeftBgColor,15%);
         }
         > div.containerRight {
             padding-left: @dividerWidth/2 + @gridSpacing/2;
-            background-color: @gridRightBgColor;
+            background-color: darken(@gridRightBgColor,15%);
         }
     }
     // TILE GRID
@@ -108,7 +97,7 @@ div.divider {
     // CONTAINER LEFT/RIGHT
     > div.containerLeft,
     > div.containerRight {
-        // overflow: visible !important;
+        overflow: visible !important;
         // position: relative;
         width: 50%;
         height: 100%;
@@ -116,9 +105,9 @@ div.divider {
         bottom: 0;
         .box-sizing(border-box);
 
-        &:hover {
-            z-index: 9999;
-        }
+        // &:hover {
+        //     z-index: 9999;
+        // }
     }
 }
 
@@ -132,7 +121,9 @@ div.containerLeft {
     > .tile {
 
         .textBox {
-            background-color: fadeout(darken(@gridLeftBgColor,20%),0%);
+            // background-color: fadeout(darken(@gridLeftBgColor,20%),0%);
+            @gridLeftBgColorDark: darken(@gridLeftBgColor, 10%);
+            .gradient(~"linear-gradient(0deg, @{gridLeftBgColorDark} 0%, @{gridLeftBgColor} 100%)");
         }
 
         .front {
@@ -143,6 +134,7 @@ div.containerLeft {
         .back {
             a.cornerButton {
                 left: 0;
+                border-color: transparent @gridLeftBgColor;
             }
         }
 
@@ -200,7 +192,9 @@ div.containerRight {
     > .tile {
 
         .textBox {
-            background-color: fadeout(darken(@gridRightBgColor,20%),0%);
+            // background-color: fadeout(darken(@gridRightBgColor,20%),0%);
+            @gridRightBgColorDark: darken(@gridRightBgColor, 10%);
+            .gradient(~"linear-gradient(0deg, @{gridRightBgColorDark} 0%, @{gridRightBgColor} 100%)");
         }
 
         .front {
@@ -211,6 +205,7 @@ div.containerRight {
         .back {
             a.cornerButton {
                 right: 0;
+                border-color: transparent @gridRightBgColor;
             }
         }
 
@@ -264,7 +259,6 @@ div.containerRight {
     // tile styles
     color: #8a8a8a;
     cursor: pointer;
-    .transition(z-index @animationDuration @animationType); // keeps the z-index for the transition
 
     &:hover {
         z-index: 9999;
@@ -292,10 +286,6 @@ div.containerRight {
         .front {
             a.title {
                 font-family: @subHeadlineFont;
-            }
-
-            .textBox {
-                .transition(height @animationDuration/2 @animationType);
             }
 
             &:hover {
@@ -336,12 +326,10 @@ div.containerRight {
                 height: 0;
                 top: 0;
                 padding: 0;
-                .transition(all @animationDuration/2 @animationType);
-                .transition-delay(@animationDuration/2);
             }
 
             a.title {
-                font-family: @subHeadlineFont !important;
+                font-family: @subHeadlineFont;
             }
         }
         .back {
@@ -368,11 +356,10 @@ div.containerRight {
         right: 0;
         bottom: 0;
         overflow: hidden;
-        // background-color: @transparentBlack;
         height: 38.2%; //38.2
         padding: 4% 6%;
         .box-sizing(border-box);
-        .box-shadow(0 0 15px rgba(0,0,0,0.5));
+        .box-shadow(0 0 5px rgba(0,0,0,0.8));
 
         a.title {
             display: block;
@@ -381,7 +368,6 @@ div.containerRight {
             text-align: left;
             width: 100%;
             height: 100%;
-            // .transition(all @animationDuration @animationType);
         }
     }
 
@@ -394,9 +380,6 @@ div.containerRight {
     }
 
 
-    // 3D Flip
-    .perspective(600px);
-
     // FRONT/BACK SIDES
     > div {
         position: absolute;
@@ -405,49 +388,33 @@ div.containerRight {
         left: @gridSpacing/2;
         right: @gridSpacing/2;
         overflow: hidden;
-        .backface-visibility(hidden);
-        .transform-style(preserve-3d);
-        .transition(transform @animationDuration @animationType);
+        .box-shadow(0 0 5px rgba(0,0,0,0.5));
 
-
-        // .box-shadow(0 0 5px rgba(0,0,0,0.5));
         padding: 0 !important; // TEMPORARY?
-
-        &:hover,
-        &:focus {
-            // .box-shadow(0 0 15px rgba(0,0,0,0.5));
-            // .transition(all @animationDuration @animationType);
-
-            // border-bottom: 2px solid #ccc;
-            // top: 0;
-            // bottom: 0;
-            // left: 0;
-            // right: 0;
-        }
 
         &.front {
             z-index: 1;
-            background-color: #111;
+            background-color: transparent;
             .transform(rotateY(0deg) rotateY(0deg));
 
             a.cornerButton {
-                border-color: transparent fadeout(@colorRed,10%);
+                border-color: transparent fadeout(@topicColorDefault,10%);
+            }
+
+            > .textBox {
+                text-shadow: 0 -1px 1px darken(@gridRightBgColor,30%);
             }
         }
         &.back {
             z-index: 0;
             .transform(rotateY(-179deg)); // 179 to fix a firefox bug
-            background-color: @colorBlack;
+            background-color: transparent;
 
-            a.cornerButton {
-                border-color: transparent @colorBlack;
-            }
-
-            > div.textBox {
+            > .textBox {
                 z-index: 1;
                 height: 100%;
                 padding: 5% 10%;
-                background-color: fadeout(@colorRed,10%);
+                background: fadeout(@topicColorDefault,10%);
 
                 a.title {
                     color: #fff;

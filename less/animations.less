@@ -1,0 +1,126 @@
+// legacy animation using CPU
+header.main {
+    div.pathMenu {
+        nav {
+            ul li {
+
+                input {
+                    .transition(all @animationDuration @animationType);
+                }
+
+                a {
+                    .transition(width @animationDuration @animationType);
+                }
+            }
+        }
+    }
+}
+
+header.main,
+footer.main,
+.mainGrid
+{
+    .transition(left @animationDuration);
+    // .easeBounce;
+
+    &.slideRight {
+        left: @leftsideBarWidth;
+    }
+}
+
+div.divider {
+    .transition(margin-left @animationDuration);
+    // .easeBounce;
+
+    &.slideRight {
+        margin-left: @leftsideBarWidth - @dividerWidth/2;
+    }
+}
+
+// grid animation
+.tile {
+    .transition(z-index @animationDuration @animationType); // keeps the z-index for the transition
+
+    &.medium {
+        .front {
+            .textBox {
+                .transition(height @animationDuration/2 @animationType);
+                .transition-delay(@animationDuration/1.5);
+            }
+        }
+    }
+    &.small {
+        .front {
+            .textBox {
+                .transition(all @animationDuration/2 @animationType);
+                .transition-delay(@animationDuration/1.5);
+            }
+        }
+    }
+
+    // 3D Flip
+    .perspective(600px);
+
+    // FRONT/BACK SIDES
+    > div {
+        .backface-visibility(hidden);
+        .transform-style(preserve-3d);
+        .transition(transform @animationDuration @animationType);
+    }
+
+}
+
+// article animation
+article.main {
+    aside.left {
+        .imageZoom {
+            .background-size(cover);
+
+            .transform-origin(left top);
+            .transition-property(padding-bottom, height, width, left, visibility, background-size, background-position-y);
+            .transition-delay(0s, 0s, 0s, @animationDuration/1.5, @animationDuration/1.5, @animationDuration/1.5, @animationDuration/1.5);
+            .transition-duration(@animationDuration/1.5);
+            // .transform(rotateY(179deg));
+            // .backface-visibility(hidden);
+            // .transform-style(preserve-3d);
+        }
+
+        .image:hover + .imageZoom {
+            .background-size(100%, auto);
+            .transition-property(left, background-position-y, background-size, width, height, padding-bottom);
+            .transition-delay(0s, 0s, @animationDuration/1.5, @animationDuration/1.5, @animationDuration/1.5, @animationDuration/1.5);
+            // .transition-property(width, height, padding-bottom);
+            // .transition-delay(0s, 0s, 0s);
+            // .transition-duration(@animationDuration*4);
+
+            // .transform(rotateY(0deg));
+        }
+    }
+    aside.right {
+        .transition(all @animationDuration);
+        .easeBounce;
+    }
+}
+
+
+// animation using GPU (overwrite others)
+.csstransforms3d {
+
+    header.main,
+    footer.main,
+    .mainGrid
+     {
+        .transition(transform @animationDuration);
+
+        &.slideRight {
+            .translate3d(@leftsideBarWidth,0,0);
+            left: 0;
+        }
+    }
+
+    div.divider {
+        &.slideRight {
+            margin-left: -@dividerWidth/2;
+        }
+    }
+}

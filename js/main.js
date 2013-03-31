@@ -2,11 +2,7 @@
 //@codekit-prepend "vendor/!!mootools-more-1.4.0.1.js";
 //@codekit-prepend "vendor/!!async.js";
 
-//@codekit-prepend "vendor/jquery.requestAnimationFrame.min.js";
-//@codekit-prepend "vendor/plugins/jquery.masonry.min.js";
-//@codekit-prepend "vendor/plugins/jquery.easing.1.3.js";
-
-//@codekit-prepend "vendor/plugins/!!jquery.imgCenter.minified.js";
+//@codekit-prepend "vendor/jquery.requestAnimationFrame.min.js", "vendor/plugins/jquery.masonry.js", "vendor/plugins/jquery.easing.1.3.js", "vendor/plugins/jquery.hammer.min.js";
 
 
 // new PlaceholderSupport();
@@ -22,7 +18,7 @@ $(function(){
         VIEWTYPE = 'read',
         HOVERTIMOUT = (ISMOBILE) ? 0 : 300,
         RESIZETIMEOUTID,
-        RESIZETIMOUT = (ISMOBILE) ? 10 : 100,
+        RESIZETIMOUT = (ISMOBILE) ? 1 : 99,
         GRIDANIMATE = (ISMOBILE) ? false : true,
         $VIEWPORT = $('html, body');
         // scrollWindow = new Fx.Scroll(window);
@@ -31,7 +27,8 @@ $(function(){
     // HELPER FUNCTIONS
     // Calculate the smallest Tile
     var TileSize = function(containerWidth) {
-        containerWidth = $('.mainGrid').width() - 60; // DEACTIVATE ??
+        var dividerWidth = ($('.mainGrid').width() <= 480) ? 30 : 60;
+        containerWidth = $('.mainGrid').width() - dividerWidth; // DEACTIVATE ??
         var division = 1;
         if(containerWidth > 768) division = 2;
         if(containerWidth > 1600) division = 4;
@@ -42,6 +39,13 @@ $(function(){
         }
 
         return containerSize / (division * 4);
+    };
+
+    var matrixToArray = function(matrix) {
+        if(matrix !== 'none')
+            return matrix.substr(7, matrix.length - 8).split(', ');
+        else
+            return [];
     };
 
     // Stop the window scrolling if the user scrolls.
@@ -91,39 +95,90 @@ $(function(){
     // DOM READY
     $(document).ready(function(){
 
+        // $.fn.masonry.prototype.layout = function($bricks, callback) {
+        //     // Call the method from the parent = Super_class.prototype.method
+        //     this.constructor.prototype.layout($bricks, callback);
+        //     containerSize.height = containerSize.height + 20;
+        //     console.log(containerSize);
+        // };
+
+        var oldcss = $.fn.masonry.layout;
+        // ...before overwriting the jQuery extension point
+        // $.fn.masonry.layout = function()
+        // {
+        //     // original behavior - use function.apply to preserve context
+        //     var ret = oldcss.apply(this, arguments);
+
+        //     console.log(containerSize);
+
+        //     // preserve return value (probably the jQuery object...)
+        //     return ret;
+        // };
+
+
         // SET MASONRY
-        // $('.mainGrid > .containerLeft').masonry({
-        //   isRTL: true,
-        //   itemSelector: '.tile',
-        //   columnWidth : TileSize,
-        //   position: 'relative',
-        //   isAnimated: GRIDANIMATE
-        // });
-        // $('.mainGrid > .containerRight').masonry({
-        //   itemSelector: '.tile',
-        //   columnWidth : TileSize,
-        //   position: 'relative',
-        //   isAnimated: GRIDANIMATE
-        // });
+        $('.mainGrid > .containerLeft').masonry({
+          isRTL: true,
+          itemSelector: '.tile',
+          columnWidth : TileSize,
+          position: 'relative',
+          isAnimated: GRIDANIMATE
+        });
+        $('.mainGrid > .containerRight').masonry({
+          itemSelector: '.tile',
+          columnWidth : TileSize,
+          position: 'relative',
+          isAnimated: GRIDANIMATE
+        });
+
+
+        // $('.mainGrid > .containerLeft, .mainGrid > .containerRight').masonry('reloadItems');
 
         $(window).trigger('resize');
 
         // BOOKMARK BUTTON
+        var $slideElements = $('.mainGrid, .mainGrid > .divider, header.main, footer.main');
         $('.bookmarkButton').click(function(e){
             e.preventDefault();
 
-            var $elements = $('aside.bookmarks, .mainGrid, .mainGrid > .divider, header.main, footer.main');
-
-            if($elements.hasClass('slideRight'))
-                $elements.removeClass('slideRight');
-            else
-                $elements.addClass('slideRight');
+            $slideElements.toggleClass('slideRight');
+            $(this).toggleClass('active');
         });
 
+        // SHOW/HIDE LEFT SIDEBAR BY SWIPE
+        // var $slideElementsHammer = $('.mainGrid').hammer({swipe_velocity: 0.2});
+        // $slideElementsHammer.on("swipeleft", function(e) {
+        //     $slideElements.removeClass('slideRight');
+        //     $('.bookmarkButton').removeClass('active');
+        // });
+        // $slideElementsHammer.on("swiperight", function(e) {
+        //     $slideElements.addClass('slideRight');
+        //     $('.bookmarkButton').addClass('active');
+        // });
+
+
         // FLIP ALL TILES BUTTON
-        $('a.viewButton').click(function(e) {
+        $('.viewButton').click(function(e) {
             e.preventDefault();
             flipTiles();
+            $(this).toggleClass('active');
+        });
+
+        // SEARCH INPUT
+        $('.pathMenu input').on('keyup',function(e){
+            var $input = $(this);
+
+            // clear on ESC
+            if(e.keyCode == 27)
+                $input.val('');
+
+            if($input.val() !== '')
+                $input.next('button.cancel').css('display','inline-block');
+            else
+                $input.next('button.cancel').css('display','none');
+        });
+        $('.pathMenu button.cancel').mouseup(function(){
+            $(this).prev('input').val('').trigger('keyup').trigger('focus');
         });
 
         // CENTER IMAGES
@@ -246,10 +301,8 @@ $(function(){
                 e.stopPropagation();
 
                 cornerButtonTimeOut = setTimeout(function() {
-                    if($tile.hasClass('flip'))
-                        $tile.css('z-index',9999).removeClass('flip');
-                    else
-                        $tile.css('z-index',9999).addClass('flip');
+                    $tile.css('z-index',9999);
+                    $tile.toggleClass('flip');
                 },HOVERTIMOUT);
             }).mouseleave(function(){
                 clearTimeout(cornerButtonTimeOut);
@@ -263,7 +316,7 @@ $(function(){
     $(window).resize(function() {
 
         // show the size in the top bar
-        $('header.main > h1').html('NEWSAPP ' + $(window).width() + 'px');
+        $('.pixelWidth').html('width: ' + $(window).width() + 'px');
 
 
         // set the font size automatically
@@ -300,23 +353,6 @@ $(function(){
         // prevent imediate resize
         clearTimeout(RESIZETIMEOUTID);
         RESIZETIMEOUTID = window.setTimeout(function() {
-
-            // responsive TILE PADDING
-            if($(window).width() <= 320) {
-                $('.mainGrid .tile > div').css({
-                    'top': 1,
-                    'bottom': 1,
-                    'left': 1,
-                    'right': 1
-                });
-            } else {
-                $('.mainGrid .tile > div').css({
-                    'top': '',
-                    'bottom': '',
-                    'left': '',
-                    'right': ''
-                });
-            }
 
 
             // set RESPONSIVE TILE SIZES
@@ -365,7 +401,7 @@ $(function(){
             // SCROLL TO the LAST VISIBLE ITEM
             if(visibleItem) {
                 window.setTimeout(function() {
-                    $VIEWPORT.animate({scrollTop: visibleItem.offset().top - smallTile}, 900, 'easeOutElastic');
+                    // $VIEWPORT.animate({scrollTop: visibleItem.offset().top - smallTile}, 900, 'easeOutElastic');
                     // scrollWindow.start(0,visibleItem.offset().top);
                 }, 500);
             }

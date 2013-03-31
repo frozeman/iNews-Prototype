@@ -1,0 +1,13 @@
+// reset
+.margignPaddingReset {
+    margin: 0;
+    padding: 0;
+}
+
+
+// layout elements
+.topBar(@divider: 1) {
+    display: block;
+    height: floor(@headerHeight/@divider);
+    color: darken(@barColor,45%);
+}

@@ -6,20 +6,22 @@ article.main {
     left: 0;
     right: 0;
     padding-top: @headerHeight;
-    // background-color: @colorLightGray;
+    // background-color: lighten(@color1, 10%);
     .box-shadow(0 0 20px rgba(0,0,0,0.5));
 
     // font
     font-size: 16px;
+    color: @textColor;
 
-    a.close {
+    button.close {
         display: block;
         position: absolute;
         top: 0;
         right: @headerHeight;
         height: @headerHeight;
         width: @headerHeight;
-        background-color: @colorLightGray;
+        border: none;
+        background-color: lighten(@color1, 10%);
 
         span {
             position: absolute;
@@ -28,19 +30,19 @@ article.main {
             font-family: @headlineFont;
             font-size: 100px;
             line-height: @headerHeight;
-            color: @colorGray;
+            color: @color1;
         }
 
         &:hover,
         &:focus {
             span {
-                color: darken(@colorGray, 20%);
+                color: darken(@color1, 20%);
             }
         }
         &:active {
-            background-color: @colorGray;
+            background-color: @color1;
             span {
-                color: @colorLightGray;
+                color: lighten(@color1, 10%);
             }
         }
     }
@@ -60,7 +62,7 @@ article.main {
     aside.left,
     aside.right {
         width: 25%;
-        background-color: @colorGray;
+        background-color: @color1;
 
     }
 
@@ -105,16 +107,6 @@ article.main {
             background-position: center top; //left top
             background-repeat: no-repeat;
 
-            .background-size(cover);
-
-            .transform-origin(left top);
-            .transition-property(padding-bottom, height, width, left, visibility, background-size, background-position-y);
-            .transition-delay(0s, 0s, 0s, @animationDuration/1.5, @animationDuration/1.5, @animationDuration/1.5, @animationDuration/1.5);
-            .transition-duration(@animationDuration/1.5);
-            // .transform(rotateY(179deg));
-            // .backface-visibility(hidden);
-            // .transform-style(preserve-3d);
-
             img {
                 // visibility: hidden;
             }
@@ -127,15 +119,6 @@ article.main {
             width: 300%;
             height: 100%;
             padding-bottom: 0;
-
-            .background-size(100%, auto);
-            .transition-property(left, background-position-y, background-size, width, height, padding-bottom);
-            .transition-delay(0s, 0s, @animationDuration/1.5, @animationDuration/1.5, @animationDuration/1.5, @animationDuration/1.5);
-            // .transition-property(width, height, padding-bottom);
-            // .transition-delay(0s, 0s, 0s);
-            // .transition-duration(@animationDuration*4);
-
-            // .transform(rotateY(0deg));
         }
     }
     aside.right {
@@ -146,17 +129,10 @@ article.main {
         margin-left: 0;
         padding-left: 60px;
         .box-sizing(border-box);
-        .transition(all @animationDuration);
-        .transition-timing-function(cubic-bezier(0.595, 0.855, 0.000, 1.165));
 
         &:hover,
         &:focus {
-            // width: 660px; // set in responsiveness.less
             .box-shadow(0 0 15px rgba(0,0,0,0.5));
-
-            h1.title {
-                width: 60px;
-            }
         }
 
         h1.title {
@@ -167,11 +143,11 @@ article.main {
             height: 100%;
             width: 60px;
             margin: 0;
-            background-color: lighten(@colorGray,10%);
+            background-color: lighten(@color1,5%);
 
             span, i {
                 position: relative;
-                color: darken(@colorGray,10%);
+                color: darken(@color1,10%);
             }
 
             > span.rotated {
@@ -180,7 +156,7 @@ article.main {
                 left: -170px;
                 width: 400px;
                 display: inline-block;
-                // color: darken(@colorGray,10%);
+                // color: darken(@color1,10%);
                 font-family: @headlineFont;
                 text-align: center;
                 .transform-origin(center center);
@@ -188,7 +164,8 @@ article.main {
             }
 
             i {
-                left: 15px;
+                left: 10px;
+                font-size: 30px; 
 
             }
             span.count {
@@ -210,20 +187,20 @@ article.main {
         height: 60px;
         line-height: 60px;
         padding: 0 20px;
-        background-color: fadeout(@colorRed,5%);
+        background-color: fadeout(@color2,5%);
         font-size: 1.5em;
         color: #fff;
         -webkit-font-smoothing: antialiased;
 
         &:hover,
         &:focus {
-            background-color: darken(@colorRed,10%);
+            background-color: darken(@color2,10%);
         }
     }
     div.medium {
         position: relative;
         width: 75%;
-        background-color: @colorLightGray;
+        background-color: lighten(@color1, 10%);
 
         > div.content {
             height: 100%;

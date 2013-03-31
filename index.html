@@ -9,8 +9,11 @@
         <title>NEWSAPP Protoype 1</title>
         <meta name="description" content="">
         <!-- <meta name="viewport" content="width=device-width"> -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+        <meta name="apple-touch-fullscreen" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
 <!--         <!-- Open Graph Protocol --
         <meta property="og:site_name" content="kunstberk.com">
@@ -37,7 +40,6 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
         <link href='http://fonts.googleapis.com/css?family=Sintony|Source+Sans+Pro:200' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="css/normalize.css">
         <!-- <link rel="stylesheet" href="css/foundation.min.css"> -->
         <link rel="stylesheet" href="css/main.css">
 
@@ -58,22 +60,33 @@
         <div class="gridSystem gs12"></div>
 
         <header class="main" role="banner">
-            <a href="" class="bookmarkButton">bookmarks</a>
-            <h1>NEWSAPP</h1>
-            <a href="" class="viewButton">nav view</a>
+            <div class="buttonGroup">
+                <button class="bookmarkButton icon-bookmark2"></button>
+                <button class="viewButton icon-grid"></button>
+            </div>
+            <div class="pathMenu">
+                <nav role="navigation">
+                    <ul>
+                        <li class="topicType1"><a href=""><span>Politics</span></a></li>
+                        <li class="topicType2"><a href=""><span>World</span></a></li>
+                        <li class="topicType3"><a href=""><span>War</span></a></li>
+                        <li class="topicType4"><a href=""><span>Syria</span></a></li>
+                        <li class="topicType5"><input type="text"><button class="cancel"><span>×</span></button></li>
+                    </ul>
+                </nav>
+            </div>
 
             <div class="arrowTop"></div>
         </header>
 
-        <!-- user sidebar -->
-        <aside class="bookmarks"></aside>
+        <!-- <div id="wrapper"> -->
 
-        <!-- articles grid -->
-<!-- div.tile.large*3>div.front>img[src="img/tests/tiles/img$.jpg"]>div.textBox>a.title{lorem ipsum dolor sit amet}+a.cornerButton -->
-        <!-- <div class\=.+><div><\/div><\/div> -->
+            <!-- articles grid -->
+            <!-- div.tile.large*3>div.front>img[src="img/tests/tiles/img$.jpg"]>div.textBox>a.title{lorem ipsum dolor sit amet}+a.cornerButton -->
+            <!-- <div class\=.+><div><\/div><\/div> -->
         <nav class="mainGrid gridContainer" role="navigation">
             <div class="containerLeft">
-                <div class="tile large">
+                <div class="tile large topicType1">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img1.jpg" alt=""></div>
                         <div class="textBox">
@@ -164,7 +177,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile large">
+                <div class="tile large topicType3">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img2.jpg" alt=""></div>
                         <div class="textBox">
@@ -245,7 +258,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile large">
+                <div class="tile large topicType1">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img3.jpg" alt=""></div>
                         <div class="textBox">
@@ -333,7 +346,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile medium">
+                <div class="tile medium topicType4">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img4.jpg" alt=""></div>
                         <div class="textBox">
@@ -424,7 +437,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile medium">
+                <div class="tile medium topicType5">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img5.jpg" alt=""></div>
                         <div class="textBox">
@@ -510,7 +523,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile medium">
+                <div class="tile medium topicType3">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img6.jpg" alt=""></div>
                         <div class="textBox">
@@ -601,7 +614,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType1">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img6.jpg" alt=""></div>
                         <div class="textBox">
@@ -692,7 +705,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType1">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img6.jpg" alt=""></div>
                         <div class="textBox">
@@ -783,7 +796,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType2">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img6.jpg" alt=""></div>
                         <div class="textBox">
@@ -874,7 +887,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType3">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img6.jpg" alt=""></div>
                         <div class="textBox">
@@ -965,7 +978,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType3">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img6.jpg" alt=""></div>
                         <div class="textBox">
@@ -1056,7 +1069,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType4">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img6.jpg" alt=""></div>
                         <div class="textBox">
@@ -1147,7 +1160,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType3">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img6.jpg" alt=""></div>
                         <div class="textBox">
@@ -1238,7 +1251,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType3">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img6.jpg" alt=""></div>
                         <div class="textBox">
@@ -1329,7 +1342,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType1">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img6.jpg" alt=""></div>
                         <div class="textBox">
@@ -1420,7 +1433,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType2">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img6.jpg" alt=""></div>
                         <div class="textBox">
@@ -1511,7 +1524,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType1">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img6.jpg" alt=""></div>
                         <div class="textBox">
@@ -1602,7 +1615,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType5">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img14.jpg" alt=""></div>
                         <div class="textBox">
@@ -1693,7 +1706,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType4">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img13.jpg" alt=""></div>
                         <div class="textBox">
@@ -1784,7 +1797,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType3">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img12.jpg" alt=""></div>
                         <div class="textBox">
@@ -1875,7 +1888,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType5">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img11.jpg" alt=""></div>
                         <div class="textBox">
@@ -1966,7 +1979,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType5">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img10.jpg" alt=""></div>
                         <div class="textBox">
@@ -2057,7 +2070,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType1">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img9.jpg" alt=""></div>
                         <div class="textBox">
@@ -2148,7 +2161,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType3">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img8.jpg" alt=""></div>
                         <div class="textBox">
@@ -2241,7 +2254,7 @@
                 </div>
             </div>
             <div class="containerRight">
-                <div class="tile large">
+                <div class="tile large topicType5">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img14.jpg" alt=""></div>
                         <div class="textBox">
@@ -2323,7 +2336,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile large">
+                <div class="tile large topicType3">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img8.jpg" alt=""></div>
                         <div class="textBox">
@@ -2409,7 +2422,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile large">
+                <div class="tile large topicType4">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img7.jpg" alt=""></div>
                         <div class="textBox">
@@ -2495,7 +2508,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile large">
+                <div class="tile large topicType2">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img15.jpg" alt=""></div>
                         <div class="textBox">
@@ -2582,7 +2595,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile medium">
+                <div class="tile medium topicType1">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img4.jpg" alt=""></div>
                         <div class="textBox">
@@ -2673,7 +2686,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile medium">
+                <div class="tile medium topicType3">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img12.jpg" alt=""></div>
                         <div class="textBox">
@@ -2759,7 +2772,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile medium">
+                <div class="tile medium topicType4">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img11.jpg" alt=""></div>
                         <div class="textBox">
@@ -2850,7 +2863,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile medium">
+                <div class="tile medium topicType1">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img10.jpg" alt=""></div>
                         <div class="textBox">
@@ -2941,7 +2954,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType2">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img14.jpg" alt=""></div>
                         <div class="textBox">
@@ -3032,7 +3045,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType3">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img14.jpg" alt=""></div>
                         <div class="textBox">
@@ -3123,7 +3136,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType1">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img14.jpg" alt=""></div>
                         <div class="textBox">
@@ -3214,8 +3227,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-
-                <div class="tile small">
+                <div class="tile small topicType4">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img14.jpg" alt=""></div>
                         <div class="textBox">
@@ -3306,7 +3318,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType4">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img14.jpg" alt=""></div>
                         <div class="textBox">
@@ -3397,7 +3409,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType5">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img14.jpg" alt=""></div>
                         <div class="textBox">
@@ -3488,7 +3500,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType2">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img14.jpg" alt=""></div>
                         <div class="textBox">
@@ -3579,7 +3591,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType1">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img14.jpg" alt=""></div>
                         <div class="textBox">
@@ -3670,7 +3682,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType3">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img14.jpg" alt=""></div>
                         <div class="textBox">
@@ -3761,7 +3773,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType3">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img14.jpg" alt=""></div>
                         <div class="textBox">
@@ -3852,7 +3864,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType4">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img14.jpg" alt=""></div>
                         <div class="textBox">
@@ -3943,7 +3955,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType5">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img14.jpg" alt=""></div>
                         <div class="textBox">
@@ -4034,7 +4046,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType2">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img14.jpg" alt=""></div>
                         <div class="textBox">
@@ -4125,7 +4137,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType2">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img14.jpg" alt=""></div>
                         <div class="textBox">
@@ -4216,7 +4228,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType1">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img14.jpg" alt=""></div>
                         <div class="textBox">
@@ -4307,7 +4319,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType3">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img14.jpg" alt=""></div>
                         <div class="textBox">
@@ -4398,7 +4410,7 @@
                         <a class="cornerButton"></a>
                     </div>
                 </div>
-                <div class="tile small">
+                <div class="tile small topicType4">
                     <div class="front">
                         <div class="image"><img src="img/tests/tiles/img14.jpg" alt=""></div>
                         <div class="textBox">
@@ -4498,6 +4510,57 @@
             </div>
         </nav>
 
+        <!-- </div> -->
+
+        <!-- footer -->
+        <footer class="main" role="contentinfo">
+                <div class="arrowBottom"></div>
+                <nav>
+                    <ul>
+                        <li>
+                            <h1><i class="icon-sun-inv"></i> Social</h1>
+                            <ul>
+                                <li><a href="/blog" target="_blank"><i class="icon-quote"></i> blog</a></li>
+                                <li><a href="http://facebook.com/morphicnews" target="_blank"><i class="icon-facebook"></i> facebook</a></li>
+                                <li><a href="http://twitter.com/morphicnews" target="_blank"><i class="icon-twitter"></i> twitter</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h1><i class="icon-hammer"></i> Legal</h1>
+                            <ul>
+                                <li><a href="">Terms of Service</a></li>
+                                <li><a href="">Privacy Policy</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <a href="/about" class="logo">
+                    <img src="img/icons/morphicnews_logo.png" alt="">
+                    <p role="about">morphic news is a news robot, which try to give you an overview about what's up in the world.</p>
+                </a>
+                <div style="clear:both;"></div>
+                <div class="pixelWidth"></div>
+        </footer>
+
+        <!-- user sidebar -->
+        <aside class="leftSidebar">
+            <!-- <h1>User Account</h1>
+            <ul>
+                <li></li>
+            </ul> -->
+            <h1><i class="icon-bookmark2"></i>Bookmarks</h1>
+            <ul>
+                <li><a href=""><span class="topic topicType3"></span>Syria</a></li>
+                <li><a href=""><span class="topic topicType4"></span>Bitcoinshduemdjfds</a></li>
+                <li><a href=""><span class="topic topicType2"></span>Leistungsschutzrecht</a></li>
+                <li><a href=""><span class="topic topicType2"></span>Japan</a></li>
+                <li><a href=""><span class="topic topicType3"></span>Syria</a></li>
+                <li><a href=""><span class="topic topicType4"></span>Bitcoinshduemdjfds</a></li>
+                <li><a href=""><span class="topic topicType2"></span>Leistungsschutzrecht</a></li>
+                <li><a href=""><span class="topic topicType2"></span>Japan</a></li>
+            </ul>
+        </aside>
+
         <!-- article view -->
         <div class="dimContainer">
             <article class="main" role="main">
@@ -4537,19 +4600,12 @@
                 <a href="http://feindura.org" class="articleLink" target="_blank">Read article on CNN <i class="icon-angle-right"></i></a>
                 <!-- COMMENTS -->
                 <aside class="right">
-                    <h1 class="title"><span class="rotated">COMMENTS</span> <i class="icon-comment-alt"></i> <span class="count">142</span></h1>
+                    <h1 class="title"><span class="rotated">COMMENTS</span> <i class="icon-comment-empty"></i> <span class="count">142</span></h1>
                     some comments
                 </aside>
-                <a href="#" class="close"><span>×</span></a>
+                <button class="close"><span>×</span></button>
             </article>
         </div>
-
-
-
-        <!-- footer -->
-        <footer class="main" role="contentinfo">
-                <div class="arrowBottom"></div>
-        </footer>
 
 
 
