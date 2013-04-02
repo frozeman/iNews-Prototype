@@ -308,7 +308,7 @@
                     padding-right: 5px;
 
                     li {
-                        margin-right: 5px;
+                        margin-right: 0px;
 
                         &:first-child a {
                             padding-left: 12px;
@@ -317,8 +317,8 @@
                         input {
                             top: 0px;
                             height: @headerPathHeightMobil - 2px;
-                            width: 100px;
-                            padding-left: 15px;
+                            width: 90px;
+                            padding-left: 20px;
                             font-size: 14px;
 
                             &:focus {
@@ -329,6 +329,10 @@
                             top: 1px;
                             height: @headerPathHeightMobil - 2px;
                             width: @headerPathHeightMobil - 2px;
+
+                            &.hidden {
+                                margin-right: -@headerPathHeightMobil - 5px;
+                            }
 
                             span {
                                 top: -2px;

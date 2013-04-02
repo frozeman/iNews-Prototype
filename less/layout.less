@@ -207,7 +207,7 @@ header.main {
                     }
                     button.cancel {
                         // display: inline-block;
-                        display: none;
+                        display: inline-block;
                         position: relative;
                         float: right;
                         top: 1px;
@@ -216,6 +216,12 @@ header.main {
                         width: @headerPathHeight - 2px;
                         border: none;
                         background-color: transparent;
+                        .opacity(1);
+
+                        &.hidden {
+                            .opacity(0);
+                            margin-right: -@headerPathHeight - 5px;
+                        }
 
                         span {
                             position: absolute;
@@ -311,6 +317,7 @@ header.main {
 }
 
 aside.leftSidebar {
+    z-index: 1;
     // display: none;
     position: fixed;
     top: 0;
@@ -389,6 +396,14 @@ aside.leftSidebar {
                 text-overflow:    ellipsis;
                 overflow: hidden;
                 white-space: nowrap;
+
+                &.add {
+                    @addColorLight: darken(@color5, 18%);
+                    @addColorDark: darken(@color5, 30%);
+                    .gradient(~"linear-gradient(0deg, @{addColorDark} 10%, @{addColorLight} 100%)");
+                    border-top: 1px solid darken(@color5,5%);
+                    border-bottom: 1px solid darken(@color5,45%);
+                }
 
                 span.topic {
                     display: inline-block;

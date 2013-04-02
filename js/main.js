@@ -2,7 +2,10 @@
 //@codekit-prepend "vendor/!!mootools-more-1.4.0.1.js";
 //@codekit-prepend "vendor/!!async.js";
 
-//@codekit-prepend "vendor/jquery.requestAnimationFrame.min.js", "vendor/plugins/jquery.masonry.js", "vendor/plugins/jquery.easing.1.3.js", "vendor/plugins/jquery.hammer.min.js";
+//@codekit-prepend "vendor/jquery.requestAnimationFrame.min.js", "vendor/plugins/jquery.masonry.js", "vendor/plugins/jquery.easing.1.3.js";
+
+
+//, "vendor/plugins/jquery.hammer.min.js";
 
 
 // new PlaceholderSupport();
@@ -173,9 +176,11 @@ $(function(){
                 $input.val('');
 
             if($input.val() !== '')
-                $input.next('button.cancel').css('display','inline-block');
+                $input.next('button.cancel').removeClass('hidden');
+                // $input.next('button.cancel').css('display','inline-block');
             else
-                $input.next('button.cancel').css('display','none');
+                $input.next('button.cancel').addClass('hidden');
+                // $input.next('button.cancel').css('display','none');
         });
         $('.pathMenu button.cancel').mouseup(function(){
             $(this).prev('input').val('').trigger('keyup').trigger('focus');
