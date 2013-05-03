@@ -137,7 +137,7 @@
             width: 100%;
             float: none;
         }
-        .imageZoom {
+        .imageZooms {
             display: none;
         }
         aside.left {
@@ -149,6 +149,13 @@
                     height: 0;
                 }
             }
+
+            a.subTopic {
+                &:first-child {
+                    width: 50%;
+                    padding-bottom: 50%; // ratio 4:3 = 37.5
+                }
+            }
         }
         div.middle {
             > div.content {
@@ -156,6 +163,11 @@
                 padding: 20px 40px;
                 padding-bottom: 60px;
                 margin: 0;
+            }
+
+            button.close {
+                display: block;
+                top: 0;
             }
         }
         aside.right {
@@ -179,10 +191,11 @@
 
                 > span.rotated {
                     display: inline;
-                    top: 10px;
+                    top: 8px;
                     left: auto;
                     width: auto;
                     .rotate(0deg);
+                    font-size: 24px;
                 }
 
                 i {
@@ -246,7 +259,7 @@
 
     .loadingIcon {
         font-size: @headerHeightMobil;
-        
+
         &.header {
             top: -18px;
             font-size: @headerHeightMobil / 2;

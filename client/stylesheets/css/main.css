@@ -1699,7 +1699,7 @@ article.main aside.left > a {
   float: left;
   height: 0;
   width: 50%;
-  padding-bottom: 37.5%;
+  padding-bottom: 50%;
 }
 article.main aside.left > div:first-child,
 article.main aside.left > a:first-child {
@@ -1733,6 +1733,9 @@ article.main aside.left a.subTopic:focus div {
 article.main aside.left a.subTopic:first-child {
   width: 100%;
   padding-bottom: 100%;
+}
+article.main aside.left a.subTopic:first-child div {
+  font-size: 2.2em;
 }
 article.main aside.left .image:hover:before,
 article.main aside.left .image:focus:before {
@@ -1773,6 +1776,7 @@ article.main aside.right h1.title span,
 article.main aside.right h1.title i {
   position: relative;
   color: #c0b9ac;
+  font-size: 30px;
 }
 article.main aside.right h1.title > span.rotated {
   top: 49%;
@@ -1782,6 +1786,7 @@ article.main aside.right h1.title > span.rotated {
   font-family: 'Source Sans Pro', 'Sintony', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   font-weight: 400;
+  text-transform: uppercase;
   text-align: center;
   -webkit-transform-origin: center center;
   -moz-transform-origin: center center;
@@ -1796,7 +1801,6 @@ article.main aside.right h1.title > span.rotated {
 }
 article.main aside.right h1.title i {
   left: 10px;
-  font-size: 30px;
 }
 article.main aside.right h1.title span.count {
   display: inline-block;
@@ -1815,7 +1819,7 @@ article.main a.articleLink {
   line-height: 60px;
   padding: 0 20px;
   background-color: rgba(197, 72, 6, 0.95);
-  font-size: 1.5em;
+  font-size: 24px;
   color: #fff;
   -webkit-font-smoothing: antialiased;
 }
@@ -1839,6 +1843,9 @@ article.main div.middle > div.content {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   background-color: #eceae6;
+}
+article.main div.middle button.close {
+  display: none;
 }
 article.main div.middle h1 {
   font-family: 'Source Sans Pro', 'Sintony', 'Helvetica Neue', sans-serif;
@@ -2248,7 +2255,7 @@ aside.leftSidebar ul li a span.topic.topicType5 {
     width: 100%;
     float: none;
   }
-  article.main .imageZoom {
+  article.main .imageZooms {
     display: none;
   }
   article.main aside.left .image:hover:before,
@@ -2257,11 +2264,19 @@ aside.leftSidebar ul li a span.topic.topicType5 {
     width: 0;
     height: 0;
   }
+  article.main aside.left a.subTopic:first-child {
+    width: 50%;
+    padding-bottom: 50%;
+  }
   article.main div.middle > div.content {
     height: auto;
     padding: 20px 40px;
     padding-bottom: 60px;
     margin: 0;
+  }
+  article.main div.middle button.close {
+    display: block;
+    top: 0;
   }
   article.main aside.right {
     top: 0;
@@ -2286,7 +2301,7 @@ aside.leftSidebar ul li a span.topic.topicType5 {
   }
   article.main aside.right h1.title > span.rotated {
     display: inline;
-    top: 10px;
+    top: 8px;
     left: auto;
     width: auto;
     -webkit-transform: rotate(0deg);
@@ -2294,6 +2309,7 @@ aside.leftSidebar ul li a span.topic.topicType5 {
     -o-transform: rotate(0deg);
     -ms-transform: rotate(0deg);
     transform: rotate(0deg);
+    font-size: 24px;
   }
   article.main aside.right h1.title i {
     position: absolute;

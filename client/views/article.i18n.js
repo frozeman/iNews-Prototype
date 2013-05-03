@@ -10,5 +10,9 @@ Meteor.i18nMessages.article = {
     readOn: {
         en: 'Read article on',
         de: 'Lies den Artikel auf'
+    },
+    comments: {
+        en: 'Comments',
+        de: 'Kommentare'
     }
 };

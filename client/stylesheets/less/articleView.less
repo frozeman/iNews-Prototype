@@ -116,7 +116,7 @@ article.main {
             float:left;
             height: 0;
             width: 50%;
-            padding-bottom: 37.5%; // ratio 4:3
+            padding-bottom: 50%; // ratio 4:3 = 37.5
 
             &:first-child {
                 width: 100%;
@@ -156,6 +156,10 @@ article.main {
             &:first-child {
                 width: 100%;
                 padding-bottom: 100%;
+
+                div {
+                    font-size: 2.2em;
+                }
             }
         }
 
@@ -205,6 +209,7 @@ article.main {
             span, i {
                 position: relative;
                 color: darken(@color1,10%);
+                font-size: 30px;
             }
 
             > span.rotated {
@@ -217,6 +222,7 @@ article.main {
                 font-family: @headlineFont;
                 -webkit-font-smoothing: antialiased;
                 font-weight: 400;
+                text-transform: uppercase;
                 text-align: center;
                 .transform-origin(center center);
                 .rotate(-90deg);
@@ -224,8 +230,6 @@ article.main {
 
             i {
                 left: 10px;
-                font-size: 30px; 
-
             }
             span.count {
                 display: inline-block;
@@ -247,7 +251,7 @@ article.main {
         line-height: 60px;
         padding: 0 20px;
         background-color: fadeout(@color2,5%);
-        font-size: 1.5em;
+        font-size: 24px;
         color: #fff;
         -webkit-font-smoothing: antialiased;
 
@@ -270,6 +274,10 @@ article.main {
             overflow: auto;
             -webkit-overflow-scrolling: touch;
             background-color: lighten(@color1, 10%);
+        }
+
+        button.close {
+            display: none;
         }
 
         h1 {

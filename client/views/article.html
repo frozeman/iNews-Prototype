@@ -3,6 +3,7 @@
         <div class="dimContainer">
             {{#each articleData}}
                 <article class="main" role="main">
+                    <button class="close"><span>×</span></button>
                     <!-- IMAGES -->
                     <aside class="left" role="complementary">
                         {{#each media.videos}}
@@ -25,6 +26,7 @@
                     <!-- ARTICLE -->
                     <div class="middle">
                         <div class="content">
+                            <button class="close"><span>×</span></button>
                             <header>
                                 <h1>{{title}}</h1>
                                 <p class="metaData">
@@ -44,10 +46,9 @@
                     <a href="{{metaData.source.link}}" class="articleLink" target="_blank">{{translate 'article.readOn'}} {{metaData.source.id}} <i class="icon-angle-right"></i></a>
                     <!-- COMMENTS -->
                     <aside class="right">
-                        <h1 class="title"><span class="rotated">COMMENTS</span> <i class="icon-comment-empty"></i> <span class="count">142</span></h1>
+                        <h1 class="title"><span class="rotated">{{translate 'article.comments'}}</span> <i class="icon-comment-empty"></i> <span class="count">142</span></h1>
                         some comments
                     </aside>
-                    <button class="close"><span>×</span></button>
                 </article>
             {{/each}}
         </div>
