@@ -1,0 +1,13 @@
+{
+  "meteor": {
+    "tag": "release/0.6.2",
+    "git": "https://github.com/meteor/meteor.git",
+    "branch": "master"
+  },
+  "packages": {
+    "router": {},
+    "HTML5-History-API": {},
+    "i18n": {},
+    "moment": {}
+  }
+}

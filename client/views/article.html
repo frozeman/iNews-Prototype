@@ -1,0 +1,62 @@
+<template name="article">
+    {{#if articleData}}
+        <div class="dimContainer">
+            {{#each articleData}}
+                <article class="main" role="main">
+                    <!-- IMAGES -->
+                    <aside class="left" role="complementary">
+                        {{#each media.videos}}
+                            <!-- <div class="image"><img src="img/tests/tiles/img3.jpg" alt="title of the article"></div> -->
+                            <!-- <div class="imageZoom"><img src="img/tests/tiles/img3.jpg" alt="title of the article"></div> -->
+                        {{/each}}
+                        {{#each media.images}}
+                            <div class="image" data-relatedid="{{generateImageZoomId this}}"><img src="{{this}}" alt="{{../title}}"></div>
+                            <!-- <div class="imageZoom" style="background-image: url('{{this}}');"></div> -->
+                        {{/each}}
+                        <a href="" class="subTopic topicType1"><div>{{clusterData.subTopic}}</div></a>
+
+                        <div class="clearFix"></div>
+                    </aside>
+                    <div class="imageZooms">
+                        {{#each media.images}}
+                            <div id="{{generateImageZoomId this}}" class="imageZoom" style="background-image: url('{{this}}');"></div>
+                        {{/each}}
+                    </div>
+                    <!-- ARTICLE -->
+                    <div class="middle">
+                        <div class="content">
+                            <header>
+                                <h1>{{title}}</h1>
+                                <p class="metaData">
+                                    {{#if metaData.pubDate}}<time datetime="{{datetimePubDate metaData.pubDate}}" title="{{absolutePubDate metaData.pubDate}}">{{relativePubDate metaData.pubDate}}</time>{{/if}}
+                                    {{#if metaData.author}} {{translate 'article.author'}} {{authorText}}{{#if metaData.author.link}}<a href="{{metaData.author.link}}" target="_blank">{{/if}}{{metaData.author.name}}{{#if metaData.author.link}}</a>{{/if}}{{/if}}
+                                    {{#if metaData.source}} {{translate 'article.source'}} {{sourceText}}{{#if metaData.source.link}}<a href="{{metaData.source.link}}" target="_blank">{{/if}}{{metaData.source.id}}{{#if metaData.source.link}}</a>{{/if}}{{/if}}
+                                </p>
+                            </header>
+                            <section>
+                                <p><b>{{abstract}}</b></p>
+                            </section>
+                            <section>
+                                {{content}}
+                            </section>
+                        </div>
+                    </div>
+                    <a href="{{metaData.source.link}}" class="articleLink" target="_blank">{{translate 'article.readOn'}} {{metaData.source.id}} <i class="icon-angle-right"></i></a>
+                    <!-- COMMENTS -->
+                    <aside class="right">
+                        <h1 class="title"><span class="rotated">COMMENTS</span> <i class="icon-comment-empty"></i> <span class="count">142</span></h1>
+                        some comments
+                    </aside>
+                    <button class="close"><span>×</span></button>
+                </article>
+            {{/each}}
+        </div>
+    {{else}}
+        <div class="dimContainer">
+            <div class="loadingIcon icon-spin2 animate-spin"></div>
+            <!-- <div class="error">
+                Couldn't find Article
+            </div> -->
+        </div>
+    {{/if}}
+</template>

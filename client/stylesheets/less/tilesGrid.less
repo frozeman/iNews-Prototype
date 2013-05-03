@@ -1,0 +1,479 @@
+div.divider {
+    z-index: 3;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    margin-left: -@dividerWidth/2;
+    height: 100%;
+    width: @dividerWidth;
+    pointer-events: none;
+
+    div.pro,
+    div.con {
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: @dividerWidth/2;
+        height: 100%;
+
+        span {
+            display: inline-block;
+            position: relative;
+            .transform-origin(center center);
+            top: @headerHeight * 2;
+            font-size: 23px;
+            font-weight: 300;
+            -webkit-font-smoothing: antialiased;
+            .rotate(-90deg);
+            text-shadow: -1px 0 3px rgba(0,0,0,0.3);
+        }
+    }
+    div.pro {
+        left: -1px;
+        @gridBgColorLight: darken(@gridBgColor,0%);
+        @gridBgColorDarker: darken(@gridBgColor, 10%);
+        .gradient(~"linear-gradient(90deg, @{gridBgColorLight} 0%, @{gridBgColorDarker} 100%)");
+        span {
+            left: -10px;
+            color: lighten(@gridBgColor, 30%);
+        }
+    }
+    div.con {
+        right: -1px;
+        @gridBgColorLight: darken(@gridBgColor,0%);
+        @gridBgColorDarker: darken(@gridBgColor, 15%);
+        .gradient(~"linear-gradient(90deg, @{gridBgColorDarker} 0%, @{gridBgColorLight} 100%)");
+
+        span {
+            left: -10px;
+            color: lighten(@gridBgColor, 30%);
+        }
+    }
+}
+
+.gridContainer {
+    z-index: 2;
+    position: relative;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 4px 0;
+    padding-bottom: 0;
+    overflow: hidden;
+    // display: table;
+    // line-height: 0;
+
+    // MAIN GRID
+    &.mainGrid {
+        padding-top: @headerHeight;
+        // padding-bottom: @gridSpacing * 4;
+        background-color: @gridBgColor;
+        .box-shadow(0 0 30px rgba(0,0,0,0.6));
+
+
+        // MAINGRID CONTAINER LEFT/RIGHT
+        > div.containerLeft,
+        > div.containerRight {
+            padding-top: @gridSpacing * 2;
+            padding-bottom: @gridSpacing * 2;
+            min-height: 600px;
+        }
+
+        > div.containerLeft {
+            padding-right: @dividerWidth/2 + @gridSpacing/2;
+        }
+        > div.containerRight {
+            padding-left: @dividerWidth/2 + @gridSpacing/2;
+        }
+    }
+    // TILE GRID
+    &.tileGrid {
+        > div.containerLeft {
+            padding-right: 1px;
+        }
+        > div.containerRight {
+            padding-left: 1px;
+        }
+    }
+
+    // CONTAINER LEFT/RIGHT
+    > div.containerLeft,
+    > div.containerRight {
+        overflow: visible !important;
+        // position: relative;
+        width: 50%;
+        height: 100%;
+        top: 0;
+        bottom: 0;
+        .box-sizing(border-box);
+
+        // &:hover {
+        //     z-index: 9999;
+        // }
+    }
+}
+
+div.containerLeft {
+    float: left;
+
+    > .tile,
+    > .subTile {
+        float: right;
+    }
+    > .tile {
+
+
+        .front {
+            a.cornerButton {
+                right: 0;
+            }
+        }
+        .back {
+            a.cornerButton {
+                left: 0;
+            }
+        }
+
+        // sizes
+        &.large {
+            .front {
+                a.cornerButton {
+                    border-width: @cornerButtonSize @cornerButtonSize 0 0;
+                }
+            }
+            .back {
+                a.cornerButton {
+                    border-width: @cornerButtonSize 0 0 @cornerButtonSize;
+                }
+            }
+        }
+        &.medium {
+            .front {
+                a.cornerButton {
+                    border-width: (@cornerButtonSize - 10px) (@cornerButtonSize - 10px) 0 0;
+                }
+            }
+            .back {
+                a.cornerButton {
+                    border-width: (@cornerButtonSize - 10px) 0 0 (@cornerButtonSize - 10px);
+                }
+            }
+        }
+        &.small {
+            .front {
+                a.cornerButton {
+                    border-width: (@cornerButtonSize - 20px) (@cornerButtonSize - 20px) 0 0;
+                }
+                .image:hover + .textBox {
+                    left: 0;
+                    right: auto;
+                }
+            }
+            .back {
+                a.cornerButton {
+                    border-width: (@cornerButtonSize - 20px) 0 0 (@cornerButtonSize - 20px);
+                }
+            }
+        }
+    }
+}
+
+div.containerRight {
+    float: right;
+
+    > .tile,
+    > .subTile {
+        float: left;
+    }
+    > .tile {
+
+        .front {
+            a.cornerButton {
+                left: 0;
+            }
+        }
+        .back {
+            a.cornerButton {
+                right: 0;
+            }
+        }
+
+        // sizes
+        &.large {
+            .front {
+                a.cornerButton {
+                    border-width: @cornerButtonSize 0 0 @cornerButtonSize;
+                }
+            }
+            .back {
+                a.cornerButton {
+                    border-width: @cornerButtonSize @cornerButtonSize 0 0;
+                }
+            }
+        }
+        &.medium {
+            .front {
+                a.cornerButton {
+                    border-width: (@cornerButtonSize - 10) 0 0 (@cornerButtonSize - 10);
+                }
+            }
+            .back {
+                a.cornerButton {
+                    border-width: (@cornerButtonSize - 10) (@cornerButtonSize - 10) 0 0;
+                }
+            }
+        }
+        &.small {
+            .front {
+                a.cornerButton {
+                    border-width: (@cornerButtonSize - 20) 0 0 (@cornerButtonSize - 20);
+                }
+                .image:hover + .textBox {
+                    left: -100%;
+                    right: auto;
+                }
+            }
+            .back {
+                a.cornerButton {
+                    border-width: (@cornerButtonSize - 20) (@cornerButtonSize - 20) 0 0;
+                }
+            }
+        }
+    }
+}
+
+.tile {
+    position: relative;
+
+    // tile styles
+    color: #8a8a8a;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        z-index: 9999;
+
+        .textBox {
+            @gridTextBoxColorLight: lighten(@gridTextBoxColor,10%);
+            .gradient(~"linear-gradient(0deg, @{gridTextBoxColor} 0%, @{gridTextBoxColorLight} 100%)");
+        }
+    }
+
+    // TILE SIZES
+    &.large {
+        > div {
+            padding: 8px;
+        }
+        .back {
+            a.title {
+                font-size: 1.8em;
+            }
+        }
+        a.title {
+            font-size: 1.4em;
+            line-height: 1.2em;
+        }
+    }
+    &.medium {
+        > div {
+            padding: 4px;
+        }
+        .front {
+
+            &:hover {
+                .textBox {
+                    height: 75%;
+                }
+            }
+        }
+        .back {
+            a.title {
+                font-size: 1.5em;
+            }
+        }
+        a.title {
+            font-size: 1.0em; //0.8
+            line-height: 1.4em;
+        }
+    }
+    &.small {
+        > div {
+            padding: 2px;
+        }
+        .front {
+            overflow: visible;
+
+            .image:hover + .textBox {
+                visibility: visible;
+                width: 200%;
+                height: 175%;
+                top: -175%;
+                padding: 15%;
+
+            }
+
+            .textBox {
+                visibility: hidden;
+                width: 100%;
+                height: 0;
+                top: 0;
+                padding: 0;
+            }
+        }
+        .back {
+            a.title {
+                font-size: 1.0em;
+            }
+        }
+        a.title {
+            font-size: 1.0em;
+            line-height: 1.4em;
+        }
+    }
+
+    // NEWS IMAGE
+    div.image {
+        height: 100%;
+        width: 100%;
+    }
+
+    // TEXTBOX
+    div.textBox {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+        height: 38.2%; //38.2
+        padding: 4% 6%;
+        .box-sizing(border-box);
+        .box-shadow(0 0 5px rgba(0,0,0,0.8));
+        .gradient(~"linear-gradient(0deg, @{gridTextBoxColorDark} 0%, @{gridTextBoxColor} 100%)");
+
+        a.title {
+            display: block;
+            color: darken(@gridTextBoxColor,70%);
+            font-family: @headlineFont;
+            font-weight: 400;
+            text-align: left;
+            width: 100%;
+            height: 100%;
+            -webkit-font-smoothing: antialiased;
+        }
+    }
+
+    // CORNER BUTTON
+    a.cornerButton {
+        z-index: 2;
+        position: absolute;
+        bottom: 0;
+        border-style: solid;
+        border-color: transparent @gridTextBoxColor;
+    }
+
+
+    // FRONT/BACK SIDES
+    > div {
+        position: absolute;
+        top: @gridSpacing/2;
+        bottom: @gridSpacing/2;
+        left: @gridSpacing/2;
+        right: @gridSpacing/2;
+        overflow: hidden;
+        .gradient(~"linear-gradient(0deg, @{gridTextBoxColorDark} 0%, @{gridTextBoxColor} 100%)");
+        .box-shadow(0 0 5px rgba(0,0,0,0.5));
+
+        padding: 0 !important; // TEMPORARY?
+        
+
+        &.front {
+            z-index: 1;
+            background-color: transparent;
+            .transform(rotateY(0deg) rotateY(0deg));
+
+            a.cornerButton {
+                border-color: transparent fadeout(@topicColorDefault,10%);
+            }
+
+            > .textBox {
+                text-shadow: 0 1px 0 lighten(@gridTextBoxColor,15%);
+            }
+        }
+        &.back {
+            z-index: 0;
+            .transform(rotateY(-179deg)); // 179 to fix a firefox bug
+            background-color: transparent;
+
+            > .textBox {
+                z-index: 1;
+                height: 100%;
+                padding: 5% 10%;
+                background: fadeout(@topicColorDefault,10%);
+
+                a.title {
+                    color: #fff;
+                    // font-size: 1.8em;
+                    // line-height: 2.0em;
+                }
+            }
+
+            .tileGrid {
+                z-index: 0;
+                position: absolute;
+                padding: 0px;
+                .box-sizing(border-box);
+
+                // default sub tile size
+                .subTile {
+                    position: relative;
+                    height: 0;
+
+                    > div {
+                        position: absolute;
+                        top: 1px;
+                        bottom: 1px;
+                        left: 1px;
+                        right: 1px;
+                        background-color: #fff;
+                    }
+
+                    &.large {
+                        width: 50%;
+                        padding-bottom: 50%;
+                    }
+                    &.medium {
+                        width: 25%;
+                        padding-bottom: 25%;
+                    }
+                    &.small {
+                        width: 12.5%;
+                        padding-bottom: 12.5%;
+                    }
+                }
+            }
+        }
+    }
+    &.flip {
+        z-index: 9999;
+
+        > div.front {
+            z-index: 0;
+            .transform(rotateY(180deg));
+        }
+        > div.back {
+            z-index: 1;
+            .transform(rotateX(0deg) rotateY(0deg));
+        }
+    }
+
+
+    &.detail {
+        z-index: 9999;
+        position: absolute;
+
+        > div {
+            .box-shadow(0 0 20px #333);
+        }
+    }
+}

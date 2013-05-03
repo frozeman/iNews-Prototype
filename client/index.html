@@ -1,0 +1,62 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>NEWSAPP Protoype 4</title>
+    <meta name="description" content="">
+    <!-- <meta name="viewport" content="width=device-width"> -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+    <base href="/">
+
+<!--         <!-- Open Graph Protocol --
+    <meta property="og:site_name" content="kunstberk.com">
+    <meta property="og:url" content="http://kunstberk.com">
+    <meta property="og:title" content="kunstberk - be part of the art">
+    <meta property="og:description" content="kunstberk is a platform for artist and art interested people alike. Discover, collect, share and rate great Art. We are preparing us for you, so stay tuned!">
+    <meta property="og:image" content="http://kunstberk.com/apple-touch-icon-144x144-precomposed.png">
+
+      <!-- Twitter Cards --
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="http://kunstberk.com">
+    <meta name="twitter:title" content="kunstberk - be part of the art">
+    <meta name="twitter:description" content="kunstberk is a platform for artist and art interested people alike. Discover, collect, share and rate great Art. We are preparing us for you, so stay tuned!">
+    <meta name="twitter:image" content="http://kunstberk.com/apple-touch-icon-144x144-precomposed.png">
+
+    <!-- Google+ Snippets --
+    <meta itemprop="url" content="http://kunstberk.com">
+    <meta itemprop="name" content="kunstberk - be part of the art">
+    <meta itemprop="description" content="kunstberk is a platform for artist and art interested people alike. Discover, collect, share and rate great Art. We are preparing us for you, so stay tuned!">
+    <meta itemprop="image" content="http://kunstberk.com/apple-touch-icon-144x144-precomposed.png">
+-->
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <link href='http://fonts.googleapis.com/css?family=Sintony:400,700|Source+Sans+Pro:300,400' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <noscript>
+        This application requires Javascript to be enabled!
+    </noscript>
+
+    {{> header}}
+    {{> grid}}
+    {{> leftSidebar}}
+    {{> footer}}
+
+    {{#isolate}}{{renderPage}}{{/isolate}}
+
+    <script>
+        var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+</body>

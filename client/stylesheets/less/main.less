@@ -1,0 +1,145 @@
+// CODEKIT Frameworks
+// @import 'bootstrap';
+@import 'normalize';
+@import 'lesshat';
+
+// thirdparty
+// @import 'thirdparty/font-awesome.less';
+@import 'thirdparty/icon-font.less';
+@import 'thirdparty/icon-animation.less';
+
+/* ==========================================================================
+   APP STYLES
+   ========================================================================== */
+
+/* 960gs */
+div.gridSystem {
+  z-index: 999;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 1200px;
+  background-position: top center !important;
+  display: none;
+}
+div.gridSystem.gs12 {
+  background: url("../img/gs/960_grid_12_col.png") repeat-y;
+}
+div.gridSystem.gs16 {
+  background: url("../img/gs/960_grid_16_col.png") repeat-y;
+}
+div.gridSystem.gs24 {
+  background: url("../img/gs/960_grid_24_col.png") repeat-y;
+}
+
+
+// RESET
+a, a:visited {
+  text-decoration: none;
+}
+
+// VARS
+
+// COLORS
+
+
+// schemes
+
+// custom
+@color1: lighten(#c0b9ac,10%); // topbar
+@color2: #c54806;
+@color3: #43352d; // base color
+@color4: #534e45; // background //#7A7468
+@color5: #5ca848; // not used
+
+// blue
+// @color1: #A9CDDE;
+// @color4: #294959;
+// @color3: #63B1D8; // base color
+// @color2: #435159;
+// @color5: #4C87A5;
+
+// dark with green
+// @color1: #a3a9aa;//#EEEEEE
+// @color2: #2D4466;
+// @color3: #343a3d;//#556F79
+// @color4: #282828; // base color
+// @color5: #7CA600;
+
+// warm grays
+// @color1: #2e2b29;
+// @color2: #556F79; // base color
+// @color3: #403D39;
+// @color4: #413e34;
+// @color5: #ABA398;
+
+
+// topic colors
+@topicColorDefault: @color2;
+@topicColor1: #b01321;//#CC0000
+@topicColor2: #185f12;//#008000
+@topicColor3: #ffd028;//#FFCC00
+@topicColor4: #3d0774;//#663399
+@topicColor5: #2758ff;//#5F9AFF
+
+@colorBlack: #111;
+@textColor: #111;
+
+@barColor: @color1;
+
+@gridBgColor: darken(@color1, 40%);
+
+@gridTextBoxColor: @barColor;
+@gridTextBoxColorDark: darken(@barColor,15%);
+
+// LAYOUT
+
+// header
+@headerHeight: 48px;
+@headerButtonHeight: @headerHeight - 10px;
+@headerPathHeight: floor(@headerHeight/1.75);
+
+@headerHeightMobil: floor(@headerHeight/1.5);
+@headerButtonHeightMobil: @headerHeightMobil - 5px;
+@headerPathHeightMobil: floor(@headerHeightMobil/1.4);
+
+// leftsideBar
+@leftsideBarWidth: 250px;
+
+// font
+@headlineFont: 'Source Sans Pro','Sintony', 'Helvetica Neue', sans-serif;
+@subHeadlineFont: 'Sintony', 'Helvetica Neue', sans-serif;
+@contentFont: 'Sintony', 'Helvetica Neue', sans-serif;
+@offlineFont: 'Helvetica Neue', sans-serif;
+@animationDuration: .4s;
+@animationType: ease-out;
+
+// grid
+@dividerWidth: 50px;
+@gridSpacing: 6px;
+@cornerButtonSize: 35px;
+
+// mixins
+.easeBounce {
+  .transition-timing-function(cubic-bezier(0.595, 0.855, 0.000, 1.165));
+}
+
+
+@import 'mixins.less';
+@import 'layout.less';
+@import 'tilesGrid.less';
+@import 'articleView.less';
+@import 'animations.less';
+@import 'topicColors.less';
+@import 'responsiveness.less';
+
+
+
+
+
+
+
+
+
+
+
