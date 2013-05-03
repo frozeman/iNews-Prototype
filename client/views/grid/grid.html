@@ -1,14 +1,22 @@
 <template name="grid">
     <nav class="mainGrid gridContainer" role="navigation">
         <div class="containerLeft">
-            {{#each tiles 'pro'}}
-                {{> tileSide}}
-            {{/each}}
+            {{#if tiles 'pro'}}
+                {{#each tiles 'pro'}}
+                    {{> tileSide}}
+                {{/each}}
+            {{else}}
+                <!-- <div class="loadingIcon icon-spin5 animate-spin"></div> -->
+            {{/if}}
         </div>
         <div class="containerRight">
-            {{#each tiles 'con'}}
-                {{> tileSide}}
-            {{/each}}
+            {{#if tiles 'con'}}
+                {{#each tiles 'con'}}
+                    {{> tileSide}}
+                {{/each}}
+            {{else}}
+                <!-- <div class="loadingIcon icon-spin5 animate-spin"></div> -->
+            {{/if}}
         </div>
 
         <!-- divider -->
@@ -17,4 +25,9 @@
             <div class="con"><span>CON</span></div>
         </div>
     </nav>
+    {{#unless tiles 'pro'}}
+    {{#unless tiles 'con'}}
+        <div class="loadingIcon header icon-spin5 animate-spin"></div>
+    {{/unless}}
+    {{/unless}}
 </template>

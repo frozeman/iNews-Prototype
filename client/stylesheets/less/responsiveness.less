@@ -244,6 +244,15 @@
         font-size: 13px;
     }
 
+    .loadingIcon {
+        font-size: @headerHeightMobil;
+        
+        &.header {
+            top: -18px;
+            font-size: @headerHeightMobil / 2;
+        }
+    }
+
     // arrows
     .arrowTop,
     .arrowBottom {
@@ -465,9 +474,10 @@
 
     // ARTICLE
     article.main {
-        padding-top: @headerHeightMobil;
+        top: @headerHeightMobil;
 
         button.close {
+            top: -@headerHeightMobil;
             height: @headerHeightMobil;
             width: @headerHeightMobil;
 

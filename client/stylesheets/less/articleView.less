@@ -1,12 +1,11 @@
 article.main {
     display: block;
     position: absolute;
-    overflow: hidden;
-    top: 0;
+    top: @headerHeight;
     bottom: 0;
     left: 0;
     right: 0;
-    padding-top: @headerHeight;
+    // padding-top: @headerHeight;
     // background-color: lighten(@color1, 10%);
     .box-shadow(0 0 20px rgba(0,0,0,0.5));
 
@@ -17,7 +16,7 @@ article.main {
     button.close {
         display: block;
         position: absolute;
-        top: 0;
+        top: -@headerHeight;
         right: 60px;
         height: @headerHeight;
         width: @headerHeight;
@@ -72,7 +71,7 @@ article.main {
     .imageZooms {
         z-index: 1;
         position: absolute;
-        top: @headerHeight;
+        top: 0;
         left: 0;
         width: 25%;
         height: 100%;
@@ -97,7 +96,7 @@ article.main {
                 visibility: visible;
                 left: 100%;
                 width: 300%;
-                height: 80%;
+                height: 100%;
                 padding-bottom: 0;
             }
         }
@@ -182,7 +181,6 @@ article.main {
     }
     aside.right {
         position: absolute;
-        top: @headerHeight;
         right: 0;
         width: 60px;
         margin-left: 0;

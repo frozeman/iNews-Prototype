@@ -14,15 +14,16 @@ Template.article.rendered = function() {
 
 // EVENTS
 Template.article.events({
-    'click button.close': function(e){ //, click .dimContainer
+    'click button.close, click .dimContainer': function(e){
+        if($(e.target).parent().hasClass('close') || $(e.target).hasClass('dimContainer')) {
+            // enable news grid scrolling again
+            unlockViewport();
 
-        // enable news grid scrolling again
-        unlockViewport();
-
-        // fade out
-        $('.dimContainer').fadeOut('fast',function(){
-            Meteor.Router.to('/news/' + Session.get('newsPath'));
-        });
+            // fade out
+            $('.dimContainer').fadeOut('fast',function(){
+                Meteor.Router.to('/news/' + Session.get('newsPath'));
+            });
+        }
     },
     'mouseenter .image': function(e) {
         var imageZoomId = $(e.target).attr('data-relatedid');
@@ -48,7 +49,7 @@ Template.article.articleData = function(){
     //     return (URLify(article.title) === articleData.title);
     // });
 
-    return false;//articles;
+    return articles;
 };
 Template.article.datetimePubDate = function(timestamp){
     var time = moment.unix(timestamp);

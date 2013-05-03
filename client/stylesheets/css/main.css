@@ -650,6 +650,24 @@ noscript {
   width: 100%;
   text-align: center;
 }
+.loadingIcon {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  margin-left: -50px;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  font-size: 32px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.4);
+}
+.loadingIcon.header {
+  z-index: 4;
+  top: -5px;
+  font-size: 24px;
+  color: #9f9481;
+}
 .dimContainer {
   display: block;
   z-index: 9999;
@@ -661,18 +679,6 @@ noscript {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-overflow-scrolling: touch;
-}
-.dimContainer .loadingIcon {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  margin-left: -50px;
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
-  font-size: 50px;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.7);
 }
 div.error {
   position: fixed;
@@ -1274,6 +1280,7 @@ div.divider div.con span {
 }
 .gridContainer.mainGrid > div.containerLeft,
 .gridContainer.mainGrid > div.containerRight {
+  position: relative;
   padding-top: 12px;
   padding-bottom: 12px;
   min-height: 600px;
@@ -1595,12 +1602,10 @@ div.containerRight > .tile.small .back a.cornerButton {
 article.main {
   display: block;
   position: absolute;
-  overflow: hidden;
-  top: 0;
+  top: 48px;
   bottom: 0;
   left: 0;
   right: 0;
-  padding-top: 48px;
   -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
@@ -1611,7 +1616,7 @@ article.main {
 article.main button.close {
   display: block;
   position: absolute;
-  top: 0;
+  top: -48px;
   right: 60px;
   height: 48px;
   width: 48px;
@@ -1657,7 +1662,7 @@ article.main aside.right {
 article.main .imageZooms {
   z-index: 1;
   position: absolute;
-  top: 48px;
+  top: 0;
   left: 0;
   width: 25%;
   height: 100%;
@@ -1680,7 +1685,7 @@ article.main .imageZooms .imageZoom.show {
   visibility: visible;
   left: 100%;
   width: 300%;
-  height: 80%;
+  height: 100%;
   padding-bottom: 0;
 }
 article.main aside.left {
@@ -1739,7 +1744,6 @@ article.main aside.left .image:focus:before {
 }
 article.main aside.right {
   position: absolute;
-  top: 48px;
   right: 0;
   width: 60px;
   margin-left: 0;
@@ -2328,6 +2332,13 @@ aside.leftSidebar ul li a span.topic.topicType5 {
   body {
     font-size: 13px;
   }
+  .loadingIcon {
+    font-size: 32px;
+  }
+  .loadingIcon.header {
+    top: -18px;
+    font-size: 16px;
+  }
   .arrowTop,
   .arrowBottom {
     border-width: 16px !important;
@@ -2487,9 +2498,10 @@ aside.leftSidebar ul li a span.topic.topicType5 {
     right: 1.5px;
   }
   article.main {
-    padding-top: 32px;
+    top: 32px;
   }
   article.main button.close {
+    top: -32px;
     height: 32px;
     width: 32px;
   }
