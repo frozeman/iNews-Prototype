@@ -1,8 +1,7 @@
 {
   "meteor": {
-    "tag": "release/0.6.2",
-    "git": "https://github.com/meteor/meteor.git",
-    "branch": "master"
+    "tag": "release/0.6.2.1-with-websockets",
+    "git": "https://github.com/meteor/meteor.git"
   },
   "packages": {
     "inews-analysis": {
