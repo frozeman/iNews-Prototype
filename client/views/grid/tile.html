@@ -1,7 +1,7 @@
-<template name="tileSide">
+<template name="tile">
     <div class="tile{{size}} topicType1">
         <div class="front">
-            <div class="image"><img src="{{image media.images}}" alt="{{title}}"></div>
+            <div class="image">{{image media.images title}}</div>
             <div class="textBox">
                 <a href="{{newsLink this}}" class="title">{{title}}</a>
             </div>
@@ -85,7 +85,7 @@
                 </div>
             </div> -->
             <div class="textBox">
-                <a class="title">{{clusterData.subTopic}}</a>
+                <a href="{{subTopicLink this}}" class="title">{{clusterData.subTopic}}</a>
             </div>
             <a class="cornerButton"></a>
         </div>

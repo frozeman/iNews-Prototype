@@ -1,6 +1,6 @@
 <template name="article">
     {{#if articleData}}
-        <div class="dimContainer">
+        <div class="dimContainer" onclick="">
             {{#each articleData}}
                 <article class="main" role="main">
                     <button class="close"><span>×</span></button>
@@ -14,7 +14,7 @@
                             <div class="image" data-relatedid="{{generateImageZoomId this}}"><img src="{{this}}" alt="{{../title}}"></div>
                             <!-- <div class="imageZoom" style="background-image: url('{{this}}');"></div> -->
                         {{/each}}
-                        <a href="" class="subTopic topicType1"><div>{{clusterData.subTopic}}</div></a>
+                        <a href="{{subTopicLink this}}" class="subTopic topicType1"><div>{{clusterData.subTopic}}</div></a>
 
                         <div class="clearFix"></div>
                     </aside>
@@ -31,8 +31,8 @@
                                 <h1>{{title}}</h1>
                                 <p class="metaData">
                                     {{#if metaData.pubDate}}<time datetime="{{datetimePubDate metaData.pubDate}}" title="{{absolutePubDate metaData.pubDate}}">{{relativePubDate metaData.pubDate}}</time>{{/if}}
-                                    {{#if metaData.author}} {{translate 'article.author'}} {{authorText}}{{#if metaData.author.link}}<a href="{{metaData.author.link}}" target="_blank">{{/if}}{{metaData.author.name}}{{#if metaData.author.link}}</a>{{/if}}{{/if}}
-                                    {{#if metaData.source}} {{translate 'article.source'}} {{sourceText}}{{#if metaData.source.link}}<a href="{{metaData.source.link}}" target="_blank">{{/if}}{{metaData.source.id}}{{#if metaData.source.link}}</a>{{/if}}{{/if}}
+                                    {{#if metaData.author}} {{translate 'article.author'}} {{authorText}}{{#if metaData.author.url}}<a href="{{metaData.author.url}}" target="_blank">{{/if}}{{metaData.author.name}}{{#if metaData.author.url}}</a>{{/if}}{{/if}}
+                                    {{#if metaData.source}} {{translate 'article.source'}} {{sourceText}}{{#if metaData.source.url}}<a href="{{metaData.source.url}}" target="_blank">{{/if}}{{metaData.source.id}}{{#if metaData.source.url}}</a>{{/if}}{{/if}}
                                 </p>
                             </header>
                             <section>
@@ -43,7 +43,7 @@
                             </section>
                         </div>
                     </div>
-                    <a href="{{metaData.source.link}}" class="articleLink" target="_blank">{{translate 'article.readOn'}} {{metaData.source.id}} <i class="icon-angle-right"></i></a>
+                    <a href="{{metaData.source.url}}" class="articleLink" target="_blank">{{translate 'article.readOn'}} {{metaData.source.id}} <i class="icon-angle-right"></i></a>
                     <!-- COMMENTS -->
                     <aside class="right">
                         <h1 class="title"><span class="rotated">{{translate 'article.comments'}}</span> <i class="icon-comment-empty"></i> <span class="count">142</span></h1>
@@ -53,11 +53,8 @@
             {{/each}}
         </div>
     {{else}}
-        <div class="dimContainer">
-            <div class="loadingIcon icon-spin5 animate-spin"></div>
-            <!-- <div class="error">
-                Couldn't find Article
-            </div> -->
+        <div class="dimContainer" onclick="">
+            {{> loadingIcon}}
         </div>
     {{/if}}
 </template>

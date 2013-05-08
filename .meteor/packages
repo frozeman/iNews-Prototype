@@ -3,10 +3,11 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-autopublish
-insecure
-preserve-inputs
 router
 HTML5-History-API
 i18n
 moment
+spiderable
+preserve-inputs
+underscore-string
+http

@@ -5,9 +5,13 @@
     "branch": "master"
   },
   "packages": {
+    "inews-analysis": {
+      "path": "/Users/frozeman/Development/Server/NEWSAPP_Prototype4/packages/inews-analysis"
+    },
     "router": {},
     "HTML5-History-API": {},
     "i18n": {},
-    "moment": {}
+    "moment": {},
+    "underscore-string": {}
   }
 }

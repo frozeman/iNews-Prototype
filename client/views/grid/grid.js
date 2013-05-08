@@ -1,37 +1,19 @@
 // SETTINGS
-Template.grid.preserve(['.containerLeft', '.containerRight']);
+Template.grid.preserve(['#mainGrid','.containerLeft', '.containerRight']);
 
 
 // RENDERED
 Template.grid.rendered = function() {
 
-    console.log('grid renderd');
+    centerImages('#mainGrid');
 
-    // SET the SIZE OF the TILES, according to the .mainGrid width
-    resizeTiles();
-    centerImages('.mainGrid');
-
-    // SET MASONRY
-    // $('.mainGrid > .containerLeft').masonry({
-    //   isRTL: true,
-    //   itemSelector: '.tile',
-    //   columnWidth : tileSize,
-    //   position: 'relative',
-    //   isAnimated: GRIDANIMATE
-    // });
-    // $('.mainGrid > .containerRight').masonry({
-    //   itemSelector: '.tile',
-    //   columnWidth : tileSize,
-    //   position: 'relative',
-    //   isAnimated: GRIDANIMATE
-    // });
-
-
-    // $('.mainGrid > .containerLeft, .mainGrid > .containerRight').masonry('reloadItems');
+    Meteor.defer(function(){
+        resizeTiles();
+    });
 
 
     // ATTACH EVENTS to TILES
-    $('.mainGrid > div > .tile').each(function(){
+    $('#mainGrid > div > .tile').each(function(){
 
         var $tile = $(this);
         var cornerButtonTimeOut;
@@ -128,9 +110,22 @@ Template.grid.rendered = function() {
 
 
 // HELPERS
+Template.grid.slideDown = function() {
+    return (Session.get('showMessageBox')) ? ' slideDown' : '';
+};
+// Template.grid.slideRight = function() {
+//     return (Session.get('showLeftsidebar')) ? ' slideRight' : '';
+// };
+
+// get the articles
 Template.grid.tiles = function(type) {
 
-    var articles = News.find({'clusterData.side': type}, {sort: {'clusterData.importance': -1, 'metaData.pubDate': -1}}).fetch();
+    var articleIds = Session.get('articleIds') || [],
+        articles;
+    if(!_.isArray(articleIds)) // TEMPORARY?
+        articles = News.find({'clusterData.side': type}, {sort: {'clusterData.importance': -1, 'metaData.pubDate': -1}}).fetch();
+    else
+        articles = News.find({$and: [{'clusterData.side': type}, {'_id': {$in: articleIds }}]}, {sort: {'clusterData.importance': -1, 'metaData.pubDate': -1}}).fetch();
 
     // -> calculate the size for all articles in that cluster
     // get highest importance
@@ -150,6 +145,10 @@ Template.grid.tiles = function(type) {
         else
             article.size = ' large';
     });
+
+
+    // hide loading circle
+    Session.set('showLoadingIcon',false);
 
     return articles;
 };

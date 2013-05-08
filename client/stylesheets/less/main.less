@@ -50,7 +50,7 @@ a, a:visited {
 @color2: #c54806;
 @color3: #43352d; // base color
 @color4: #534e45; // background //#7A7468
-@color5: #5ca848; // not used
+@color5: #f9cf28; // messagebox
 
 // blue
 // @color1: #A9CDDE;
@@ -99,9 +99,12 @@ a, a:visited {
 @headerButtonHeight: @headerHeight - 10px;
 @headerPathHeight: floor(@headerHeight/1.75);
 
-@headerHeightMobil: floor(@headerHeight/1.5);
-@headerButtonHeightMobil: @headerHeightMobil - 5px;
-@headerPathHeightMobil: floor(@headerHeightMobil/1.4);
+@headerHeightMobile: floor(@headerHeight/1.5);
+@headerButtonHeightMobil: @headerHeightMobile - 5px;
+@headerPathHeightMobil: floor(@headerHeightMobile/1.4);
+
+@footerHeight: 160px;
+@footerHeightMobile: 280px;
 
 // leftsideBar
 @leftsideBarWidth: 250px;
@@ -127,7 +130,7 @@ a, a:visited {
 
 @import 'mixins.less';
 @import 'layout.less';
-@import 'tilesGrid.less';
+@import 'grid.less';
 @import 'articleView.less';
 @import 'animations.less';
 @import 'topicColors.less';

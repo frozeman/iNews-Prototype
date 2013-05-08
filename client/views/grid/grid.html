@@ -1,33 +1,28 @@
 <template name="grid">
-    <nav class="mainGrid gridContainer" role="navigation">
+    <nav id="mainGrid" class="mainGrid gridContainer{{slideDown}}" role="navigation">
         <div class="containerLeft">
             {{#if tiles 'pro'}}
                 {{#each tiles 'pro'}}
-                    {{> tileSide}}
+                    {{> tile}}
                 {{/each}}
             {{else}}
-                <!-- <div class="loadingIcon icon-spin5 animate-spin"></div> -->
+                <p>{{translate 'grid.errors.noArticles'}}</p>
             {{/if}}
         </div>
         <div class="containerRight">
             {{#if tiles 'con'}}
                 {{#each tiles 'con'}}
-                    {{> tileSide}}
+                    {{> tile}}
                 {{/each}}
             {{else}}
-                <!-- <div class="loadingIcon icon-spin5 animate-spin"></div> -->
+                <p>{{translate 'grid.errors.noArticles'}}</p>
             {{/if}}
         </div>
 
         <!-- divider -->
-        <div class="divider">
+        <div class="divider{{slideRight}}">
             <div class="pro"><span>PRO</span></div>
             <div class="con"><span>CON</span></div>
         </div>
     </nav>
-    {{#unless tiles 'pro'}}
-    {{#unless tiles 'con'}}
-        <div class="loadingIcon header icon-spin5 animate-spin"></div>
-    {{/unless}}
-    {{/unless}}
 </template>

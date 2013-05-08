@@ -1,21 +1,31 @@
 Meteor.startup(function() {
 
-    // ADD the FACEBOOK OPEN GRAPH ATTRIBUTES
-    $('html').attr("xmlns:fb","http://ogp.me/ns/fb#");
-    $("head").attr("prefix", "og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#");
+    // DEFAULT SESSIONS
+    Session.setDefault('articleIds',[]);
+    Session.setDefault('newsPath', '');
+    Session.setDefault('messageBoxMessage', '');
+    Session.set('showLoadingIcon',true);
 
-    // set the DEFAULT NEWS PATH
-    Session.set('newsPath','');
 
-    // set the locale
+    // SET the LOCALE
     var locale = navigator.language || navigator.browserLanguage || navigator.userLanguage || navigator.systemLanguage;
     if(locale) {
         // use onl "en" of "en_US"
         locale = locale.substr(0,2);
+
+        // allowed languages: en, de
+        locale = (locale === 'en' || locale === 'de') ? locale : 'en';
+
         Meteor.setLocale(locale);
         moment.lang(locale);
     }
 
+
+    // SET HEAD
+
+    // add the facebook open graph attributes
+    $('html').attr("xmlns:fb","http://ogp.me/ns/fb#");
+    $("head").attr("prefix", "og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#");
 
 });
 
@@ -47,9 +57,6 @@ Meteor.startup(function() {
 // RESIZE
 $(window).resize(function() {
 
-    // show the size in the top bar
-    $('.pixelWidth').html('width: ' + $(window).width() + 'px');
-
 
     // set the font size automatically
     //Standard height, for which the body font size is correct
@@ -68,7 +75,7 @@ $(window).resize(function() {
     // get the last visible tile
     else {
         var scrollPos = $(window).scrollTop();
-        $('.mainGrid > div > .tile').each(function(index, item){
+        $('#mainGrid > div > .tile').each(function(index, item){
             item = $(item);
             if(scrollPos > 60 && scrollPos < item.offset().top) {
                 visibleItem = item;
@@ -85,7 +92,6 @@ $(window).resize(function() {
     // prevent imediate resize
     clearTimeout(RESIZETIMEOUTID);
     RESIZETIMEOUTID = window.setTimeout(function() {
-
 
         // set RESPONSIVE TILE SIZES
         resizeTiles();

@@ -31,7 +31,7 @@ div.divider {
     }
     div.pro {
         left: -1px;
-        @gridBgColorLight: darken(@gridBgColor,0%);
+        @gridBgColorLight: fadeout(@gridBgColor,100%);
         @gridBgColorDarker: darken(@gridBgColor, 10%);
         .gradient(~"linear-gradient(90deg, @{gridBgColorLight} 0%, @{gridBgColorDarker} 100%)");
         span {
@@ -41,7 +41,7 @@ div.divider {
     }
     div.con {
         right: -1px;
-        @gridBgColorLight: darken(@gridBgColor,0%);
+        @gridBgColorLight: fadeout(@gridBgColor,100%);
         @gridBgColorDarker: darken(@gridBgColor, 15%);
         .gradient(~"linear-gradient(90deg, @{gridBgColorDarker} 0%, @{gridBgColorLight} 100%)");
 
@@ -56,20 +56,25 @@ div.divider {
     z-index: 2;
     position: relative;
     width: 100%;
+    min-height: 100%;
     margin-left: auto;
     margin-right: auto;
     padding: 4px 0;
     padding-bottom: 0;
     overflow: hidden;
-    // display: table;
-    // line-height: 0;
+
 
     // MAIN GRID
     &.mainGrid {
+        min-height: 100%;
         padding-top: @headerHeight;
         // padding-bottom: @gridSpacing * 4;
         background-color: @gridBgColor;
         .box-shadow(0 0 30px rgba(0,0,0,0.6));
+
+        &.slideDown {
+            margin-top: @headerHeight;
+        }
 
 
         // MAINGRID CONTAINER LEFT/RIGHT
@@ -78,7 +83,19 @@ div.divider {
             position: relative;
             padding-top: @gridSpacing * 2;
             padding-bottom: @gridSpacing * 2;
-            min-height: 600px;
+            min-height: 100%;
+
+            > p {
+                display: inline-block;
+                width: 100%;
+                margin-top: 50px;
+                font-family: @headlineFont;
+                font-weight: 300;
+                font-size: 1.4em;
+                text-align: center;
+                color: darken(@gridBgColor,20%);
+                text-shadow: 0 1px 0 lighten(@gridBgColor,10%);
+            }
         }
 
         > div.containerLeft {
@@ -259,6 +276,11 @@ div.containerRight {
             @gridTextBoxColorLight: lighten(@gridTextBoxColor,10%);
             .gradient(~"linear-gradient(0deg, @{gridTextBoxColor} 0%, @{gridTextBoxColorLight} 100%)");
         }
+    }
+
+    &.hidden {
+        .opacity(0);
+        // .scale(0.1);
     }
 
     // TILE SIZES

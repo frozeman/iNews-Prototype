@@ -1,0 +1,8 @@
+{
+  "name": "iNews mediator",
+  "description": "To let the iNews modules communicate",
+  "homepage": "",
+  "author": "Fabian Vogelsteller  (http://frozeman.de)",
+  "version": "0.1.0",
+  "git": ""
+}

@@ -1,4 +1,9 @@
 // legacy animation using CPU
+.loadingIcon {
+    .transition(all @animationDuration);
+    .translateZ(0);
+}
+
 header.main {
     nav {
         ul {
@@ -7,6 +12,11 @@ header.main {
                     .transition(all @animationDuration @animationType);
                 }
             }
+        }
+    }
+    .search {
+        input {
+            .transition(all @animationDuration/2);
         }
     }
     div.pathMenu {
@@ -26,29 +36,26 @@ header.main {
 }
 
 header.main,
-footer.main,
-.mainGrid
-{
-    .transition(left @animationDuration);
+.mainGrid,
+.messageBox {
+    .transition-property(transform, left, top, margin-top, height);
+    .transition-duration(@animationDuration);
+    .translateZ(0); // also moves the divider? why?
     // .easeBounce;
 
-    &.slideRight {
-        left: @leftsideBarWidth;
-    }
 }
-
-div.divider {
-    .transition(margin-left @animationDuration);
-    // .easeBounce;
-
-    &.slideRight {
-        margin-left: @leftsideBarWidth - @dividerWidth/2;
-    }
+.contentWrapper {
+    .transition-property(transform, left);
+    .transition-duration(@animationDuration);
+    .translateZ(0); // also moves the divider? why?
 }
 
 // grid animation
 .tile {
-    .transition(z-index @animationDuration @animationType); // keeps the z-index for the transition
+    .transition-property(z-index, opacity, transform, scale);
+    .transition-duration(@animationDuration);
+    .translateZ(0);
+    // .transition(z-index @animationDuration @animationType);
 
     &.medium {
         .front {
@@ -122,19 +129,28 @@ article.main {
 
     header.main,
     footer.main,
-    .mainGrid
-     {
-        .transition(transform @animationDuration);
-
-        &.slideRight {
-            .translate3d(@leftsideBarWidth,0,0);
-            left: 0;
+    .messageBox {
+        &.slideDown {
+            top: 0;
+            .translate3d(0,@headerHeight,0);
         }
     }
-
-    div.divider {
+    .contentWrapper {
         &.slideRight {
-            margin-left: -@dividerWidth/2;
+            left: 0;
+            .translate3d(@leftsideBarWidth,0,0);
+        }
+    }
+}
+@media (max-width: 480px) {
+    .csstransforms3d {
+
+        header.main,
+        footer.main,
+        .messageBox {
+            &.slideDown {
+                .translate3d(0,@headerHeightMobile,0);
+            }
         }
     }
 }

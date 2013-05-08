@@ -1,6 +1,6 @@
 body {
     // display: block;
-    position: relative;
+    // position: relative;
     height: 100%;
     zoom: 1;
     background-color: darken(@color3, 5%);//#dcd4bc
@@ -12,6 +12,17 @@ body, html {
     overflow-x: hidden;
 }
 
+// RESET
+::selection {
+    background: @color2;
+    color: #f2f2f2;
+}
+::-moz-selection {
+    background: @color2;
+    color: #f2f2f2;
+}
+
+
 // GENERAL ELEMENTS
 noscript {
     display: block;
@@ -19,6 +30,18 @@ noscript {
     height: 60px;
     width: 100%;
     text-align: center;
+}
+
+.contentWrapper {
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: @footerHeight + @headerHeight;
+
+    &.slideRight {
+        left: @leftsideBarWidth;
+    }
 }
 
 .loadingIcon {
@@ -32,12 +55,10 @@ noscript {
     font-size: @headerHeight / 1.5;
     text-align: center;
     color: fadeout(#fff,60%);
+    .opacity(1);
 
-    &.header {
-        z-index: 4;
-        top: -5px;
-        font-size: @headerHeight / 2;
-        color: darken(@barColor,25%);
+    &.hidden {
+        .opacity(0);
     }
 }
 
@@ -81,6 +102,37 @@ div.error {
     clear: both;
 }
 
+
+h1, h2, h3, h4, h5 {
+    font-weight: normal;
+}
+
+.messageBox {
+    z-index: 4;
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+    height: @headerHeight;
+    line-height: @headerHeight;
+    background-color: @color5;
+    text-align: center;
+    color: darken(@color5,35%);
+    font-family: @headlineFont;
+    font-weight: 300;
+    font-size: 18px;
+    text-shadow: 0 1px 0 lighten(@color5,30%);
+    .box-shadow(0 -5px 10px rgba(0,0,0,0.3));
+
+    p {
+        margin: 0;
+        padding: 0;
+    }
+    em {
+        font-weight: 400;
+        font-style: normal;
+    }
+}
+
 // arrows
 .arrowTop,
 .arrowBottom {
@@ -90,10 +142,6 @@ div.error {
     width: 0;
     position: absolute;
     left: 50%;
-}
-
-h1, h2, h3, h4, h5 {
-    font-weight: normal;
 }
 
 header.main {
@@ -106,8 +154,21 @@ header.main {
     .gradient(~"linear-gradient(0deg, @{barColor} 10%, @{barColorLight} 100%)");
     border-top: 1px solid lighten(@barColor,10%);
     border-bottom: 1px solid darken(@barColor,30%);
-    .box-shadow(0 0 10px rgba(0,0,0,0.8));
+    .box-shadow(0 0 10px rgba(0,0,0,0.7));
     .topBar;
+
+    &.slideDown {
+        top: @headerHeight;
+    }
+
+    .loadingIcon {
+        z-index: 0;
+        position: absolute;
+        top: auto;
+        bottom: -50px;
+        font-size: @headerHeight / 2;
+        color: darken(@barColor,25%);
+    }
 
     .arrowTop {
         top: 100%;
@@ -143,7 +204,7 @@ header.main {
 
             .barLinks;
 
-            &.bookmarkButton {
+            &.sidebarButton {
                 // left: 5px;
             }
             &.viewButton {
@@ -151,6 +212,44 @@ header.main {
                 // position: absolute;
                 // top: 10px;
                 // left: 250px;
+            }
+        }
+    }
+
+    // SEARCH
+    div.search {
+        z-index: 1;
+        position: absolute;
+        left: @headerButtonHeight * 2 + 60px;
+        width: 85%;
+        height: @headerHeight;
+        line-height: @headerHeight;
+
+        label {
+            font-size: 20px;
+            .barLinks;
+            
+            &:active {
+                .box-shadow(none);
+            }
+        }
+
+        input {
+            position: relative;
+            top: -3%;
+            background: none;
+            border: none;
+            outline: none;
+            width: 80%;
+            height: 75%;
+            line-height: @headerHeight/1.5;
+            
+            font-size: 18px;
+            .barText;
+
+            &.highlight {
+                color: darken(@barColor,5%);
+                text-shadow: 0 0 10px #fff;
             }
         }
     }
@@ -337,8 +436,7 @@ header.main {
 }
 
 aside.leftSidebar {
-    z-index: 1;
-    display: none;
+    z-index: 0;
     position: fixed;
     overflow: auto;
     top: 0;
@@ -464,8 +562,10 @@ aside.leftSidebar {
 
 footer.main {
     z-index: 3;
+    display: block;
     position: relative;
     width: 100%;
+    height: @footerHeight;
     padding: 20px;
     padding-bottom: 0;
     border-top: 1px solid lighten(@color1,10%);
@@ -491,7 +591,10 @@ footer.main {
 
     // logo
     a.logo {
+        position: relative;
         display: inline-block;
+        top: 18px;
+        left: 18px;
         float: left;
         // margin-right: 20px;
         // width: 100px;

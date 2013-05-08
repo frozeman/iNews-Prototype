@@ -1,42 +1,59 @@
+// SETTINGS
+Template.header.preserve(['header.main']);
+
 // RENDERED
 Template.header.rendered = function() {
 
 
     // SEARCH INPUT
-    $('.pathMenu input').on('keyup',function(e){
-        var $input = $(this);
+    // $('#search').typeahead({
+    //     name: 'accounts',
+    //     local: ['timtrueman', 'JakeHarding', 'vskarich']
+    // });
 
-        // clear on ESC
-        if(e.keyCode == 27)
-            $input.val('');
 
-        if($input.val() !== '')
-            $input.next('button.cancel').removeClass('hidden');
-            // $input.next('button.cancel').css('display','inline-block');
-        else
-            $input.next('button.cancel').addClass('hidden');
-            // $input.next('button.cancel').css('display','none');
-    });
-    $('.pathMenu button.cancel').click(function(){
-        $(this).prev('input').val('').trigger('keyup').trigger('focus');
-    });
+
+
+
+
+
+
+    // $('.pathMenu input').on('keyup',function(e){
+    //     var $input = $(this);
+
+    //     // clear on ESC
+    //     if(e.keyCode == 27)
+    //         $input.val('');
+
+    //     if($input.val() !== '')
+    //         $input.next('button.cancel').removeClass('hidden');
+    //         // $input.next('button.cancel').css('display','inline-block');
+    //     else
+    //         $input.next('button.cancel').addClass('hidden');
+    //         // $input.next('button.cancel').css('display','none');
+    // });
+    // $('.pathMenu button.cancel').click(function(){
+    //     $(this).prev('input').val('').trigger('keyup').trigger('focus');
+    // });
 
 
     // SHOW/HIDE LEFT SIDEBAR BY SWIPE
-    // var $slideElementsHammer = $('.mainGrid').hammer({swipe_velocity: 0.2});
+    // var $slideElementsHammer = $('#mainGrid').hammer({swipe_velocity: 0.2});
     // $slideElementsHammer.on("swipeleft", function(e) {
     //     $slideElements.removeClass('slideRight');
-    //     $('.bookmarkButton').removeClass('active');
+    //     $('.sidebarButton').removeClass('active');
     // });
     // $slideElementsHammer.on("swiperight", function(e) {
     //     $slideElements.addClass('slideRight');
-    //     $('.bookmarkButton').addClass('active');
+    //     $('.sidebarButton').addClass('active');
     // });
 
 };
 
 
 // EVENTS
+var searchKeyTimeout = null;
+
 Template.header.events({
     // FLIP ALL TILES BUTTON
     'click .viewButton': function(e) {
@@ -46,20 +63,51 @@ Template.header.events({
         flipTiles();
     },
     // BOOKMARK BUTTON
-    'click .bookmarkButton': function(e){
+    'click .sidebarButton': function(e){
         e.preventDefault();
 
-        var $bookmarkButton = $(e.currentTarget);
+        if($(e.currentTarget).hasClass('active'))
+            Session.set('showLeftsidebar',false);
+        else
+            Session.set('showLeftsidebar',true);
+    },
+    // SEARCH INPUT
+    'keyup #search': function(e) {
+        var $input = $(e.currentTarget);
+        var value = $input.val();
+        // clearTimeout(searchKeyTimeout);
 
-        // show/hide sidebar
-        // if($bookmarkButton.hasClass('active'))
-        //     $('.leftSidebar').hide();
-        // else
-        //     $('.leftSidebar').show();
+        // -> START SEARCH
+        if(e.keyCode === 13 && Session.get('newsPath') !== value){
 
-        $('.leftSidebar').show();
+            // highlight the input text
+            $input.addClass('highlight');
+            setTimeout(function(){ $input.removeClass('highlight'); },200);
 
-        $('.mainGrid, .mainGrid > .divider, header.main, footer.main').toggleClass('slideRight');
-        $bookmarkButton.toggleClass('active');
+            Meteor.Router.to(encodeNewsPath(value)); //_.slugify(result)
+
+        // -> SHOW TOPICS
+        } else {
+            // searchKeyTimeout = setTimeout(function() {
+
+                // var topics = Search.getClustersFor(value);
+
+                // console.log('SHOW TOPICS FOR: '+ value);
+                // show topics under the header bar
+
+            // },100);   
+        }
     }
 });
+
+
+// HELPERS
+Template.header.currentNewsPath = function() {
+    return Session.get('newsPath');
+};
+Template.header.slideDown = function() {
+    return (Session.get('showMessageBox')) ? ' slideDown' : '';
+};
+Template.header.sidebarButtonActive = function() {
+    return (Session.get('showLeftsidebar')) ? ' active' : '';
+};

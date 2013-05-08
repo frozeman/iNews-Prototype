@@ -14,14 +14,15 @@ Template.article.rendered = function() {
 
 // EVENTS
 Template.article.events({
-    'click button.close, click .dimContainer': function(e){
+    'mouseup button.close, mouseup .dimContainer': function(e){
         if($(e.target).parent().hasClass('close') || $(e.target).hasClass('dimContainer')) {
+
             // enable news grid scrolling again
             unlockViewport();
 
             // fade out
             $('.dimContainer').fadeOut('fast',function(){
-                Meteor.Router.to('/news/' + Session.get('newsPath'));
+                Meteor.Router.to(encodeNewsPath(Session.get('newsPath')));
             });
         }
     },
@@ -46,10 +47,19 @@ Template.article.articleData = function(){
 
     // filter the one with the right title
     // var article = _.filter(articles,function(article){
-    //     return (URLify(article.title) === articleData.title);
+    //     return (_.slugify(article.title) === articleData.title);
     // });
 
+    // set the websites title
+    var article = _.first(articles);
+    changeWebsitesTitle((article && article.title) + (article && article.metaData.source && ' - ' + article.metaData.source.id));
+
     return articles;
+};
+// the same as in tile.js
+Template.article.subTopicLink = function (news) {
+    var title = news.clusterData.subTopic;
+    return encodeNewsPath(title,true); // add to the existing path
 };
 Template.article.datetimePubDate = function(timestamp){
     var time = moment.unix(timestamp);
@@ -65,6 +75,6 @@ Template.article.absolutePubDate = function(timestamp){
 };
 Template.article.generateImageZoomId = function(imagePath){
     imagePath = imagePath.split('/');
-    imagePath = URLify(_.last(imagePath));
+    imagePath = _.slugify(_.last(imagePath));
     return 'imageZoom-' + imagePath;
 };

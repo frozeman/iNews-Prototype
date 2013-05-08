@@ -27,6 +27,7 @@ $VIEWPORT.bind('scroll mousedown DOMMouseScroll mousewheel keyup', function(e){
         $VIEWPORT.stop();
 });
 
+
 lockViewport = function() {
     $VIEWPORT.css('overflow','hidden');
 };
@@ -34,8 +35,42 @@ unlockViewport = function() {
     $VIEWPORT.css('overflow','');
 };
 
+
+changeWebsitesTitle = function(title) {
+    title = (title) ? 'iNews | ' + title : 'iNews';
+    $('head > title').text(title);
+};
+
+encodeNewsPath = function(newsPath,add) {
+    if(add)
+        return Meteor.Router.newsPath() + '/' + Session.get('newsPath').replace(/ +/g,'/') + '/' + newsPath.replace(/ +/g,'/');
+    else
+        return Meteor.Router.newsPath() + '/' + newsPath.replace(/ +/g,'/');
+};
+decodeNewsPath = function(newsPath) {
+    return newsPath.replace(Meteor.Router.newsPath() + '/','').replace(/\//g,' ');
+};
+
 // debulked onresize handler
 // function on_resize(c,t){onresize=function(){clearTimeout(t);t=setTimeout(c,100)};return c};
+
+// loadingIcon = {
+//     show: function(){
+//         $('body > .loadingIcon').removeClass('hidden');
+//     },
+//     hide: function(){
+//         $('body > .loadingIcon').addClass('hidden');
+//     }
+// };
+
+// messageBox = {
+//     show: function(){
+//         $('header.main, body > .loadingIcon').addClass('slideDown');
+//     },
+//     hide: function(){
+//         $('header.main, body > .loadingIcon').removeClass('slideDown');
+//     }
+// };
 
 // CENTER IMAGES
 centerImages = function(container) {
@@ -50,8 +85,8 @@ centerImages = function(container) {
 
 // Calculate the smallest Tile
 tileSize = function(containerWidth) {
-    var dividerWidth = ($('.mainGrid').width() <= 480) ? 30 : 60;
-    containerWidth = $('.mainGrid').width() - dividerWidth; // DEACTIVATE ??
+    var dividerWidth = ($('#mainGrid').width() <= 480) ? 30 : 60;
+    containerWidth = $('#mainGrid').width() - dividerWidth; // DEACTIVATE ??
     var division = 1;
     if(containerWidth > 768) division = 2;
     if(containerWidth > 1600) division = 4;
@@ -67,7 +102,7 @@ tileSize = function(containerWidth) {
 resizeTiles = function() {
 
     // var
-    $mainGrid = $('.mainGrid');
+    $mainGrid = $('#mainGrid');
 
     // set RESPONSIVE TILE SIZES
     var smallTile = tileSize();//$mainGrid.width() - 60);
@@ -140,12 +175,13 @@ flipTiles = function(){
 
     VIEWTYPE = (VIEWTYPE === 'topic') ? 'read' : 'topic';
 
-    turn('.mainGrid > .containerLeft',countLeft);
-    turn('.mainGrid > .containerRight',countRight);
+    turn('#mainGrid > .containerLeft',countLeft);
+    turn('#mainGrid > .containerRight',countRight);
 };
 
-// i18n template translation
+
+// I18N TEMPLATE TRANSLATION
 Handlebars.registerHelper('translate', function(string,object) {
     object = object || {};
-    return __(string, object);
+    return new Handlebars.SafeString(__(string, object));
 });
