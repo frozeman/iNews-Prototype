@@ -22,10 +22,10 @@ matrixToArray = function(matrix) {
 };
 
 // Stop the window scrolling if the user scrolls.
-$VIEWPORT.bind('scroll mousedown DOMMouseScroll mousewheel keyup', function(e){
-    if ( e.which > 0 || e.which < 0 || e.type === 'mousedown' || e.type === 'mousewheel')
-        $VIEWPORT.stop();
-});
+// $VIEWPORT.bind('scroll mousedown DOMMouseScroll mousewheel keyup', function(e){
+//     if ( e.which > 0 || e.which < 0 || e.type === 'mousedown' || e.type === 'mousewheel')
+//         $VIEWPORT.stop();
+// });
 
 
 lockViewport = function() {

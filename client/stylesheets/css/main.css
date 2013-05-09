@@ -863,28 +863,31 @@ header.main .buttonGroup button.active {
   border-radius: 2px;
   background-clip: padding-box;
 }
-header.main div.search {
+header.main form.search {
   z-index: 1;
+  display: block;
   position: absolute;
   left: 136px;
   width: 85%;
   height: 48px;
   line-height: 48px;
+  padding: 0;
+  margin: 0;
 }
-header.main div.search label {
+header.main form.search label {
   font-size: 20px;
   border: none;
   background: none;
   color: #5b5345;
   text-shadow: 0 1px 0 #f7f6f4;
 }
-header.main div.search label:hover,
-header.main div.search label:focus {
+header.main form.search label:hover,
+header.main form.search label:focus {
   color: #ffffff;
   text-shadow: 0 1px 1px #9f9481;
 }
-header.main div.search label:active,
-header.main div.search label.active {
+header.main form.search label:active,
+header.main form.search label.active {
   -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
@@ -896,13 +899,13 @@ header.main div.search label.active {
   border-radius: 2px;
   background-clip: padding-box;
 }
-header.main div.search label:active {
+header.main form.search label:active {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
   color: none;
 }
-header.main div.search input {
+header.main form.search input {
   position: relative;
   top: -3%;
   background: none;
@@ -915,7 +918,7 @@ header.main div.search input {
   color: #5b5345;
   text-shadow: 0 1px 0 #f7f6f4;
 }
-header.main div.search input.highlight {
+header.main form.search input.highlight {
   color: #cbc5ba;
   text-shadow: 0 0 10px #fff;
 }
@@ -1984,15 +1987,16 @@ article.main div.middle {
   background-color: #eceae6;
 }
 article.main div.middle > div.content {
+  position: relative;
   height: 100%;
   padding: 20px 40px;
   padding-bottom: 110px;
   margin-right: 60px;
+  overflow: auto;
+  background-color: #eceae6;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  overflow: auto;
-  background-color: #eceae6;
   -webkit-overflow-scrolling: touch;
 }
 article.main div.middle button.close {
@@ -2086,12 +2090,13 @@ header.main div.pathMenu nav ul li a {
 }
 header.main,
 .mainGrid,
-.messageBox {
-  -webkit-transition-property: -webkit-transform, left, top, margin-top, height;
-  -moz-transition-property: -moz-transform, left, top, margin-top, height;
-  -o-transition-property: -o-transform, left, top, margin-top, height;
-  -ms-transition-property: -ms-transform, left, top, margin-top, height;
-  transition-property: transform, left, top, margin-top, height;
+.messageBox,
+.divider {
+  -webkit-transition-property: -webkit-transform, left, top, margin, height;
+  -moz-transition-property: -moz-transform, left, top, margin, height;
+  -o-transition-property: -o-transform, left, top, margin, height;
+  -ms-transition-property: -ms-transform, left, top, margin, height;
+  transition-property: transform, left, top, margin, height;
   -webkit-transition-duration: 0.4s;
   -moz-transition-duration: 0.4s;
   -o-transition-duration: 0.4s;
@@ -2583,16 +2588,16 @@ aside.leftSidebar ul li a span.topic.topicType5 {
     margin-right: 0;
     font-size: 14px;
   }
-  header.main div.search {
+  header.main form.search {
     left: 84px;
     width: 88%;
     height: 32px;
     line-height: 32px;
   }
-  header.main div.search label {
+  header.main form.search label {
     font-size: 15px;
   }
-  header.main div.search input {
+  header.main form.search input {
     line-height: 21.333333333333332px;
     font-size: 14px;
   }
@@ -2788,7 +2793,7 @@ aside.leftSidebar ul li a span.topic.topicType5 {
   header.main .buttonGroup {
     padding-right: 5px;
   }
-  header.main div.search {
+  header.main form.search {
     width: 78%;
     left: 77px;
   }

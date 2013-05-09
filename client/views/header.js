@@ -72,7 +72,7 @@ Template.header.events({
             Session.set('showLeftsidebar',true);
     },
     // SEARCH INPUT
-    'keyup #search': function(e) {
+    'keypress #search': function(e) {
         var $input = $(e.currentTarget);
         var value = $input.val();
         // clearTimeout(searchKeyTimeout);
@@ -97,6 +97,9 @@ Template.header.events({
 
             // },100);   
         }
+    },
+    'submit form.search': function(e){
+        e.preventDefault();
     }
 });
 

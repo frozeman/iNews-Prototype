@@ -266,13 +266,14 @@ article.main {
         background-color: lighten(@color1, 10%);
 
         > div.content {
+            position: relative;
             height: 100%;
             padding: 20px 40px;
             padding-bottom: 110px;
             margin-right: 60px;
-            .box-sizing(border-box);
             overflow: auto;
             background-color: lighten(@color1, 10%);
+            .box-sizing(border-box);
             -webkit-overflow-scrolling: touch;
         }
 

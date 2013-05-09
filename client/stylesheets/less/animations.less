@@ -37,8 +37,9 @@ header.main {
 
 header.main,
 .mainGrid,
-.messageBox {
-    .transition-property(transform, left, top, margin-top, height);
+.messageBox,
+.divider {
+    .transition-property(transform, left, top, margin, height);
     .transition-duration(@animationDuration);
     .translateZ(0); // also moves the divider? why?
     // .easeBounce;
@@ -139,6 +140,10 @@ article.main {
         &.slideRight {
             left: 0;
             .translate3d(@leftsideBarWidth,0,0);
+
+            // .divider {
+            //     margin-left: -@dividerWidth/2;
+            // }
         }
     }
 }
@@ -152,5 +157,12 @@ article.main {
                 .translate3d(0,@headerHeightMobile,0);
             }
         }
+        // .contentWrapper {
+        //     &.slideRight {
+        //         .divider {
+        //             margin-left: -@dividerWidth/4;
+        //         }
+        //     }
+        // }
     }
 }

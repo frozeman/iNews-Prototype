@@ -93,7 +93,10 @@ Meteor.Router.add({
             title: title
         };
 
-        Session.set('currentArticle', article);
+        Session.set('showLoadingIcon',true);
+
+        // reload the article view
+        Session.set('currentArticle', id);
     }},
 
 

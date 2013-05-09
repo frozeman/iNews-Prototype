@@ -15,7 +15,7 @@ Template.article.rendered = function() {
 // EVENTS
 Template.article.events({
     'mouseup button.close, mouseup .dimContainer': function(e){
-        if($(e.target).parent().hasClass('close') || $(e.target).hasClass('dimContainer')) {
+        if($(e.currentTarget).hasClass('close') || $(e.target).hasClass('dimContainer')) {
 
             // enable news grid scrolling again
             unlockViewport();
@@ -39,20 +39,17 @@ Template.article.events({
 
 // HELPERS
 Template.article.articleData = function(){
-    var articleData = Session.get('currentArticle');
+    var articleId = Session.get('currentArticle');
 
     // get all articles of that day
     // IMPROVE
-    var articles = News.find({_id: articleData.id}).fetch();
-
-    // filter the one with the right title
-    // var article = _.filter(articles,function(article){
-    //     return (_.slugify(article.title) === articleData.title);
-    // });
+    var articles = News.find({_id: articleId}).fetch();
 
     // set the websites title
     var article = _.first(articles);
     changeWebsitesTitle((article && article.title) + (article && article.metaData.source && ' - ' + article.metaData.source.id));
+
+    Session.set('showLoadingIcon',false);
 
     return articles;
 };
