@@ -1,5 +1,13 @@
 Meteor.startup(function () {
 
+
+    // Start to work on QUEUES (for n) periodically
+
+    // update clusters periodically
+
+    
+
+
     // ENSURE INDEXES
     // Cluster._ensureIndex({ "dictionary": 1 });
 

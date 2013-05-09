@@ -1,13 +1,15 @@
 Meteor.methods({
     search: function (searchValue) {
         this.unblock(); // this method won't block others
-        var Future = Npm.require('fibers/future');
-        var future = new Future(); // defer method execution
+        var Future = Npm.require('fibers/future'),
+            Fiber = Npm.require('fibers'),
+            future = new Future(); // defer method execution
 
         var send = null,
             clusterNames = searchValue.split(' '),
             clusters = [],
             missingClusters = [];
+
 
         // -> LOOK FOR the topics in the CLUSTERS
         Q.allResolved(_.map(clusterNames, function(clusterName){
@@ -21,8 +23,9 @@ Meteor.methods({
                 if(clusterName) {
                     missingClusters.push(clusterName);
 
-                    var analysis = new Analysis.createNewCluster(clusterName);
-                    analysis.create();
+                    Fiber(function() {
+                        new Analysis.CreateNewCluster(clusterName);
+                    }).run();
                 }
                 // return failed promise to Search.getArticleIds()
                 return clusterName;

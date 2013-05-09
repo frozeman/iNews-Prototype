@@ -1,3 +1,4 @@
+// DOM ready
 Meteor.startup(function() {
 
     // DEFAULT SESSIONS
