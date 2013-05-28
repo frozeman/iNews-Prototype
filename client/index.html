@@ -46,8 +46,10 @@
         This application requires Javascript to be enabled!
     </noscript>
 
-    {{> contentWrapper}}
-    {{> leftSidebar}}
+    {{#isolate}}{{> messageBox}}{{/isolate}}
+    {{#isolate}}{{> header}}{{/isolate}}
+    {{#isolate}}{{> leftSidebar}}{{/isolate}}
+    {{#isolate}}{{> contentWrapper}}{{/isolate}}
 
     {{#isolate}}{{renderPage}}{{/isolate}}
 

@@ -6,36 +6,36 @@ Meteor.Router.beforeRouting = function() {
     changeWebsitesTitle();
 };
 Meteor.Router.add({
-    '/news': {as: 'news', to: function(){
-        Session.set('articleIds','all');
-    }},
-    '/news/*': function(path) {
+    '/news/*': function(path) { //{as: 'news', to:
         var newsPath = decodeNewsPath(path);
 
-        changeWebsitesTitle(newsPath);
-
         // only START a SEARCH when the topics changed
-        if(Session.get('newsPath') !== newsPath) {
+        if(RELOAD || (!this.init && NEWSPATH !== newsPath)) { // !this.init fix for HTML push state poly fill
+            RELOAD = false;
 
-            // set the newsPath
-            Session.set('newsPath', newsPath);
-            $('#search').val(newsPath);
-
-            // console.log('SEARCH STARTED: '+newsPath);
+            console.log('Route to: '+newsPath);
 
             // show loading circle
             Session.set('showLoadingIcon',true);
+            NEWSPATH = newsPath;
+            $('#search').val(NEWSPATH);
+
+            console.log('SEARCH STARTED: '+newsPath);
+
 
             // -> START SEARCH
             Meteor.call('search', newsPath, function(error, result) {
+                var articleIds          = _.compact(result[0]),
+                    missingArticleIds   = result[1],
+                    changedNewsPath     = result[2];
 
-                // console.log('SEARCH ENDED: ');
-                // console.log(result);
+                console.log('SEARCH ENDED: ');
+                console.log(result);
 
                 // -> SHOW MESSAGE for MISSING CLUSTERS
-                if(!_.isEmpty(result[1])) {
+                if(!_.isEmpty(missingArticleIds)) {
                     var missingTopicsMessage = __('messageBox.missingClusters',{
-                        topics: _.reduce(result[1],function(memo,topic){
+                        topics: _.reduce(missingArticleIds,function(memo,topic){
                             topic = '&quot;' + topic + '&quot;';
                             return (memo) ? (memo + ', ' + topic) : topic;
                         },'')}
@@ -51,54 +51,65 @@ Meteor.Router.add({
                 } else
                     Session.set('showMessageBox',false);
 
+                // reSET the NEW NEWSPATH
+                changeWebsitesTitle(changedNewsPath);
+                NEWSPATH = changedNewsPath;
+                $('#search').val(NEWSPATH);
+
 
                 // -> FADE ARTICLES OUT
-                var smallTile = tileSize();
-                Q.allResolved(_.map($('.tile'),function(tile){
-                    var deferred = Q.defer(),
-                        $tile = $(tile);
+                fadeArticlesOut(function(){
+                    if(_.isEmpty(articleIds)) {
 
-                    setTimeout(function(){
-                        $tile.addClass('hidden');
-                        $tile.css({'width':smallTile,'height':smallTile});
-                        deferred.resolve();
-                    },1);
+                        // if no articles could be found, use the search term, t look in titles of articles
+                        Session.set('articleIds',NEWSPATH);
 
-                    return deferred.promise;
-                })).done(function(promises){
-
-                    // wait until all animations happend
-                    setTimeout(function(){
-                        resizeTiles();
-                        $('.tile').removeClass('hidden');
-                        // -> set article ids
-                        Session.set('articleIds',result[0]);
-                    },400);
+                    // -> set article ids (will reload subscriptions)
+                    } else {
+                        Session.set('articleIds',articleIds);
+                    }
                 });
 
 
-                // hide loading circle
-                Session.set('showLoadingIcon',false);
             });
         }
     },
     '/article/:id/:year/:month/:day/:title': { to: 'article', and: function(id,year,month,day,title) {
-        // IMPROVE
-        var article = {
-            id: id,
-            year: year,
-            month: month,
-            day: day,
-            timestamp: moment(year + '-' + month + '-' + day).unix(),
-            title: title
-        };
+        // IMPROVE TODO
+        // var article = {
+        //     id: id,
+        //     year: year,
+        //     month: month,
+        //     day: day,
+        //     timestamp: moment(year + '-' + month + '-' + day).unix(),
+        //     title: title
+        // };
 
+        // show loading circle
         Session.set('showLoadingIcon',true);
+
+        console.log('Route to Article');
 
         // reload the article view
         Session.set('currentArticle', id);
     }},
 
 
-    '*': 'not_found'
+    '*': function() {
+
+        if (RELOAD || (!this.init && NEWSPATH !== '')) { // fix for HTML push state poly fill
+            RELOAD = false;
+            console.log('Route to topNews');
+
+            NEWSPATH = '';
+            $('#search').val(NEWSPATH);
+
+            fadeArticlesOut(function(){
+                // -> set article ids (will reload subscriptions)
+                Session.set('articleIds',['topNews']);
+            });
+
+        }
+    }
 });
+

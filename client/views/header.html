@@ -1,8 +1,9 @@
 <template name="header">
-    <header class="main{{slideDown}}" role="banner">
-        <div class="buttonGroup">
+    <header class="main{{slideDown}}{{slideRight}}" role="banner">
+        <div class="buttonGroup left">
             <button class="sidebarButton icon-right{{sidebarButtonActive}}"></button>
-            <button class="viewButton icon-th"></button>
+            <button class="viewButton icon-th{{viewButtonActive}}"></button>
+            <button class="homeButton icon-home"></button>
         </div>
         <form class="search">
             <!-- <form> -->
@@ -11,18 +12,9 @@
                 </label>
             <!-- </form> -->
         </form>
-        <!-- <div class="pathMenu">
-            <nav role="navigation">
-                <i class="icon-search"></i>
-                <ul>
-                    <li class="topicType1"><a href=""><span>Politics</span></a></li>
-                    <li class="topicType2"><a href=""><span>World</span></a></li>
-                    <li class="topicType3"><a href=""><span>War</span></a></li>
-                    <li class="topicType4"><a href=""><span>Syria</span></a></li>
-                    <li class="topicType5"><input type="text"><button class="cancel hidden"><span>×</span></button></li>
-                </ul>
-            </nav>
-        </div> -->
+        <div class="buttonGroup right">
+            <button class="icon-cw" id="reloadButton"></button>
+        </div>
     
         <div class="arrowTop"></div>
         {{> loadingIcon}}

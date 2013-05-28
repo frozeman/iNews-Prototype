@@ -2,10 +2,13 @@
 Meteor.startup(function() {
 
     // DEFAULT SESSIONS
+    Session.setDefault('viewType', 'read'); // read, navigate
     Session.setDefault('articleIds',[]);
-    Session.setDefault('newsPath', '');
+    Session.setDefault('showLeftsidebar', false);
+    Session.setDefault('showMessageBox', false);
+
     Session.setDefault('messageBoxMessage', '');
-    Session.set('showLoadingIcon',true);
+    Session.setDefault('showLoadingIcon',true);
 
 
     // SET the LOCALE
@@ -98,12 +101,12 @@ $(window).resize(function() {
         resizeTiles();
 
         // SCROLL TO the LAST VISIBLE ITEM
-        if(visibleItem) {
-            window.setTimeout(function() {
-                // $VIEWPORT.animate({scrollTop: visibleItem.offset().top - smallTile}, 900, 'easeOutElastic');
-                // scrollWindow.start(0,visibleItem.offset().top);
-            }, 500);
-        }
+        // if(visibleItem) {
+        //     window.setTimeout(function() {
+        //         $VIEWPORT.animate({scrollTop: visibleItem.offset().top - smallTile}, 900, 'easeOutElastic');
+        //         scrollWindow.start(0,visibleItem.offset().top);
+        //     }, 500);
+        // }
 
     }, RESIZETIMOUT);
 

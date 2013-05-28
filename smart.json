@@ -1,6 +1,6 @@
 {
   "meteor": {
-    "tag": "release/0.6.2.1-with-websockets",
+    "tag": "release/0.6.3.1",
     "git": "https://github.com/meteor/meteor.git"
   },
   "packages": {
@@ -8,6 +8,9 @@
       "path": "/Users/frozeman/Development/Server/NEWSAPP_Prototype4/packages/inews-analysis"
     },
     "router": {},
+    "browser-store": {
+      "git": "git://github.com/mvanasse/meteor-browser-store.git"
+      },
     "HTML5-History-API": {},
     "i18n": {},
     "moment": {},

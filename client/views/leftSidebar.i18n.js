@@ -4,5 +4,11 @@ Meteor.i18nMessages.leftSidebar = {
             en: 'Bookmarks',
             de: 'Lesezeichen'
         }
-    }   
+    },
+    actions: {
+        addBookmark: {
+            en: 'Add Bookmark',
+            de: 'Lesezeichen hinzufügen'
+        }
+    }
 };

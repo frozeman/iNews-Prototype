@@ -3,7 +3,7 @@ Template.messageBox.preserve(['#messageBox']);
 
 // HELPERS
 Template.messageBox.slideRight = function() {
-    return (Session.get('showLeftsidebar')) ? ' slideRight' : '';
+    return (Session.equals('showLeftsidebar', true)) ? ' slideRight' : '';
 };
 Template.messageBox.message = function() {
     if(_.isString(Session.get('messageBoxMessage')))

@@ -1,6 +1,6 @@
 Meteor.i18nMessages.messageBox = {
     missingClusters: {
-        en: 'We don\'t have articles for <em>{{topics}}</em> yet, but we getting some for you right now! <i class="icon-thumbs-up"></i>',
-        de: 'Wir haben noch keine Artikel für <em>{{topics}}</em>, aber wir finden sofort welche für dich! <i class="icon-thumbs-up"></i>'
+        en: 'We don\'t have a cluster for <em>{{topics}}</em> yet, but we get one soon! <i class="icon-thumbs-up"></i>',
+        de: 'Wir haben noch kein Cluster für <em>{{topics}}</em>, aber wir finden bald eins! <i class="icon-thumbs-up"></i>'
     }
 };

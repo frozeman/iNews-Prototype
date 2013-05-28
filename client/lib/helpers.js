@@ -2,11 +2,12 @@
 
 // VARS
 ISMOBILE = (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) ? true : false;
+NEWSPATH = '', 
+RELOAD = true; //need to be TRUE on start, so it loads the topNews at start
 CURRENTDETAILTILE = false;
-VIEWTYPE = 'read';
 HOVERTIMOUT = (ISMOBILE) ? 0 : 300;
 RESIZETIMEOUTID = null;
-RESIZETIMOUT = (ISMOBILE) ? 1 : 99;
+RESIZETIMOUT = (ISMOBILE) ? 1 : 200;
 GRIDANIMATE = (ISMOBILE) ? false : true;
 $VIEWPORT = $('body, html');
 
@@ -42,13 +43,24 @@ changeWebsitesTitle = function(title) {
 };
 
 encodeNewsPath = function(newsPath,add) {
+    var addNewsPath = (_.isString(NEWSPATH)) ? NEWSPATH.replace(/ +/g,'/') + '/' : '',
+        generatedNewsPath = '',
+        changedNewsPath = newsPath.replace(/ +/g,'/');
+
     if(add)
-        return Meteor.Router.newsPath() + '/' + Session.get('newsPath').replace(/ +/g,'/') + '/' + newsPath.replace(/ +/g,'/');
+        generatedNewsPath = '/news/' + addNewsPath + changedNewsPath;
+    else if(!_.isEmpty(newsPath))
+        generatedNewsPath = '/news/' + changedNewsPath;
     else
-        return Meteor.Router.newsPath() + '/' + newsPath.replace(/ +/g,'/');
+        generatedNewsPath = '/news';
+
+    // remove duplicates from the given newsPath
+    generatedNewsPath = _.uniq(generatedNewsPath.replace(/\/+/g,'/').split('/')).join('/');
+
+    return generatedNewsPath;
 };
 decodeNewsPath = function(newsPath) {
-    return newsPath.replace(Meteor.Router.newsPath() + '/','').replace(/\//g,' ');
+    return _.trim(newsPath.replace('/news/','').replace(/\/+/g,' '));
 };
 
 // debulked onresize handler
@@ -110,9 +122,9 @@ resizeTiles = function() {
     var largeTile = smallTile * 4;
 
     // set grid size
-    $mainGrid.find('.tile.large').css({'width':largeTile,'height':largeTile});
-    $mainGrid.find('.tile.medium').css({'width':mediumTile,'height':mediumTile});
-    $mainGrid.find('.tile.small').css({'width':smallTile,'height':smallTile});
+    $mainGrid.find('.tile.large').css({'width':largeTile,'height':largeTile}).removeClass('hidden');
+    $mainGrid.find('.tile.medium').css({'width':mediumTile,'height':mediumTile}).removeClass('hidden');
+    $mainGrid.find('.tile.small').css({'width':smallTile,'height':smallTile}).removeClass('hidden');
 
     // set article boxes size
     // $('article.main aside.left').css({'width':largeTile});
@@ -148,35 +160,38 @@ resizeTiles = function() {
     // });
 };
 
-flipTiles = function(){
-    var countLeft = {count:0};
-    var countRight = {count:0};
+fadeArticlesOut = function(callback){
+    var smallTile = tileSize();
+
+    Q.allResolved(_.map($('.tile'),function(tile){
+        var deferred = Q.defer(),
+            $tile = $(tile);
+
+        setTimeout(function(){
+            $tile.addClass('hidden');
+            $tile.css({'width':smallTile,'height':smallTile});
+            deferred.resolve();
+        },1);
+
+        return deferred.promise;
+    })).done(function(promises){
 
 
-    // if(VIEWTYPE === 'read') {
-    //     $('.tile').removeClass('flip');
-    // } else {
-    //     $('.tile').addClass('flip');
-    // }
+        // wait until all animations happend
+        setTimeout(function(){
 
-    var turn = function(container,number){
-        if(VIEWTYPE === 'read') {
-            $($(container + ' .tile')[number.count]).removeClass('flip');
-        } else {
-            $($(container + ' .tile')[number.count]).addClass('flip');
-        }
-        number.count++;
-        if(number.count <= $(container + ' .tile').length) {
-            window.setTimeout(function(){
-                turn(container,number);
-            }, 0);
-        }
-    };
+            // run callback
+            callback();
 
-    VIEWTYPE = (VIEWTYPE === 'topic') ? 'read' : 'topic';
+        },400);
 
-    turn('#mainGrid > .containerLeft',countLeft);
-    turn('#mainGrid > .containerRight',countRight);
+        // wait again until the new articles were loaded
+        setTimeout(function(){
+            resizeTiles();
+            // hide loading circle
+            Session.set('showLoadingIcon',false);
+        },600);
+    });
 };
 
 

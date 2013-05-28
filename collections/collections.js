@@ -1,6 +1,6 @@
 News = new Meteor.Collection("news");
 
-Cluster = new Meteor.Collection("cluster");
+Clusters = new Meteor.Collection("clusters");
 
 Sources = new Meteor.Collection("sources");
 

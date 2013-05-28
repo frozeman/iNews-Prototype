@@ -1,6 +1,6 @@
 div.divider {
     z-index: 3;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 50%;
     margin-left: -@dividerWidth/2;
@@ -404,7 +404,9 @@ div.containerRight {
         left: @gridSpacing/2;
         right: @gridSpacing/2;
         overflow: hidden;
-        .gradient(~"linear-gradient(0deg, @{gridTextBoxColorDark} 0%, @{gridTextBoxColor} 100%)");
+        @darkerGridTextBoxColorDark: darken(@gridTextBoxColorDark,55%);
+        @darkerGridTextBoxColor: darken(@gridTextBoxColor,55%);
+        .gradient(~"linear-gradient(0deg, @{darkerGridTextBoxColorDark} 0%, @{darkerGridTextBoxColor} 100%)");
         .box-shadow(0 0 5px rgba(0,0,0,0.5));
 
         padding: 0 !important; // TEMPORARY?

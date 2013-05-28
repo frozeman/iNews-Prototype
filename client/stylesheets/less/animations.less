@@ -136,6 +136,16 @@ article.main {
             .translate3d(0,@headerHeight,0);
         }
     }
+    header.main,
+    .messageBox {
+        &.slideRight {
+            left: 0;
+            .translate3d(@leftsideBarWidth,0,0);
+        }
+        &.slideRight.slideDown {
+            .translate3d(@leftsideBarWidth,@headerHeight,0);
+        }
+    }
     .contentWrapper {
         &.slideRight {
             left: 0;
@@ -155,6 +165,11 @@ article.main {
         .messageBox {
             &.slideDown {
                 .translate3d(0,@headerHeightMobile,0);
+            }
+        }
+        header.main {
+            &.slideRight.slideDown {
+                .translate3d(@leftsideBarWidth,@headerHeightMobile,0);
             }
         }
         // .contentWrapper {

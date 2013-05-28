@@ -22,7 +22,7 @@ Template.article.events({
 
             // fade out
             $('.dimContainer').fadeOut('fast',function(){
-                Meteor.Router.to(encodeNewsPath(Session.get('newsPath')));
+                Meteor.Router.to(encodeNewsPath(NEWSPATH));
             });
         }
     },
@@ -41,22 +41,26 @@ Template.article.events({
 Template.article.articleData = function(){
     var articleId = Session.get('currentArticle');
 
-    // get all articles of that day
-    // IMPROVE
-    var articles = News.find({_id: articleId}).fetch();
+    // fetch article
+    var article = News.findOne({_id: articleId});
 
-    // set the websites title
-    var article = _.first(articles);
-    changeWebsitesTitle((article && article.title) + (article && article.metaData.source && ' - ' + article.metaData.source.id));
+    if(article) {
+        // set the websites title
+        changeWebsitesTitle((article && article.title) + (article && article.metaData.source && ' - ' + article.metaData.source.id));
+
+        // remove the html from the content
+        article.abstract = article.abstract.replace(/<\/?(?:(?!p\b)(?!a\b)(?!img\b)[^>])*>/gi,'');
+        article.content = article.content.replace(/<\/?(?:(?!p\b)(?!a\b)(?!img\b)[^>])*>/gi,'');
+    }
 
     Session.set('showLoadingIcon',false);
 
-    return articles;
+    return article ? [article] : [];
 };
 // the same as in tile.js
 Template.article.subTopicLink = function (news) {
     var title = news.clusterData.subTopic;
-    return encodeNewsPath(title,true); // add to the existing path
+    return (title) ? encodeNewsPath(title,true) : ''; // add to the existing path
 };
 Template.article.datetimePubDate = function(timestamp){
     var time = moment.unix(timestamp);
@@ -74,4 +78,10 @@ Template.article.generateImageZoomId = function(imagePath){
     imagePath = imagePath.split('/');
     imagePath = _.slugify(_.last(imagePath));
     return 'imageZoom-' + imagePath;
+};
+Template.article.placeAuthor = function(content){
+    return new Handlebars.SafeString(content);
+};
+Template.article.placeContent = function(content){
+    return new Handlebars.SafeString(content);
 };

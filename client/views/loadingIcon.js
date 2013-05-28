@@ -3,8 +3,8 @@ Template.loadingIcon.preserve(['.loadingIcon']);
 
 // HELPERS
 Template.loadingIcon.visible = function() {
-    return (Session.get('showLoadingIcon')) ? '' : ' hidden';
+    return (Session.equals('showLoadingIcon', true)) ? '' : ' hidden';
 };
 Template.loadingIcon.slideDown = function() {
-    return (Session.get('showMessageBox')) ? ' slideDown' : '';
+    return (Session.equals('showMessageBox', true)) ? ' slideDown' : '';
 };

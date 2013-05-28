@@ -7,15 +7,10 @@
             </ul> -->
             <h1><i class="icon-bookmark"></i>{{translate 'leftSidebar.titles.bookmarks'}}</h1>
             <ul>
-                <li><a href="" class="add"><i class="icon-plus"></i> Add Bookmark</a></li>
-                <li><a href=""><span class="topic topicType3"></span>Syria</a></li>
-                <li><a href=""><span class="topic topicType4"></span>Bitcoinshduemdjfds</a></li>
-                <li><a href=""><span class="topic topicType2"></span>Leistungsschutzrecht</a></li>
-                <li><a href=""><span class="topic topicType2"></span>Japan</a></li>
-                <li><a href=""><span class="topic topicType3"></span>Syria</a></li>
-                <li><a href=""><span class="topic topicType4"></span>Bitcoinshduemdjfds</a></li>
-                <li><a href=""><span class="topic topicType2"></span>Leistungsschutzrecht</a></li>
-                <li><a href=""><span class="topic topicType2"></span>Japan</a></li>
+                <li><a href="#" class="add" id="addBookmarkButton"><i class="icon-plus"></i> {{translate 'leftSidebar.actions.addBookmark'}}</a></li>
+                {{#each bookmarks}}
+                <li><a href="{{link}}"><span class="topic topicType1"></span>{{text}}</a></li>
+                {{/each}}
             </ul>
         </div>
     </aside>

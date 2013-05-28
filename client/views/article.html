@@ -31,15 +31,15 @@
                                 <h1>{{title}}</h1>
                                 <p class="metaData">
                                     {{#if metaData.pubDate}}<time datetime="{{datetimePubDate metaData.pubDate}}" title="{{absolutePubDate metaData.pubDate}}">{{relativePubDate metaData.pubDate}}</time>{{/if}}
-                                    {{#if metaData.author}} {{translate 'article.author'}} {{authorText}}{{#if metaData.author.url}}<a href="{{metaData.author.url}}" target="_blank">{{/if}}{{metaData.author.name}}{{#if metaData.author.url}}</a>{{/if}}{{/if}}
+                                    {{#if metaData.author}} {{translate 'article.author'}} {{authorText}}{{#if metaData.author.url}}<a href="{{metaData.author.url}}" target="_blank">{{/if}}{{placeAuthor metaData.author.name}}{{#if metaData.author.url}}</a>{{/if}}{{/if}}
                                     {{#if metaData.source}} {{translate 'article.source'}} {{sourceText}}{{#if metaData.source.url}}<a href="{{metaData.source.url}}" target="_blank">{{/if}}{{metaData.source.id}}{{#if metaData.source.url}}</a>{{/if}}{{/if}}
                                 </p>
                             </header>
                             <section>
-                                <p><b>{{abstract}}</b></p>
+                                <p>{{placeContent abstract}}</p>
                             </section>
                             <section>
-                                {{content}}
+                                <p>{{placeContent content}}</p>
                             </section>
                         </div>
                     </div>

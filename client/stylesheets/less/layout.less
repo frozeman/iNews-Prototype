@@ -123,6 +123,10 @@ h1, h2, h3, h4, h5 {
     text-shadow: 0 1px 0 lighten(@color5,30%);
     .box-shadow(0 -5px 10px rgba(0,0,0,0.3));
 
+    &.slideRight {
+        left: @leftsideBarWidth;
+    }
+
     p {
         margin: 0;
         padding: 0;
@@ -160,6 +164,9 @@ header.main {
     &.slideDown {
         top: @headerHeight;
     }
+    &.slideRight {
+        left: @leftsideBarWidth;
+    }
 
     .loadingIcon {
         z-index: 0;
@@ -182,13 +189,24 @@ header.main {
     .buttonGroup {
         z-index: 2;
         position: absolute;
-        left: 0;
         top: 0;
         height: 100%;
         padding-right: 50px;
-        padding-left: 10px;
         @barColorTransparent: fadeout(@barColor, 100%);
-        .gradient(~"linear-gradient(90deg, @{barColor} 70%, @{barColorTransparent} 100%)");
+        
+
+        &.left {
+            left: 0;
+            padding-left: 10px;
+            padding-right: 50px;
+            .gradient(~"linear-gradient(90deg, @{barColor} 70%, @{barColorTransparent} 100%)");
+        }
+        &.right {
+            right: 0;
+            padding-right: 10px;
+            padding-left: 50px;
+            .gradient(~"linear-gradient(90deg, @{barColorTransparent} 0%, @{barColor} 70%)");
+        }
         
         button {
             position: relative;
@@ -221,8 +239,8 @@ header.main {
         z-index: 1;
         display: block;
         position: absolute;
-        left: @headerButtonHeight * 2 + 60px;
-        width: 85%;
+        left: @headerButtonHeight * 3 + 60px;
+        width: 75%;
         height: @headerHeight;
         line-height: @headerHeight;
         padding: 0;
@@ -244,9 +262,12 @@ header.main {
             background: none;
             border: none;
             outline: none;
-            width: 80%;
+            width: 90%;
             height: 75%;
             line-height: @headerHeight/1.5;
+            padding: 0 15px;
+            // .box-shadow(inset 0 1px 15px rgba(0,0,0,0.3));
+            // .border-radius(4px);
             
             font-size: 18px;
             .barText;
