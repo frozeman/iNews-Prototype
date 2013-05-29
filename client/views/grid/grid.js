@@ -13,9 +13,8 @@ Template.grid.rendered = function() {
 
     centerImages('#mainGrid');
 
-    Meteor.defer(function(){
-        resizeTiles();
-    });
+    // hide loading circle
+    // Session.set('showLoadingIcon',false);
 };
 
 
@@ -23,9 +22,10 @@ Template.grid.rendered = function() {
 
 // check if articles exist articles
 Template.grid.checkTiles = function(type) {
-    // hide loading circle
-    Session.set('showLoadingIcon',false);
-    return (News.find({'clusterData.side': type}).fetch().length > 0);
+    var articles = Session.get('articles');
+    articles = _.filter(articles,function(article){ return (article.clusterData.side === type); });
+
+    return (_.isArray(Session.get('articles')) && !_.isEmpty(Session.get('articles')));
 };
 
 // get the articles
@@ -33,35 +33,8 @@ Template.grid.tiles = function(type) {
 
     console.log('Reload grid Data for "'+type+'"');
 
-    var sortBy = {'clusterData.importance': -1, 'metaData.pubDate': -1}
-    var articles = News.find({'clusterData.side': type}, {sort: sortBy}).fetch();
+    var articles = Session.get('articles');
+    articles = _.filter(articles,function(article){ return (article.clusterData.side === type); });
 
-    if(!_.isEmpty(articles)) {
-
-        // -> calculate the size for all given articles
-        var highestImportance = _.max(articles, function(article){ return article.clusterData.importance; });
-        highestImportance = highestImportance.clusterData.importance;
-        var lowestImportance  = _.min(articles, function(article){ return article.clusterData.importance; });
-        lowestImportance = lowestImportance.clusterData.importance;
-
-        // get partly importance, and set size (small/middle/large)
-        var partlyImportance = (highestImportance - lowestImportance) / 3;
-
-        articles = _.map(articles,function(article){
-            if(article.clusterData.importance < (partlyImportance + lowestImportance))
-                article.size = ' small';
-            else if(article.clusterData.importance < (partlyImportance * 2 + lowestImportance))
-                article.size = ' medium';
-            else
-                article.size = ' large';
-
-            return article;
-        });
-    }
-
-
-    // hide loading circle
-    Session.set('showLoadingIcon',false);
-
-    return (articles) ? articles : [];
+    return (_.isArray(articles)) ? articles : [];
 };

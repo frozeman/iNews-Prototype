@@ -1,5 +1,6 @@
 <template name="grid">
     <nav id="mainGrid" class="mainGrid gridContainer" role="navigation">
+        {{#isolate}}
         <div class="containerLeft">
             {{#if checkTiles 'pro'}}
                 {{#each tiles 'pro'}}
@@ -18,6 +19,7 @@
                 <p>{{translate 'grid.errors.noArticles'}}</p>
             {{/if}}
         </div>
+        {{/isolate}}
 
         <!-- divider -->
         <div class="divider">

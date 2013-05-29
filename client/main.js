@@ -2,14 +2,19 @@
 Meteor.startup(function() {
 
     // DEFAULT SESSIONS
+    Session.setDefault('getArticlesFor',[]);
+    Session.setDefault('articles',[]);
+    Session.setDefault('showCurrentArticle',false);
+
     Session.setDefault('viewType', 'read'); // read, navigate
-    Session.setDefault('articleIds',[]);
     Session.setDefault('showLeftsidebar', false);
     Session.setDefault('showMessageBox', false);
-
     Session.setDefault('messageBoxMessage', '');
-    Session.setDefault('showLoadingIcon',true);
+    Session.setDefault('activateHomeButton',true);
+    Session.set('showLoadingIcon',true);
 
+    // set start tile size
+    setTileSize();
 
     // SET the LOCALE
     var locale = navigator.language || navigator.browserLanguage || navigator.userLanguage || navigator.systemLanguage;
@@ -97,7 +102,8 @@ $(window).resize(function() {
     clearTimeout(RESIZETIMEOUTID);
     RESIZETIMEOUTID = window.setTimeout(function() {
 
-        // set RESPONSIVE TILE SIZES
+        // reset RESPONSIVE TILE SIZES
+        setTileSize();
         resizeTiles();
 
         // SCROLL TO the LAST VISIBLE ITEM
@@ -111,3 +117,6 @@ $(window).resize(function() {
     }, RESIZETIMOUT);
 
 });
+
+// DEBUG
+// logRenders();

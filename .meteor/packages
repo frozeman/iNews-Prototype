@@ -11,5 +11,4 @@ spiderable
 preserve-inputs
 underscore-string
 http
-browser-store
 localstorage

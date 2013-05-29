@@ -4,6 +4,11 @@ var removeWords = [',',"'",'"','<','>','/','|',':','?','(',')','{','}','[',']','
                    'das','der','die','es','uns','was','wo','wie','wann','welcher','und','noch','für','ist','schon','von','zum','bis','einige','oder','wird','werden','sein','kann','möchte','findet'];
 
 Meteor.methods({
+    /*
+    * Searches for clusters by a given search string.
+    *
+    * If it cant find clusters that match the words from the search string, it returns an empty array.
+    */
     search: function (searchValues) {
         this.unblock(); // this method won't block others
         var Future = Npm.require('fibers/future'),

@@ -3,7 +3,7 @@
         <div class="buttonGroup left">
             <button class="sidebarButton icon-right{{sidebarButtonActive}}"></button>
             <button class="viewButton icon-th{{viewButtonActive}}"></button>
-            <button class="homeButton icon-home"></button>
+            <button class="homeButton icon-home{{homeButtonActive}}"></button>
         </div>
         <form class="search">
             <!-- <form> -->
@@ -17,6 +17,9 @@
         </div>
     
         <div class="arrowTop"></div>
+        
+        {{#isolate}}
         {{> loadingIcon}}
+        {{/isolate}}
     </header>
 </template>

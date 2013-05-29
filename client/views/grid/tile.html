@@ -1,5 +1,6 @@
 <template name="tile">
-    <div class="tile hidden{{size}}{{flip}} topicType1">
+    {{#each tile}}
+    <div class="tile hidden{{../size}}{{flip}}{{topicColor}}">
         <div class="front">
             <div class="image">{{image media.images title}}</div>
             <div class="textBox">
@@ -86,8 +87,10 @@
             </div> -->
             <div class="textBox">
                 <a href="{{subTopicLink this}}" class="title">{{clusterData.subTopic}}</a>
+                <a href="{{subTopicLinkAdd this}}" class="addSubTopicToQueryButton toolTip" title="{{translate 'tiles.toolTips.addSubTopicToQuery'}}"><span class="icon-dot-2"></span></a>
             </div>
             <a class="cornerButton"></a>
         </div>
     </div>
+    {{/each}}
 </template>

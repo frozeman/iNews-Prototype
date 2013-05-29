@@ -153,6 +153,10 @@ div.containerLeft {
             }
         }
 
+        a.addSubTopicToQueryButton {
+            right: -10%;
+        }
+
         // sizes
         &.large {
             .front {
@@ -215,6 +219,10 @@ div.containerRight {
             a.cornerButton {
                 right: 0;
             }
+        }
+
+        a.addSubTopicToQueryButton {
+            left: 0;
         }
 
         // sizes
@@ -289,7 +297,8 @@ div.containerRight {
             padding: 8px;
         }
         .back {
-            a.title {
+            a.title,
+            a.addSubTopicToQueryButton {
                 font-size: 1.8em;
             }
         }
@@ -311,7 +320,8 @@ div.containerRight {
             }
         }
         .back {
-            a.title {
+            a.title,
+            a.addSubTopicToQueryButton {
                 font-size: 1.5em;
             }
         }
@@ -345,7 +355,8 @@ div.containerRight {
             }
         }
         .back {
-            a.title {
+            a.title,
+            a.addSubTopicToQueryButton {
                 font-size: 1.0em;
             }
         }
@@ -374,7 +385,8 @@ div.containerRight {
         .box-shadow(0 0 5px rgba(0,0,0,0.8));
         .gradient(~"linear-gradient(0deg, @{gridTextBoxColorDark} 0%, @{gridTextBoxColor} 100%)");
 
-        a.title {
+        a.title,
+        a.addSubTopicToQueryButton {
             display: block;
             color: darken(@gridTextBoxColor,70%);
             font-family: @headlineFont;
@@ -383,6 +395,26 @@ div.containerRight {
             width: 100%;
             height: 100%;
             -webkit-font-smoothing: antialiased;
+        }
+        a.addSubTopicToQueryButton {
+            display: table;
+            position: absolute;
+            bottom: 0;
+            color: #fff;
+            width: 40%;
+            height: 35%;
+            background-color: fadeout(#fff,80%);
+
+            &:hover,
+            &:focus {
+                background-color: fadeout(#fff,70%);
+            }
+
+            span {
+                display: table-cell;
+                vertical-align: middle;
+                text-align: center;
+            }
         }
     }
 
@@ -435,6 +467,10 @@ div.containerRight {
                 height: 100%;
                 padding: 5% 10%;
                 background: fadeout(@topicColorDefault,10%);
+
+                &:hover {
+                    background: fadeout(@topicColorDefault,0%);
+                }
 
                 a.title {
                     color: #fff;

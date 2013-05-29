@@ -5,11 +5,21 @@
             <ul>
                 <li></li>
             </ul> -->
-            <h1><i class="icon-bookmark"></i>{{translate 'leftSidebar.titles.bookmarks'}}</h1>
+            
+            <!-- Topic Bookmarks -->
+            <h1><i class="icon-bookmark"></i> {{translate 'leftSidebar.titles.bookmarks'}}</h1>
             <ul>
-                <li><a href="#" class="add" id="addBookmarkButton"><i class="icon-plus"></i> {{translate 'leftSidebar.actions.addBookmark'}}</a></li>
+                <li><a href="#" class="addBookmark" id="addBookmarkButton"><i class="icon-plus-1"></i> {{translate 'leftSidebar.actions.addBookmark'}}</a></li>
                 {{#each bookmarks}}
-                <li><a href="{{link}}"><span class="topic topicType1"></span>{{text}}</a></li>
+                <li><a href="{{link}}" class="toolTip" title="{{text}}"><span class="topic{{topicColor}}"></span>{{text}}<button class="removeBookmark" data-bookmark="{{text}}">×</button></a></li>
+                {{/each}}
+            </ul>
+            
+            <!-- Reading List -->
+            <h1><i class="icon-glasses"></i> {{translate 'leftSidebar.titles.readingList'}}</h1>
+            <ul>
+                {{#each readingList}}
+                <li><a href="{{link}}" class="toolTip" title="{{title}}"><span class="topic{{topicColor}}"></span>{{title}}<button class="removeArticle" data-article="{{id}}">×</button></a></li>
                 {{/each}}
             </ul>
         </div>

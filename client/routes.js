@@ -24,6 +24,10 @@ Meteor.Router.add({
 
 
             // -> START SEARCH
+            /*
+            * Searches in clusters for matches and returns article ids.
+            * Then it fetches those articles, PLUS articles matching the search string
+            */
             Meteor.call('search', newsPath, function(error, result) {
                 var articleIds          = _.compact(result[0]),
                     missingArticleIds   = result[1],
@@ -62,11 +66,11 @@ Meteor.Router.add({
                     if(_.isEmpty(articleIds)) {
 
                         // if no articles could be found, use the search term, t look in titles of articles
-                        Session.set('articleIds',NEWSPATH);
+                        Session.set('getArticlesFor',[NEWSPATH]);
 
                     // -> set article ids (will reload subscriptions)
                     } else {
-                        Session.set('articleIds',articleIds);
+                        Session.set('getArticlesFor',[NEWSPATH,articleIds]);
                     }
                 });
 
@@ -75,6 +79,8 @@ Meteor.Router.add({
         }
     },
     '/article/:id/:year/:month/:day/:title': { to: 'article', and: function(id,year,month,day,title) {
+        var articles = Session.get('articles') || [];
+
         // IMPROVE TODO
         // var article = {
         //     id: id,
@@ -85,28 +91,34 @@ Meteor.Router.add({
         //     title: title
         // };
 
-        // show loading circle
-        Session.set('showLoadingIcon',true);
-
         console.log('Route to Article');
 
+        // add article id of the current article, when url was only an article
+        if(id && !_.find(articles, function(article){ return(article._id === id); })) {
+            Session.set('getArticlesFor', [id]);
+        }
+
         // reload the article view
-        Session.set('currentArticle', id);
+        Session.set('showCurrentArticle', id);
     }},
 
 
     '*': function() {
 
-        if (RELOAD || (!this.init && NEWSPATH !== '')) { // fix for HTML push state poly fill
+        if(RELOAD || (!this.init && NEWSPATH !== '')) { // fix for HTML push state poly fill
             RELOAD = false;
+
             console.log('Route to topNews');
+
+            // show loading circle
+            Session.set('showLoadingIcon',true);
 
             NEWSPATH = '';
             $('#search').val(NEWSPATH);
 
             fadeArticlesOut(function(){
                 // -> set article ids (will reload subscriptions)
-                Session.set('articleIds',['topNews']);
+                Session.set('getArticlesFor',['topNews']);
             });
 
         }

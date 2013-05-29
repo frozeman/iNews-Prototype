@@ -3,12 +3,16 @@ Meteor.i18nMessages.leftSidebar = {
         bookmarks: {
             en: 'Bookmarks',
             de: 'Lesezeichen'
+        },
+        readingList: {
+            en: 'Reading List',
+            de: 'Leseliste'
         }
     },
     actions: {
         addBookmark: {
-            en: 'Add Bookmark',
-            de: 'Lesezeichen hinzufügen'
+            en: 'Add Current Topic',
+            de: 'Aktuelles Thema hinzufügen'
         }
     }
 };

@@ -2,18 +2,35 @@
 
 // VARS
 ISMOBILE = (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) ? true : false;
-NEWSPATH = '', 
+NEWSPATH = '',
+LASTARTICLE = {},
 RELOAD = true; //need to be TRUE on start, so it loads the topNews at start
 CURRENTDETAILTILE = false;
 HOVERTIMOUT = (ISMOBILE) ? 0 : 300;
 RESIZETIMEOUTID = null;
 RESIZETIMOUT = (ISMOBILE) ? 1 : 200;
 GRIDANIMATE = (ISMOBILE) ? false : true;
-$VIEWPORT = $('body, html');
+$VIEWPORT = $('body, html'),
+
+SMALLTILESIZE = 0,
+MEDIUMTILESIZE = 0,
+LARGETILESIZE = 0;
 
 
 
 // GLOBAL HELPER FUNCTIONS
+
+logRenders = function() {
+    _.each(Template, function (template, name) {
+      var oldRender = template.rendered;
+      var counter = 0;
+
+      template.rendered = function () {
+        console.log(name, "render count: ", ++counter);
+        oldRender && oldRender.apply(this, arguments);
+      };
+    });
+}
 
 matrixToArray = function(matrix) {
     if(matrix !== 'none')
@@ -61,6 +78,12 @@ encodeNewsPath = function(newsPath,add) {
 };
 decodeNewsPath = function(newsPath) {
     return _.trim(newsPath.replace('/news/','').replace(/\/+/g,' '));
+};
+
+encodeArticlePath = function(article) {
+    var title = _.slugify(article.title);
+    var time = moment.unix(article.metaData.pubDate);
+    return '/article/' + article._id + '/' + time.format('YYYY') + '/' + time.format('MM') + '/' + time.format('DD') + '/' + title;
 };
 
 // debulked onresize handler
@@ -111,20 +134,21 @@ tileSize = function(containerWidth) {
     return containerSize / (division * 4);
 };
 
+setTileSize = function() {
+    SMALLTILESIZE = tileSize(); //$mainGrid.width() - 60);
+    MEDIUMTILESIZE = SMALLTILESIZE * 2;
+    LARGETILESIZE = SMALLTILESIZE * 4;
+};
+
 resizeTiles = function() {
 
     // var
     $mainGrid = $('#mainGrid');
 
-    // set RESPONSIVE TILE SIZES
-    var smallTile = tileSize();//$mainGrid.width() - 60);
-    var mediumTile = smallTile * 2;
-    var largeTile = smallTile * 4;
-
     // set grid size
-    $mainGrid.find('.tile.large').css({'width':largeTile,'height':largeTile}).removeClass('hidden');
-    $mainGrid.find('.tile.medium').css({'width':mediumTile,'height':mediumTile}).removeClass('hidden');
-    $mainGrid.find('.tile.small').css({'width':smallTile,'height':smallTile}).removeClass('hidden');
+    $mainGrid.find('.tile.large').css({'width':LARGETILESIZE,'height':LARGETILESIZE}).removeClass('hidden');
+    $mainGrid.find('.tile.medium').css({'width':MEDIUMTILESIZE,'height':MEDIUMTILESIZE}).removeClass('hidden');
+    $mainGrid.find('.tile.small').css({'width':SMALLTILESIZE,'height':SMALLTILESIZE}).removeClass('hidden');
 
     // set article boxes size
     // $('article.main aside.left').css({'width':largeTile});
@@ -161,20 +185,21 @@ resizeTiles = function() {
 };
 
 fadeArticlesOut = function(callback){
-    var smallTile = tileSize();
 
-    Q.allResolved(_.map($('.tile'),function(tile){
-        var deferred = Q.defer(),
-            $tile = $(tile);
+    $('#mainGrid .tile').addClass('hidden');
 
-        setTimeout(function(){
-            $tile.addClass('hidden');
-            $tile.css({'width':smallTile,'height':smallTile});
-            deferred.resolve();
-        },1);
+    // Q.allResolved(_.map($('.tile'),function(tile){
+    //     var deferred = Q.defer(),
+    //         $tile = $(tile);
 
-        return deferred.promise;
-    })).done(function(promises){
+    //     setTimeout(function(){
+    //         $tile.addClass('hidden');
+    //         $tile.css({'width':SMALLTILESIZE,'height':SMALLTILESIZE});
+    //         deferred.resolve();
+    //     },1);
+
+    //     return deferred.promise;
+    // })).done(function(promises){
 
 
         // wait until all animations happend
@@ -183,15 +208,14 @@ fadeArticlesOut = function(callback){
             // run callback
             callback();
 
+            // wait again until the new articles were loaded
+            setTimeout(function(){
+                resizeTiles();
+
+            },600);
         },400);
 
-        // wait again until the new articles were loaded
-        setTimeout(function(){
-            resizeTiles();
-            // hide loading circle
-            Session.set('showLoadingIcon',false);
-        },600);
-    });
+    // });
 };
 
 

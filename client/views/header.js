@@ -184,3 +184,6 @@ Template.header.sidebarButtonActive = function() {
 Template.header.viewButtonActive = function() {
     return (Session.equals('viewType','navigate')) ? ' active' : '';
 };
+Template.header.homeButtonActive = function() {
+    return (Session.equals('activateHomeButton',true)) ? ' active' : '';
+};

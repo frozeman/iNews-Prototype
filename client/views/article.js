@@ -1,3 +1,7 @@
+// PRESERVE
+Template.article.preserve(['.dimContainer','article.main']);
+
+
 // RENDERED
 Template.article.rendered = function() {
 
@@ -7,13 +11,16 @@ Template.article.rendered = function() {
     lockViewport();
 
     // fade in
-    $('.dimContainer').hide();
-    $('.dimContainer').fadeIn('fast');
+    // $('.dimContainer').hide();
+    // $('.dimContainer').fadeIn('fast');
 };
 
 
 // EVENTS
 Template.article.events({
+    'click .articleLink': function(){
+        LASTARTICLE = this;
+    },
     'mouseup button.close, mouseup .dimContainer': function(e){
         if($(e.currentTarget).hasClass('close') || $(e.target).hasClass('dimContainer')) {
 
@@ -23,6 +30,68 @@ Template.article.events({
             // fade out
             $('.dimContainer').fadeOut('fast',function(){
                 Meteor.Router.to(encodeNewsPath(NEWSPATH));
+            });
+        }
+    },
+    // ADD READING LIST
+    'click .addToReadingList': function(e){
+        e.preventDefault();
+        var article = this;
+
+
+        var readingList = JSON.parse(Meteor._localStorage.getItem('readingList'));
+
+        // add to reading list
+        if(!_.isEmpty(article) && !_.find(readingList, function(item){ return (item.id === article._id); })) {
+            readingList = readingList || [];
+            readingList.push({
+                id: article._id,
+                title: _.stripTags(article.title),
+                link: encodeArticlePath(article),
+                opinionated: article.clusterData.opinionated
+            });
+            Meteor._localStorage.setItem('readingList',JSON.stringify(readingList));
+            Session.set('reloadReadingList',true);
+
+        // remove from reading list
+        } else {
+
+            readingList = _.reject(readingList, function(item){ return (item.id === article._id); });
+            Meteor._localStorage.setItem('readingList',JSON.stringify(readingList));
+            Session.set('reloadReadingList',true);
+        }
+    },
+    // IMPORTANT BUTTON
+    'click .importantButton': function(e){
+        e.preventDefault();
+        var article = this;
+
+        var importantButton = JSON.parse(Meteor._localStorage.getItem('importantButton'));
+
+        // add importance
+        if(!_.isEmpty(article) && !_.contains(importantButton, article._id)) {
+            News.update({_id: article._id},{$inc: {'clusterData.importance': 1}}, function(error){
+                if(!error) {
+                    
+                    importantButton = importantButton || [];
+                    importantButton.push(article._id);
+                    Meteor._localStorage.setItem('importantButton',JSON.stringify(importantButton));
+                    Session.set('reloadImportantButton',true);
+
+                }
+            });
+        // remove importance
+        } else {
+
+            News.update({_id: article._id},{$inc: {'clusterData.importance': -1}}, function(error){
+                if(!error) {
+                    
+                    importantButton = importantButton || [];
+                    importantButton = _.reject(importantButton, function(item){ return (item === article._id); });
+                    Meteor._localStorage.setItem('importantButton',JSON.stringify(importantButton));
+                    Session.set('reloadImportantButton',true);
+
+                }
             });
         }
     },
@@ -39,7 +108,7 @@ Template.article.events({
 
 // HELPERS
 Template.article.articleData = function(){
-    var articleId = Session.get('currentArticle');
+    var articleId = Session.get('showCurrentArticle');
 
     // fetch article
     var article = News.findOne({_id: articleId});
@@ -53,9 +122,29 @@ Template.article.articleData = function(){
         article.content = article.content.replace(/<\/?(?:(?!p\b)(?!a\b)(?!img\b)[^>])*>/gi,'');
     }
 
-    Session.set('showLoadingIcon',false);
-
     return article ? [article] : [];
+};
+Template.article.isImportant = function (articleId) {
+    var importantButton = JSON.parse(Meteor._localStorage.getItem('importantButton'));
+
+    // allow reactivity
+    if(Session.equals('reloadImportantButton', true))
+        Session.set('reloadImportantButton',false);
+
+    return (_.contains(importantButton, articleId)) ? ' active' : '';
+};
+Template.article.isOnReadingList = function (articleId) {
+    var readingList = JSON.parse(Meteor._localStorage.getItem('readingList'));
+
+    // allow reactivity
+    if(Session.equals('reloadReadingList', true))
+        Session.set('reloadReadingList',false);
+
+    return (_.find(readingList, function(item){ return (item.id === articleId) })) ? ' active' : '';
+};
+// the same as in leftSidebar.js, tile.js
+Template.article.topicColor = function () {
+    return (this && this.clusterData && this.clusterData.opinionated) ? ' topicType' + Math.round(0.5 * this.clusterData.opinionated): ' topicType1';
 };
 // the same as in tile.js
 Template.article.subTopicLink = function (news) {

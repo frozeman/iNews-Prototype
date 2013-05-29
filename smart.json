@@ -8,9 +8,6 @@
       "path": "/Users/frozeman/Development/Server/NEWSAPP_Prototype4/packages/inews-analysis"
     },
     "router": {},
-    "browser-store": {
-      "git": "git://github.com/mvanasse/meteor-browser-store.git"
-      },
     "HTML5-History-API": {},
     "i18n": {},
     "moment": {},

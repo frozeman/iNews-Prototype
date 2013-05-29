@@ -1,4 +1,5 @@
 article.main {
+    z-index: 1;
     display: block;
     position: absolute;
     top: @headerHeight;
@@ -13,40 +14,47 @@ article.main {
     font-size: 16px;
     color: @textColor;
 
-    button.close {
+    // button default style
+    button {
         display: block;
+        height: @headerHeight;
+        width: @headerHeight;
+        font-family: @headlineFont;
+        font-weight: 300px;
+        -webkit-font-smoothing: antialiased;
+        background-color: lighten(@color1, 10%);
+        border: none;
+        .marginPaddingReset;
+        .box-sizing(border-box);
+
+        color: darken(@color1, 20%);
+
+        &:hover,
+        &:focus {
+            background-color: @color1;
+            color: lighten(@color1, 10%);
+        }
+        &:active,
+        &.active {
+            background-color: darken(@color1,5%);
+        }
+        &.active {
+            color: lighten(@color1, 10%);
+        }
+    }
+
+    button.close {
         position: absolute;
         top: -@headerHeight;
         right: 60px;
-        height: @headerHeight;
-        width: @headerHeight;
-        border: none;
-        background-color: lighten(@color1, 10%);
 
         span {
             position: absolute;
             top: -2px;
             left: 4px;
-            font-family: @headlineFont;
             font-size: 80px;
-            font-weight: 300px;
-            -webkit-font-smoothing: antialiased;
             line-height: @headerHeight;
-            color: @color1;
-        }
-
-        &:hover,
-        &:focus {
-            span {
-                color: darken(@color1, 20%);
-            }
-        }
-        &:active {
-            background-color: @color1;
-            span {
-                color: lighten(@color1, 10%);
-            }
-        }
+        }  
     }
 
 
@@ -277,9 +285,40 @@ article.main {
             -webkit-overflow-scrolling: touch;
         }
 
-        button.close {
-            display: none;
+        .articleMenu {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            .marginPaddingReset;
+            list-style: none;
+            text-align: right;
+
+            li {
+                display: inline-block;
+                .marginPaddingReset;
+                float: right;
+            }
+
+            button {
+                position: relative;
+                display: inline-block;
+                margin: 0;
+
+                font-size: 25px;
+            }
+            button.importantButton {
+                width: auto;
+                padding: 0 10px;
+                font-size: 20px;
+            }
+            button.close {
+                display: none;
+                top: auto;
+                right: auto;
+            }
         }
+
 
         h1 {
             font-family: @headlineFont;

@@ -287,7 +287,7 @@
             this.key                     = 'c4bcc3f7c9bf9ec159f51da0a86ca658'; // NewsCreed Test Key, max 10 000 queries per day
             this.apiUrl                  = 'http://api.newscred.com';
             this.query                   = _.trim(query),
-            this.numberOfArticlesToFetch = 20;
+            this.numberOfArticlesToFetch = 50;
 
             /*
             * Start fetching news

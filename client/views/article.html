@@ -1,5 +1,4 @@
 <template name="article">
-    {{#if articleData}}
         <div class="dimContainer" onclick="">
             {{#each articleData}}
                 <article class="main" role="main">
@@ -14,7 +13,7 @@
                             <div class="image" data-relatedid="{{generateImageZoomId this}}"><img src="{{this}}" alt="{{../title}}"></div>
                             <!-- <div class="imageZoom" style="background-image: url('{{this}}');"></div> -->
                         {{/each}}
-                        <a href="{{subTopicLink this}}" class="subTopic topicType1"><div>{{clusterData.subTopic}}</div></a>
+                        <a href="{{subTopicLink this}}" class="subTopic{{topicColor}}"><div>{{clusterData.subTopic}}</div></a>
 
                         <div class="clearFix"></div>
                     </aside>
@@ -26,7 +25,13 @@
                     <!-- ARTICLE -->
                     <div class="middle">
                         <div class="content">
-                            <button class="close"><span>×</span></button>
+                            {{#isolate}}
+                            <ul class="articleMenu">
+                                <li><button class="close"><span>×</span></button></li>
+                                <li><button class="addToReadingList{{isOnReadingList _id}} icon-glasses"></button></li>
+                                <li><button class="importantButton{{isImportant _id}}">!mportant ({{clusterData.importance}})</button></li>
+                            </ul>
+                            {{/isolate}}
                             <header>
                                 <h1>{{title}}</h1>
                                 <p class="metaData">
@@ -51,10 +56,7 @@
                     </aside>
                 </article>
             {{/each}}
+
+            <div class="loadingIcon icon-spin5 animate-spin"></div>
         </div>
-    {{else}}
-        <div class="dimContainer" onclick="">
-            {{> loadingIcon}}
-        </div>
-    {{/if}}
 </template>
