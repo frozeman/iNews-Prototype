@@ -16,37 +16,36 @@ Deps.autorun(function (who) {
 
         // change subscription
         Meteor.subscribe("currentNews", articleIds, {onReady: function(error){
-            var articleIds = [],
-                sortBy = {'clusterData.importance': -1, 'metaData.pubDate': -1};
+            // var sortBy = {'clusterData.importance': -1, 'metaData.pubDate': -1};
 
-            // get current articles
-            var articles = News.find({}, {sort: sortBy, reactive: false}).fetch();
+            // // get current articles
+            // var articles = News.find({}, {sort: sortBy, reactive: false}).fetch();
 
-            if(!_.isEmpty(articles)) {
+            // if(!_.isEmpty(articles)) {
 
-                // -> calculate the size for all given articles
-                var highestImportance = _.max(articles, function(article){ return article.clusterData.importance; });
-                highestImportance = highestImportance.clusterData.importance;
-                var lowestImportance  = _.min(articles, function(article){ return article.clusterData.importance; });
-                lowestImportance = lowestImportance.clusterData.importance;
+            //     // -> calculate the size for all given articles
+            //     var highestImportance = _.max(articles, function(article){ return article.clusterData.importance; });
+            //     highestImportance = highestImportance.clusterData.importance;
+            //     var lowestImportance  = _.min(articles, function(article){ return article.clusterData.importance; });
+            //     lowestImportance = lowestImportance.clusterData.importance;
 
-                // get partly importance, and set size (small/middle/large)
-                var partlyImportance = (highestImportance - lowestImportance) / 3;
+            //     // get partly importance, and set size (small/middle/large)
+            //     var partlyImportance = (highestImportance - lowestImportance) / 3;
 
-                articles = _.map(articles,function(article){
-                    if(article.clusterData.importance < (partlyImportance + lowestImportance))
-                        article.size = ' small';
-                    else if(article.clusterData.importance < (partlyImportance * 2 + lowestImportance))
-                        article.size = ' medium';
-                    else
-                        article.size = ' large';
+            //     articles = _.map(articles,function(article){
+            //         if(article.clusterData.importance < (partlyImportance + lowestImportance))
+            //             article.size = ' small';
+            //         else if(article.clusterData.importance < (partlyImportance * 2 + lowestImportance))
+            //             article.size = ' medium';
+            //         else
+            //             article.size = ' large';
 
-                    return article;
-                });
-            }
+            //         return article;
+            //     });
+            // }
 
-            // redraw grid.html
-            Session.set('articles',articles);
+            // // redraw grid.html
+            // Session.set('articles',articles);
 
             // hide loading circle
             Session.set('showLoadingIcon',false);

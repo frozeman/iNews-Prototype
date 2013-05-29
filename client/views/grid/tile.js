@@ -7,7 +7,8 @@ Template.tile.preserve(['.tile']);
 
 // RENDERED
 Template.tile.rendered = function() {
-    var $tile = $(this.find('.tile'));
+    var $tile = $(this.find('.tile')),
+        article = this.data;
 
     console.log('Tile rendered');
     // console.log($tile);
@@ -15,15 +16,15 @@ Template.tile.rendered = function() {
     Meteor.defer(function(){
 
         // set tile size
-        // LARGE
-        if($tile.hasClass('large'))
-            $tile.css({'width':LARGETILESIZE,'height':LARGETILESIZE});
-        // MEDIUM
-        else if($tile.hasClass('medium'))
-            $tile.css({'width':MEDIUMTILESIZE,'height':MEDIUMTILESIZE});
         // SMALL
-        else if($tile.hasClass('small'))
-            $tile.css({'width':SMALLTILESIZE,'height':SMALLTILESIZE});
+        if(article.clusterData.importance < (PARTLYIMPORTANCE + CURRENTLYLOWESTIMPORTANCE))
+            $tile.addClass('small').css({'width':SMALLTILESIZE,'height':SMALLTILESIZE});
+        // MEDIUM
+        else if(article.clusterData.importance < (PARTLYIMPORTANCE * 2 + CURRENTLYLOWESTIMPORTANCE))
+            $tile.addClass('medium').css({'width':MEDIUMTILESIZE,'height':MEDIUMTILESIZE});
+        // LARGE
+        else
+            $tile.addClass('large').css({'width':LARGETILESIZE,'height':LARGETILESIZE});
 
 
         $tile.removeClass('hidden');
@@ -41,6 +42,9 @@ Template.tile.rendered = function() {
             $tile.removeClass('flip');
     });
 
+};
+Template.tile.destroyed = function(){
+    console.log('destroy');
 };
 
 
@@ -77,10 +81,6 @@ Template.tile.events({
 
 
 // HELPERS
-// makes the tile reactive
-Template.tile.tile = function () {
-    return News.find({_id: this._id}).fetch();
-};
 // the same as in leftSidebar.js, article.js
 Template.tile.topicColor = function () {
     return (this && this.clusterData && this.clusterData.opinionated) ? ' topicType' + Math.round(0.5 * this.clusterData.opinionated): ' topicType1';

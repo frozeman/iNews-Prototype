@@ -2,18 +2,23 @@
 Template.article.preserve(['.dimContainer','article.main']);
 
 
+// CREATED
+Template.article.created = function() {
+
+    Meteor.defer(function(){
+        // fade in
+        $('.dimContainer').removeClass('hidden');
+
+
+        // prevent news grid from scrolling
+        lockViewport();
+    });
+};
 // RENDERED
 Template.article.rendered = function() {
-
-    centerImages('article');
-
-    // prevent news grid from scrolling
-    lockViewport();
-
-    // fade in
-    // $('.dimContainer').hide();
-    // $('.dimContainer').fadeIn('fast');
+     centerImages('article');
 };
+
 
 
 // EVENTS
@@ -108,21 +113,12 @@ Template.article.events({
 
 // HELPERS
 Template.article.articleData = function(){
-    var articleId = Session.get('showCurrentArticle');
-
-    // fetch article
-    var article = News.findOne({_id: articleId});
-
-    if(article) {
-        // set the websites title
-        changeWebsitesTitle((article && article.title) + (article && article.metaData.source && ' - ' + article.metaData.source.id));
-
-        // remove the html from the content
-        article.abstract = article.abstract.replace(/<\/?(?:(?!p\b)(?!a\b)(?!img\b)[^>])*>/gi,'');
-        article.content = article.content.replace(/<\/?(?:(?!p\b)(?!a\b)(?!img\b)[^>])*>/gi,'');
-    }
-
-    return article ? [article] : [];
+    return News.find({_id: Session.get('showCurrentArticle')});
+};
+Template.article.setTitle = function(){
+    var article = this;
+    // set the websites title
+    changeWebsitesTitle((article && article.title) + (article && article.metaData.source && ' - ' + article.metaData.source.id));
 };
 Template.article.isImportant = function (articleId) {
     var importantButton = JSON.parse(Meteor._localStorage.getItem('importantButton'));
@@ -172,5 +168,5 @@ Template.article.placeAuthor = function(content){
     return new Handlebars.SafeString(content);
 };
 Template.article.placeContent = function(content){
-    return new Handlebars.SafeString(content);
+    return new Handlebars.SafeString(content.replace(/<\/?(?:(?!p\b)(?!a\b)(?!img\b)[^>])*>/gi,''));
 };

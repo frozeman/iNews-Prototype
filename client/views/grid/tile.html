@@ -1,6 +1,5 @@
 <template name="tile">
-    {{#each tile}}
-    <div class="tile hidden{{../size}}{{flip}}{{topicColor}}">
+    <div class="tile hidden{{size}}{{flip}}{{topicColor}}">
         <div class="front">
             <div class="image">{{image media.images title}}</div>
             <div class="textBox">
@@ -92,5 +91,4 @@
             <a class="cornerButton"></a>
         </div>
     </div>
-    {{/each}}
 </template>

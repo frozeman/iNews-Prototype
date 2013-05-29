@@ -1,6 +1,7 @@
 <template name="article">
-        <div class="dimContainer" onclick="">
+        <div class="dimContainer hidden" onclick="">
             {{#each articleData}}
+                {{setTitle}}
                 <article class="main" role="main">
                     <button class="close"><span>×</span></button>
                     <!-- IMAGES -->
@@ -33,7 +34,7 @@
                             </ul>
                             {{/isolate}}
                             <header>
-                                <h1>{{title}}</h1>
+                                <h1>{{placeContent title}}</h1>
                                 <p class="metaData">
                                     {{#if metaData.pubDate}}<time datetime="{{datetimePubDate metaData.pubDate}}" title="{{absolutePubDate metaData.pubDate}}">{{relativePubDate metaData.pubDate}}</time>{{/if}}
                                     {{#if metaData.author}} {{translate 'article.author'}} {{authorText}}{{#if metaData.author.url}}<a href="{{metaData.author.url}}" target="_blank">{{/if}}{{placeAuthor metaData.author.name}}{{#if metaData.author.url}}</a>{{/if}}{{/if}}

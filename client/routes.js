@@ -79,7 +79,6 @@ Meteor.Router.add({
         }
     },
     '/article/:id/:year/:month/:day/:title': { to: 'article', and: function(id,year,month,day,title) {
-        var articles = Session.get('articles') || [];
 
         // IMPROVE TODO
         // var article = {
@@ -94,7 +93,7 @@ Meteor.Router.add({
         console.log('Route to Article');
 
         // add article id of the current article, when url was only an article
-        if(id && !_.find(articles, function(article){ return(article._id === id); })) {
+        if(id && _.isEmpty(News.findOne({_id: id},{reactive: false}))) {
             Session.set('getArticlesFor', [id]);
         }
 

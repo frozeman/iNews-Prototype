@@ -2,19 +2,24 @@
 
 // VARS
 ISMOBILE = (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) ? true : false;
-NEWSPATH = '',
-LASTARTICLE = {},
-RELOAD = true; //need to be TRUE on start, so it loads the topNews at start
-CURRENTDETAILTILE = false;
 HOVERTIMOUT = (ISMOBILE) ? 0 : 300;
 RESIZETIMEOUTID = null;
 RESIZETIMOUT = (ISMOBILE) ? 1 : 200;
 GRIDANIMATE = (ISMOBILE) ? false : true;
 $VIEWPORT = $('body, html'),
 
+NEWSPATH = '',
+LASTARTICLE = {},
+RELOAD = true; //need to be TRUE on start, so it loads the topNews at start
+CURRENTDETAILTILE = false;
+
 SMALLTILESIZE = 0,
 MEDIUMTILESIZE = 0,
-LARGETILESIZE = 0;
+LARGETILESIZE = 0,
+
+CURRENTLYHIGHESTIMPORTANCE = 0,
+CURRENTLYLOWESTIMPORTANCE = 0,
+PARTLYIMPORTANCE = 0;
 
 
 
@@ -56,6 +61,7 @@ unlockViewport = function() {
 
 changeWebsitesTitle = function(title) {
     title = (title) ? 'iNews | ' + title : 'iNews';
+    title = _.stripTags(title);
     $('head > title').text(title);
 };
 

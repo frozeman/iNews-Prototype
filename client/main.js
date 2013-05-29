@@ -3,7 +3,6 @@ Meteor.startup(function() {
 
     // DEFAULT SESSIONS
     Session.setDefault('getArticlesFor',[]);
-    Session.setDefault('articles',[]);
     Session.setDefault('showCurrentArticle',false);
 
     Session.setDefault('viewType', 'read'); // read, navigate
