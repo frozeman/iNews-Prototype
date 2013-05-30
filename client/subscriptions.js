@@ -12,7 +12,7 @@ Deps.autorun(function (who) {
     // change subscription only when, article ids changed
     if(!_.isEmpty(articleIds)) {
 
-        console.log('Subscriptions: '+ articleIds);
+        console.log('Subscriptions: ('+articleIds.length+'): '+ articleIds);
 
         // change subscription
         Meteor.subscribe("currentNews", articleIds, {onReady: function(error){

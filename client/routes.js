@@ -70,7 +70,8 @@ Meteor.Router.add({
 
                     // -> set article ids (will reload subscriptions)
                     } else {
-                        Session.set('getArticlesFor',[NEWSPATH,articleIds]);
+                        articleIds.unshift(NEWSPATH);
+                        Session.set('getArticlesFor', articleIds);
                     }
                 });
 

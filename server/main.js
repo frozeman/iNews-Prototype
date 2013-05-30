@@ -100,8 +100,6 @@ Meteor.startup(function () {
         // runQueue();
     }).run();
     
-
-
     // ENSURE INDEXES
     // Clusters._ensureIndex({ "dictionary": 1 });
 

@@ -44,7 +44,7 @@ Template.tile.rendered = function() {
 
 };
 Template.tile.destroyed = function(){
-    console.log('destroy');
+    console.log('Tile destroyed');
 };
 
 

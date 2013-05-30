@@ -22,11 +22,6 @@ Template.grid.rendered = function() {
 
 // check if articles exist articles
 Template.grid.checkTiles = function(type) {
-    // var articles = Session.get('articles');
-    // articles = _.filter(articles,function(article){ return (article.clusterData.side === type); });
-
-    // return (_.isArray(Session.get('articles')) && !_.isEmpty(Session.get('articles')));
-
     return (News.find({'clusterData.side': type}).count() > 0);
 };
 
@@ -34,12 +29,6 @@ Template.grid.checkTiles = function(type) {
 Template.grid.tiles = function(type) {
 
     console.log('Reload grid Data for "'+type+'"');
-
-    // var articles = Session.get('articles');
-    // articles = _.filter(articles,function(article){ return (article.clusterData.side === type); });
-
-    // return (_.isArray(articles)) ? articles : [];
-
 
     var sortBy = {'clusterData.importance': -1, 'metaData.pubDate': -1},
         articles = News.find({'clusterData.side': type}, {sort: sortBy});
@@ -58,7 +47,6 @@ Template.grid.tiles = function(type) {
         PARTLYIMPORTANCE = (CURRENTLYHIGHESTIMPORTANCE - CURRENTLYLOWESTIMPORTANCE) / 3;
 
     }
-
 
     // get current articles
     return articles;

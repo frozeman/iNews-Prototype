@@ -215,11 +215,11 @@ fadeArticlesOut = function(callback){
             callback();
 
             // wait again until the new articles were loaded
-            setTimeout(function(){
-                resizeTiles();
+            // setTimeout(function(){
+            //     resizeTiles();
 
-            },600);
-        },400);
+            // },600);
+        },600);
 
     // });
 };

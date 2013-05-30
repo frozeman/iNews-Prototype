@@ -5,13 +5,15 @@
 // publish only searched articles
 Meteor.publish("currentNews", function (articleIds) {
 
-    var limitTo = 30,
+    var limitTo = 50,
+        topNewsImportance = 500,
         onlyArticlesFrom = moment().subtract('days',10).unix(), // 10 days to now()
         searchValueRegex = (_.isString(articleIds[0])) ? {'title': {$regex : '.*(?:'+articleIds[0].split(' ').join('|')+').*', $options: 'i'}} : {};
 
+
     // GET TOP NEWS
     if(_.contains(articleIds, 'topNews'))
-        return News.find({$and: [{'metaData.pubDate': {$gt: onlyArticlesFrom}}, {'clusterData.importance': {$gt: 500}}]}, {limit: limitTo});
+        return News.find({$and: [{'metaData.pubDate': {$gt: onlyArticlesFrom}}, {'clusterData.importance': {$gt: topNewsImportance}}]}, {limit: limitTo});
 
     // GET SPECIFIC ARTICLES from CLUSTERS by ID (use the first value as search array)
     else if(_.isArray(articleIds))
