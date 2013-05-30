@@ -1,5 +1,5 @@
 // PRESERVE
-Template.article.preserve(['.dimContainer','article.main']);
+Template.article.preserve(['.dimContainer','article.main','.content']);
 
 
 // CREATED

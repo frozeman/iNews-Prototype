@@ -324,7 +324,7 @@
         // SEARCH
         form.search {
             left: @headerButtonHeightMobil * 3 + 30px;
-            width: 65%;
+            width: 70%;
             height: @headerHeightMobile;
             line-height: @headerHeightMobile;
 
@@ -437,10 +437,18 @@
                 .topBar(1.5);
                 line-height: @headerHeight/1.5;
 
+                button.removeBookmark,
+                button.removeArticle {
+                    height: (@headerHeight/2) /1.5;
+                    width: (@headerHeight/2) /1.5;
+                    top: (@headerHeight/4) /1.5;
+                    right: (@headerHeight/4) /1.5;
+                }
+
                 a {
                     height: @headerHeight/1.5;
                     line-height: @headerHeight/1.4;
-                    padding: 0 5px;
+                    padding: 0 30px;
                     padding-left: 20px;
                     font-size: 12px;
 
@@ -619,11 +627,11 @@
 
         // SEARCH
         form.search {
-            width: 58%;
+            width: 70%;
             left: @headerButtonHeightMobil * 3 + 23px;
 
             input {
-                width: 45%;
+                width: 65%;
             }
         }
 

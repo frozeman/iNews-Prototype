@@ -3,7 +3,8 @@ body {
     // position: relative;
     height: 100%;
     zoom: 1;
-    background-color: darken(@color3, 5%);//#dcd4bc
+    // background-color: darken(@color3, 5%);//#dcd4bc
+    background-color: @gridBgColor;
     
     font-family: @contentFont;
     font-size: 16px;
@@ -540,11 +541,13 @@ aside.leftSidebar {
                 width: @headerHeight/2;
                 top: @headerHeight/4;
                 right: @headerHeight/4;
+                .marginPaddingReset;
                 background-color: @barColorDesaturateDark;
                 border: none;
                 .border-radius(1px);
                 .box-shadow(inset 0 1px 5px rgba(0,0,0,0.2));
 
+                text-align: center;
                 color: lighten(@barColorDesaturate, 20%);
 
                 &:hover,
