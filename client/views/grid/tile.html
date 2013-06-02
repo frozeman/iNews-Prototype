@@ -5,7 +5,10 @@
             <div class="textBox">
                 <a href="{{newsLink this}}" class="title">{{title}}</a>
             </div>
-            <a class="cornerButton"></a>
+            {{#isolate}}
+            <button class="addToReadingList{{isOnReadingList _id}} icon-glasses toolTip" title="{{translate 'shared.toolTips.addToReadingList'}}"></button>
+            {{/isolate}}
+            <button class="cornerButton"></button>
         </div>
         <div class="back">
             <!-- <div class="tileGrid gridContainer">
@@ -88,7 +91,7 @@
                 <a href="{{subTopicLink this}}" class="title">{{clusterData.subTopic}}</a>
                 <a href="{{subTopicLinkAdd this}}" class="addSubTopicToQueryButton toolTip" title="{{translate 'tiles.toolTips.addSubTopicToQuery'}}"><span class="icon-dot-2"></span></a>
             </div>
-            <a class="cornerButton"></a>
+            <button class="cornerButton"></button>
         </div>
     </div>
 </template>

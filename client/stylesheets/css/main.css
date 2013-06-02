@@ -639,6 +639,35 @@ a:visited {
   margin: 0;
   padding: 0;
 }
+.buttonDefault {
+  display: block;
+  height: 48px;
+  width: 48px;
+  font-family: 'Source Sans Pro', 'Sintony', 'Helvetica Neue', sans-serif;
+  font-weight: 300px;
+  -webkit-font-smoothing: antialiased;
+  background-color: #eceae6;
+  border: none;
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  pointer: cursor;
+  color: #aaa18f;
+  text-shadow: none;
+}
+.buttonDefault:hover,
+.buttonDefault:focus {
+  background-color: #d6d1c9;
+  color: #eceae6;
+}
+.buttonDefault:active {
+  background-color: #cbc5ba;
+}
+.buttonDefault.active {
+  color: #c54806;
+}
 .barText {
   color: #5b5345;
   text-shadow: 0 1px 0 #f7f6f4;
@@ -685,6 +714,9 @@ html {
 ::-moz-selection {
   background: #c54806;
   color: #f2f2f2;
+}
+a:active {
+  color: #d6d1c9 !important;
 }
 noscript {
   display: block;
@@ -1052,7 +1084,7 @@ aside.leftSidebar ul li button.removeArticle {
   right: 12px;
   margin: 0;
   padding: 0;
-  background-color: #777166;
+  background-color: transparent;
   border: none;
   -webkit-border-radius: 1px;
   -webkit-background-clip: padding-box;
@@ -1060,12 +1092,8 @@ aside.leftSidebar ul li button.removeArticle {
   -moz-background-clip: padding;
   border-radius: 1px;
   background-clip: padding-box;
-  -webkit-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2);
-  box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2);
-  color: inset 0 1px 5px rgba(0, 0, 0, 0.2);
   text-align: center;
-  color: #efeeed;
+  color: #c0bdb6;
 }
 aside.leftSidebar ul li button.removeBookmark:hover,
 aside.leftSidebar ul li button.removeArticle:hover,
@@ -1299,9 +1327,11 @@ div.divider div.con span {
   -o-transform-origin: center center;
   -ms-transform-origin: center center;
   transform-origin: center center;
-  top: 96px;
+  top: 168px;
+  width: 200px;
   font-size: 23px;
   font-weight: 300;
+  text-align: right;
   -webkit-font-smoothing: antialiased;
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
@@ -1319,7 +1349,7 @@ div.divider div.pro {
   background-image: linear-gradient(90deg, rgba(120, 110, 91, 0) 0%, #5b5345 100%);
 }
 div.divider div.pro span {
-  left: -10px;
+  left: -89px;
   color: #c0b9ac;
 }
 div.divider div.con {
@@ -1331,7 +1361,7 @@ div.divider div.con {
   background-image: linear-gradient(90deg, #4c463a 0%, rgba(120, 110, 91, 0) 100%);
 }
 div.divider div.con span {
-  left: -10px;
+  left: -84px;
   color: #c0b9ac;
 }
 .gridContainer {
@@ -1406,35 +1436,38 @@ div.containerLeft > .tile,
 div.containerLeft > .subTile {
   float: right;
 }
-div.containerLeft > .tile .front a.cornerButton {
+div.containerLeft > .tile .front button.cornerButton {
   right: 0;
 }
-div.containerLeft > .tile .back a.cornerButton {
+div.containerLeft > .tile .front button.addToReadingList {
+  left: 0;
+}
+div.containerLeft > .tile .back button.cornerButton {
   left: 0;
 }
 div.containerLeft > .tile a.addSubTopicToQueryButton {
   right: -10%;
 }
-div.containerLeft > .tile.large .front a.cornerButton {
+div.containerLeft > .tile.large .front button.cornerButton {
   border-width: 35px 35px 0 0;
 }
-div.containerLeft > .tile.large .back a.cornerButton {
+div.containerLeft > .tile.large .back button.cornerButton {
   border-width: 35px 0 0 35px;
 }
-div.containerLeft > .tile.medium .front a.cornerButton {
+div.containerLeft > .tile.medium .front button.cornerButton {
   border-width: 25px 25px 0 0;
 }
-div.containerLeft > .tile.medium .back a.cornerButton {
+div.containerLeft > .tile.medium .back button.cornerButton {
   border-width: 25px 0 0 25px;
 }
-div.containerLeft > .tile.small .front a.cornerButton {
+div.containerLeft > .tile.small .front button.cornerButton {
   border-width: 15px 15px 0 0;
 }
 div.containerLeft > .tile.small .front .image:hover + .textBox {
   left: 0;
   right: auto;
 }
-div.containerLeft > .tile.small .back a.cornerButton {
+div.containerLeft > .tile.small .back button.cornerButton {
   border-width: 15px 0 0 15px;
 }
 div.containerRight {
@@ -1444,35 +1477,38 @@ div.containerRight > .tile,
 div.containerRight > .subTile {
   float: left;
 }
-div.containerRight > .tile .front a.cornerButton {
+div.containerRight > .tile .front button.cornerButton {
   left: 0;
 }
-div.containerRight > .tile .back a.cornerButton {
+div.containerRight > .tile .front button.addToReadingList {
+  right: 0;
+}
+div.containerRight > .tile .back button.cornerButton {
   right: 0;
 }
 div.containerRight > .tile a.addSubTopicToQueryButton {
   left: 0;
 }
-div.containerRight > .tile.large .front a.cornerButton {
+div.containerRight > .tile.large .front button.cornerButton {
   border-width: 35px 0 0 35px;
 }
-div.containerRight > .tile.large .back a.cornerButton {
+div.containerRight > .tile.large .back button.cornerButton {
   border-width: 35px 35px 0 0;
 }
-div.containerRight > .tile.medium .front a.cornerButton {
+div.containerRight > .tile.medium .front button.cornerButton {
   border-width: 25px 0 0 25px;
 }
-div.containerRight > .tile.medium .back a.cornerButton {
+div.containerRight > .tile.medium .back button.cornerButton {
   border-width: 25px 25px 0 0;
 }
-div.containerRight > .tile.small .front a.cornerButton {
+div.containerRight > .tile.small .front button.cornerButton {
   border-width: 15px 0 0 15px;
 }
 div.containerRight > .tile.small .front .image:hover + .textBox {
   left: -100%;
   right: auto;
 }
-div.containerRight > .tile.small .back a.cornerButton {
+div.containerRight > .tile.small .back button.cornerButton {
   border-width: 15px 15px 0 0;
 }
 .tile {
@@ -1492,6 +1528,10 @@ div.containerRight > .tile.small .back a.cornerButton {
   background-image: -o-linear-gradient(90deg, #d6d1c9 0%, #eceae6 100%);
   background-image: linear-gradient(0deg, #d6d1c9 0%, #eceae6 100%);
 }
+.tile:hover button.addToReadingList,
+.tile:focus button.addToReadingList {
+  display: block;
+}
 .tile.hidden {
   -webkit-opacity: 0;
   -moz-opacity: 0;
@@ -1499,6 +1539,10 @@ div.containerRight > .tile.small .back a.cornerButton {
 }
 .tile.large > div {
   padding: 8px;
+}
+.tile.large .front button.addToReadingList {
+  height: 48px;
+  width: 48px;
 }
 .tile.large .back a.title,
 .tile.large .back a.addSubTopicToQueryButton {
@@ -1513,6 +1557,10 @@ div.containerRight > .tile.small .back a.cornerButton {
 }
 .tile.medium .front:hover .textBox {
   height: 75%;
+}
+.tile.medium .front button.addToReadingList {
+  height: 32px;
+  width: 32px;
 }
 .tile.medium .back a.title,
 .tile.medium .back a.addSubTopicToQueryButton {
@@ -1541,6 +1589,10 @@ div.containerRight > .tile.small .back a.cornerButton {
   height: 0;
   top: 0;
   padding: 0;
+}
+.tile.small .front button.addToReadingList {
+  height: 24px;
+  width: 24px;
 }
 .tile.small .back a.title,
 .tile.small .back a.addSubTopicToQueryButton {
@@ -1604,7 +1656,50 @@ div.containerRight > .tile.small .back a.cornerButton {
   vertical-align: middle;
   text-align: center;
 }
-.tile a.cornerButton {
+.tile button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+.tile button.addToReadingList {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  display: block;
+  height: 48px;
+  width: 48px;
+  font-family: 'Source Sans Pro', 'Sintony', 'Helvetica Neue', sans-serif;
+  font-weight: 300px;
+  -webkit-font-smoothing: antialiased;
+  background-color: #eceae6;
+  border: none;
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  pointer: cursor;
+  color: #aaa18f;
+  text-shadow: none;
+  display: none;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  color: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+.tile button.addToReadingList:hover,
+.tile button.addToReadingList:focus {
+  background-color: #d6d1c9;
+  color: #eceae6;
+}
+.tile button.addToReadingList:active {
+  background-color: #cbc5ba;
+}
+.tile button.addToReadingList.active {
+  color: #c54806;
+}
+.tile button.cornerButton {
   z-index: 2;
   position: absolute;
   bottom: 0;
@@ -1638,11 +1733,15 @@ div.containerRight > .tile.small .back a.cornerButton {
   -ms-transform: rotateY(0deg) rotateY(0deg);
   transform: rotateY(0deg) rotateY(0deg);
 }
-.tile > div.front a.cornerButton {
+.tile > div.front button.cornerButton {
   border-color: transparent rgba(197, 72, 6, 0.9);
 }
 .tile > div.front > .textBox {
   text-shadow: 0 1px 0 #f7f6f4;
+}
+.tile > div.front > .textBox a.title:active {
+  color: #fff !important;
+  text-shadow: 0 1px 1px #9f9481;
 }
 .tile > div.back {
   z-index: 0;
@@ -1755,19 +1854,20 @@ article.main button {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  pointer: cursor;
   color: #aaa18f;
+  text-shadow: none;
 }
 article.main button:hover,
 article.main button:focus {
   background-color: #d6d1c9;
   color: #eceae6;
 }
-article.main button:active,
-article.main button.active {
+article.main button:active {
   background-color: #cbc5ba;
 }
 article.main button.active {
-  color: #eceae6;
+  color: #c54806;
 }
 article.main button.close {
   position: absolute;
@@ -1849,6 +1949,7 @@ article.main aside.left > a.clearFix {
 }
 article.main aside.left a.subTopic {
   position: relative;
+  color: #fff;
 }
 article.main aside.left a.subTopic div {
   position: absolute;
@@ -1861,7 +1962,6 @@ article.main aside.left a.subTopic div {
   font-size: 1.5em;
   -webkit-font-smoothing: antialiased;
   padding: 5px 10px;
-  color: #fff;
 }
 article.main aside.left a.subTopic:hover div,
 article.main aside.left a.subTopic:focus div {
@@ -2369,31 +2469,31 @@ header.main .pathMenu li.topicType5 a:hover:after {
 header.main .pathMenu li.topicType5 a:after {
   border-left-color: #762b04;
 }
-.tile.topicType1 > div.front a.cornerButton {
+.tile.topicType1 > div.front button.cornerButton {
   border-color: transparent rgba(197, 72, 6, 0.9);
 }
 .tile.topicType1 > div.back > .textBox {
   background: rgba(197, 72, 6, 0.9);
 }
-.tile.topicType2 > div.front a.cornerButton {
+.tile.topicType2 > div.front button.cornerButton {
   border-color: transparent rgba(187, 68, 6, 0.9);
 }
 .tile.topicType2 > div.back > .textBox {
   background: rgba(187, 68, 6, 0.9);
 }
-.tile.topicType3 > div.front a.cornerButton {
+.tile.topicType3 > div.front button.cornerButton {
   border-color: transparent rgba(177, 65, 5, 0.9);
 }
 .tile.topicType3 > div.back > .textBox {
   background: rgba(177, 65, 5, 0.9);
 }
-.tile.topicType4 > div.front a.cornerButton {
+.tile.topicType4 > div.front button.cornerButton {
   border-color: transparent rgba(157, 58, 5, 0.9);
 }
 .tile.topicType4 > div.back > .textBox {
   background: rgba(157, 58, 5, 0.9);
 }
-.tile.topicType5 > div.front a.cornerButton {
+.tile.topicType5 > div.front button.cornerButton {
   border-color: transparent rgba(118, 43, 4, 0.9);
 }
 .tile.topicType5 > div.back > .textBox {
@@ -2707,17 +2807,17 @@ aside.leftSidebar ul li a span.topic.topicType5 {
   }
   div.divider div.pro span,
   div.divider div.con span {
-    top: 64px;
+    top: 144px;
     font-size: 13px;
   }
   div.divider div.pro span {
-    left: -7px;
+    left: -94px;
   }
   div.divider div.con {
     right: 0;
   }
   div.divider div.con span {
-    left: -6px;
+    left: -92px;
   }
   .gridContainer.mainGrid {
     padding-top: 32px;

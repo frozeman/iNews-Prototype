@@ -29,7 +29,7 @@
                             {{#isolate}}
                             <ul class="articleMenu">
                                 <li><button class="close"><span>×</span></button></li>
-                                <li><button class="addToReadingList{{isOnReadingList _id}} icon-glasses"></button></li>
+                                <li><button class="addToReadingList{{isOnReadingList _id}} icon-glasses toolTip" title="{{translate 'shared.toolTips.addToReadingList'}}"></button></li>
                                 <li><button class="importantButton{{isImportant _id}}">!mportant ({{clusterData.importance}})</button></li>
                             </ul>
                             {{/isolate}}
@@ -37,8 +37,8 @@
                                 <h1>{{placeContent title}}</h1>
                                 <p class="metaData">
                                     {{#if metaData.pubDate}}<time datetime="{{datetimePubDate metaData.pubDate}}" title="{{absolutePubDate metaData.pubDate}}">{{relativePubDate metaData.pubDate}}</time>{{/if}}
-                                    {{#if metaData.author}} {{translate 'article.author'}} {{authorText}}{{#if metaData.author.url}}<a href="{{metaData.author.url}}" target="_blank">{{/if}}{{placeAuthor metaData.author.name}}{{#if metaData.author.url}}</a>{{/if}}{{/if}}
-                                    {{#if metaData.source}} {{translate 'article.source'}} {{sourceText}}{{#if metaData.source.url}}<a href="{{metaData.source.url}}" target="_blank">{{/if}}{{metaData.source.id}}{{#if metaData.source.url}}</a>{{/if}}{{/if}}
+                                    {{#if metaData.author}} {{translate 'article.author'}} {{#if metaData.author.url}}<a href="{{metaData.author.url}}" target="_blank">{{/if}}{{placeAuthor metaData.author.name}}{{#if metaData.author.url}}</a>{{/if}}{{/if}}
+                                    {{#if metaData.source}} {{translate 'article.source'}} {{#if metaData.source.url}}<a href="{{metaData.source.url}}" target="_blank">{{/if}}{{metaData.source.id}}{{#if metaData.source.url}}</a>{{/if}}{{/if}}
                                 </p>
                             </header>
                             <section>
@@ -52,8 +52,8 @@
                     <a href="{{metaData.source.url}}" class="articleLink" target="_blank">{{translate 'article.readOn'}} {{metaData.source.id}} <i class="icon-angle-right"></i></a>
                     <!-- COMMENTS -->
                     <aside class="right">
-                        <h1 class="title"><span class="rotated">{{translate 'article.comments'}}</span> <i class="icon-comment-empty"></i> <span class="count">142</span></h1>
-                        some comments
+                        <h1 class="title"><span class="rotated">{{translate 'article.comments'}}</span> <i class="icon-comment-empty"></i> <span class="count">57</span></h1>
+                        <img src="img/tests/disqus_embedd.png" alt="">
                     </aside>
                 </article>
             {{/each}}

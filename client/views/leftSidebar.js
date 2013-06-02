@@ -59,6 +59,9 @@ Template.leftSidebar.events({
 
         readingList = _.reject(readingList, function(article){ return (article.id === $button.attr('data-article')); });
         Meteor._localStorage.setItem('readingList',JSON.stringify(readingList));
+
+        // reactivity
+        Session.set('reloadReadingListButton',$button.attr('data-article'));
         Session.set('reloadReadingList',true);
     }
 });

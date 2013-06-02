@@ -9,14 +9,23 @@ Template.article.created = function() {
         // fade in
         $('.dimContainer').removeClass('hidden');
 
-
         // prevent news grid from scrolling
         lockViewport();
     });
 };
 // RENDERED
 Template.article.rendered = function() {
-     centerImages('article');
+    var $this = $(this.firstNode);
+
+    centerImages('article');
+
+    Meteor.defer(function(){
+        $this.find('.toolTip').powerTip({
+            placement: 's',
+            intentPollInterval: 200,
+            smartPlacement: true
+        });
+    });
 };
 
 
@@ -43,28 +52,7 @@ Template.article.events({
         e.preventDefault();
         var article = this;
 
-
-        var readingList = JSON.parse(Meteor._localStorage.getItem('readingList'));
-
-        // add to reading list
-        if(!_.isEmpty(article) && !_.find(readingList, function(item){ return (item.id === article._id); })) {
-            readingList = readingList || [];
-            readingList.push({
-                id: article._id,
-                title: _.stripTags(article.title),
-                link: encodeArticlePath(article),
-                opinionated: article.clusterData.opinionated
-            });
-            Meteor._localStorage.setItem('readingList',JSON.stringify(readingList));
-            Session.set('reloadReadingList',true);
-
-        // remove from reading list
-        } else {
-
-            readingList = _.reject(readingList, function(item){ return (item.id === article._id); });
-            Meteor._localStorage.setItem('readingList',JSON.stringify(readingList));
-            Session.set('reloadReadingList',true);
-        }
+        addToReadingList(article);
     },
     // IMPORTANT BUTTON
     'click .importantButton': function(e){
@@ -129,12 +117,13 @@ Template.article.isImportant = function (articleId) {
 
     return (_.contains(importantButton, articleId)) ? ' active' : '';
 };
+// same as in tile.js
 Template.article.isOnReadingList = function (articleId) {
     var readingList = JSON.parse(Meteor._localStorage.getItem('readingList'));
 
     // allow reactivity
-    if(Session.equals('reloadReadingList', true))
-        Session.set('reloadReadingList',false);
+    if(Session.equals('reloadReadingListButton', true))
+        Session.set('reloadReadingListButton',false);
 
     return (_.find(readingList, function(item){ return (item.id === articleId) })) ? ' active' : '';
 };

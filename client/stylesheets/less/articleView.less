@@ -16,31 +16,7 @@ article.main {
 
     // button default style
     button {
-        display: block;
-        height: @headerHeight;
-        width: @headerHeight;
-        font-family: @headlineFont;
-        font-weight: 300px;
-        -webkit-font-smoothing: antialiased;
-        background-color: lighten(@color1, 10%);
-        border: none;
-        .marginPaddingReset;
-        .box-sizing(border-box);
-
-        color: darken(@color1, 20%);
-
-        &:hover,
-        &:focus {
-            background-color: @color1;
-            color: lighten(@color1, 10%);
-        }
-        &:active,
-        &.active {
-            background-color: darken(@color1,5%);
-        }
-        &.active {
-            color: lighten(@color1, 10%);
-        }
+        .buttonDefault;
     }
 
     button.close {
@@ -138,6 +114,7 @@ article.main {
 
         a.subTopic {
             position: relative;
+            color: #fff;
 
             div {
                 position: absolute;
@@ -150,7 +127,6 @@ article.main {
                 font-size: 1.5em;
                 -webkit-font-smoothing: antialiased;
                 padding: 5px 10px;
-                color: #fff;
             }
 
             &:hover,

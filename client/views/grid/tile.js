@@ -56,6 +56,13 @@ Template.tile.events({
     'click .addSubTopicToQueryButton, click .back a.title': function(){
         LASTARTICLE = this;
     },
+    // ADD READING LIST
+    'click .addToReadingList': function(e){
+        e.preventDefault();
+        var article = this;
+
+        addToReadingList(article);
+    },
     'mouseleave .tile': function(e){
         var $tile = $(e.currentTarget);
 
@@ -64,7 +71,7 @@ Template.tile.events({
         else
             $tile.css('z-index','').addClass('flip');
     },
-    'mouseenter a.cornerButton': function(e){
+    'mouseenter button.cornerButton': function(e){
         e.stopPropagation();
         var $tile = $(e.currentTarget).closest('.tile');
 
@@ -73,7 +80,7 @@ Template.tile.events({
             $tile.toggleClass('flip');
         },HOVERTIMOUT);
     },
-    'mouseleave a.cornerButton': function(e){
+    'mouseleave button.cornerButton': function(e){
         e.stopPropagation();
         clearTimeout(cornerButtonTimeOut);
     },
@@ -100,6 +107,16 @@ Template.tile.subTopicLink = function (article) {
 Template.tile.subTopicLinkAdd = function (article) {
     var title = article.clusterData.subTopic;
     return (title) ? encodeNewsPath(title,true) : ''; // add to the existing path
+};
+// same as in article.js
+Template.tile.isOnReadingList = function (articleId) {
+    var readingList = JSON.parse(Meteor._localStorage.getItem('readingList'));
+
+    // allow reactivity
+    if(Session.equals('reloadReadingListButton', articleId))
+        Session.set('reloadReadingListButton',false);
+
+    return (_.find(readingList, function(item){ return (item.id === articleId) })) ? ' active' : '';
 };
 
 

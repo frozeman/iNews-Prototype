@@ -21,9 +21,11 @@ div.divider {
             display: inline-block;
             position: relative;
             .transform-origin(center center);
-            top: @headerHeight * 2;
+            top: @headerHeight * 3.5;
+            width: 200px;
             font-size: 23px;
             font-weight: 300;
+            text-align: right;
             -webkit-font-smoothing: antialiased;
             .rotate(-90deg);
             text-shadow: -1px 0 3px rgba(0,0,0,0.3);
@@ -35,7 +37,7 @@ div.divider {
         @gridBgColorDarker: darken(@gridBgColor, 10%);
         .gradient(~"linear-gradient(90deg, @{gridBgColorLight} 0%, @{gridBgColorDarker} 100%)");
         span {
-            left: -10px;
+            left: -89px;
             color: lighten(@gridBgColor, 30%);
         }
     }
@@ -46,7 +48,7 @@ div.divider {
         .gradient(~"linear-gradient(90deg, @{gridBgColorDarker} 0%, @{gridBgColorLight} 100%)");
 
         span {
-            left: -10px;
+            left: -84px;
             color: lighten(@gridBgColor, 30%);
         }
     }
@@ -143,12 +145,15 @@ div.containerLeft {
 
 
         .front {
-            a.cornerButton {
+            button.cornerButton {
                 right: 0;
+            }
+            button.addToReadingList {
+                left: 0;
             }
         }
         .back {
-            a.cornerButton {
+            button.cornerButton {
                 left: 0;
             }
         }
@@ -160,31 +165,31 @@ div.containerLeft {
         // sizes
         &.large {
             .front {
-                a.cornerButton {
+                button.cornerButton {
                     border-width: @cornerButtonSize @cornerButtonSize 0 0;
                 }
             }
             .back {
-                a.cornerButton {
+                button.cornerButton {
                     border-width: @cornerButtonSize 0 0 @cornerButtonSize;
                 }
             }
         }
         &.medium {
             .front {
-                a.cornerButton {
+                button.cornerButton {
                     border-width: (@cornerButtonSize - 10px) (@cornerButtonSize - 10px) 0 0;
                 }
             }
             .back {
-                a.cornerButton {
+                button.cornerButton {
                     border-width: (@cornerButtonSize - 10px) 0 0 (@cornerButtonSize - 10px);
                 }
             }
         }
         &.small {
             .front {
-                a.cornerButton {
+                button.cornerButton {
                     border-width: (@cornerButtonSize - 20px) (@cornerButtonSize - 20px) 0 0;
                 }
                 .image:hover + .textBox {
@@ -193,7 +198,7 @@ div.containerLeft {
                 }
             }
             .back {
-                a.cornerButton {
+                button.cornerButton {
                     border-width: (@cornerButtonSize - 20px) 0 0 (@cornerButtonSize - 20px);
                 }
             }
@@ -211,12 +216,15 @@ div.containerRight {
     > .tile {
 
         .front {
-            a.cornerButton {
+            button.cornerButton {
                 left: 0;
+            }
+            button.addToReadingList {
+                right: 0;
             }
         }
         .back {
-            a.cornerButton {
+            button.cornerButton {
                 right: 0;
             }
         }
@@ -228,31 +236,31 @@ div.containerRight {
         // sizes
         &.large {
             .front {
-                a.cornerButton {
+                button.cornerButton {
                     border-width: @cornerButtonSize 0 0 @cornerButtonSize;
                 }
             }
             .back {
-                a.cornerButton {
+                button.cornerButton {
                     border-width: @cornerButtonSize @cornerButtonSize 0 0;
                 }
             }
         }
         &.medium {
             .front {
-                a.cornerButton {
+                button.cornerButton {
                     border-width: (@cornerButtonSize - 10) 0 0 (@cornerButtonSize - 10);
                 }
             }
             .back {
-                a.cornerButton {
+                button.cornerButton {
                     border-width: (@cornerButtonSize - 10) (@cornerButtonSize - 10) 0 0;
                 }
             }
         }
         &.small {
             .front {
-                a.cornerButton {
+                button.cornerButton {
                     border-width: (@cornerButtonSize - 20) 0 0 (@cornerButtonSize - 20);
                 }
                 .image:hover + .textBox {
@@ -261,7 +269,7 @@ div.containerRight {
                 }
             }
             .back {
-                a.cornerButton {
+                button.cornerButton {
                     border-width: (@cornerButtonSize - 20) (@cornerButtonSize - 20) 0 0;
                 }
             }
@@ -284,6 +292,9 @@ div.containerRight {
             @gridTextBoxColorLight: lighten(@gridTextBoxColor,10%);
             .gradient(~"linear-gradient(0deg, @{gridTextBoxColor} 0%, @{gridTextBoxColorLight} 100%)");
         }
+        button.addToReadingList {
+            display: block;
+        }
     }
 
     &.hidden {
@@ -295,6 +306,12 @@ div.containerRight {
     &.large {
         > div {
             padding: 8px;
+        }
+        .front {
+            button.addToReadingList {
+                height: @headerHeight;
+                width: @headerHeight;
+            }
         }
         .back {
             a.title,
@@ -317,6 +334,11 @@ div.containerRight {
                 .textBox {
                     height: 75%;
                 }
+            }
+
+            button.addToReadingList {
+                height: @headerHeight/1.5;
+                width: @headerHeight/1.5;
             }
         }
         .back {
@@ -352,6 +374,11 @@ div.containerRight {
                 height: 0;
                 top: 0;
                 padding: 0;
+            }
+
+            button.addToReadingList {
+                height: @headerHeight/2;
+                width: @headerHeight/2;
             }
         }
         .back {
@@ -418,8 +445,23 @@ div.containerRight {
         }
     }
 
+    button {
+        .marginPaddingReset;
+        border: none;
+        background: transparent;
+    }
+
+    button.addToReadingList {
+        z-index: 2;
+        position: absolute;
+        top: 0;
+        .buttonDefault;
+        display: none;
+        .box-shadow(0 0 5px rgba(0,0,0,0.3));
+    }
+
     // CORNER BUTTON
-    a.cornerButton {
+    button.cornerButton {
         z-index: 2;
         position: absolute;
         bottom: 0;
@@ -449,12 +491,19 @@ div.containerRight {
             background-color: transparent;
             .transform(rotateY(0deg) rotateY(0deg));
 
-            a.cornerButton {
+            button.cornerButton {
                 border-color: transparent fadeout(@topicColorDefault,10%);
             }
 
             > .textBox {
                 text-shadow: 0 1px 0 lighten(@gridTextBoxColor,15%);
+
+                a.title {
+                    &:active {
+                        color: #fff !important;
+                        text-shadow: 0 1px 1px darken(@gridTextBoxColor,25%);
+                    }
+                }
             }
         }
         &.back {
