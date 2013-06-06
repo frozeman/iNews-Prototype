@@ -10,7 +10,7 @@ Meteor.startup(function() {
     Session.setDefault('showMessageBox', false);
     Session.setDefault('messageBoxMessage', '');
     Session.setDefault('activateHomeButton',true);
-    Session.set('showLoadingIcon',true);
+    Session.setDefault('showLoadingIcon',true);
 
     // set start tile size
     setTileSize();

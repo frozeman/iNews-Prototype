@@ -43,6 +43,7 @@ Template.article.events({
 
             // fade out
             $('.dimContainer').fadeOut('fast',function(){
+                Session.set('showCurrentArticle', false);
                 Meteor.Router.to(encodeNewsPath(NEWSPATH));
             });
         }

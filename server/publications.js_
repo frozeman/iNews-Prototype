@@ -24,6 +24,14 @@ Meteor.publish("currentNews", function (articleIds) {
         // return News.find({$and: [{'metaData.pubDate': {$gt: onlyArticlesFrom}},{'title': {$regex : '.*(?:'+articleIds.split(' ').join('|')+').*', $options: 'i'}}]}, {limit: limitTo});
 });
 
+// publish the current article
+Meteor.publish("currentArticle", function (articleId) {
+
+    // GET SPECIFIC ARTICLE by ID
+    return News.find({'_id': articleId});
+
+});
+
 // publish current clusters
 // Meteor.publish("currentClusters", function () {
 //     return Clusters.find({});
