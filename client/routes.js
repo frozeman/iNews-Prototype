@@ -29,55 +29,55 @@ Meteor.Router.add({
             * Then it fetches those articles, PLUS articles matching the search string
             */
             console.log('Routing');
-            // Meteor.call('search', newsPath, function(error, result) {
-            //     var articleIds          = _.compact(result[0]),
-            //         missingArticleIds   = result[1],
-            //         changedNewsPath     = result[2];
+            Meteor.call('search', newsPath, function(error, result) {
+                var articleIds          = _.compact(result[0]),
+                    missingArticleIds   = result[1],
+                    changedNewsPath     = result[2];
 
-            //     console.log('SEARCH ENDED: ');
-            //     console.log(result);
+                console.log('SEARCH ENDED: ');
+                console.log(result);
 
-            //     // -> SHOW MESSAGE for MISSING CLUSTERS
-            //     if(!_.isEmpty(missingArticleIds)) {
-            //         var missingTopicsMessage = __('messageBox.missingClusters',{
-            //             topics: _.reduce(missingArticleIds,function(memo,topic){
-            //                 topic = '&quot;' + topic + '&quot;';
-            //                 return (memo) ? (memo + ', ' + topic) : topic;
-            //             },'')}
-            //         );
-            //         Session.set('messageBoxMessage',missingTopicsMessage);
-            //         Session.set('showMessageBox',true);
+                // -> SHOW MESSAGE for MISSING CLUSTERS
+                if(!_.isEmpty(missingArticleIds)) {
+                    var missingTopicsMessage = __('messageBox.missingClusters',{
+                        topics: _.reduce(missingArticleIds,function(memo,topic){
+                            topic = '&quot;' + topic + '&quot;';
+                            return (memo) ? (memo + ', ' + topic) : topic;
+                        },'')}
+                    );
+                    Session.set('messageBoxMessage',missingTopicsMessage);
+                    Session.set('showMessageBox',true);
 
-            //         // hide automatically
-            //         clearTimeout(messageBoxTimeout);
-            //         messageBoxTimeout = setTimeout(function(){
-            //             Session.set('showMessageBox',false);
-            //         },8000);
-            //     } else
-            //         Session.set('showMessageBox',false);
+                    // hide automatically
+                    clearTimeout(messageBoxTimeout);
+                    messageBoxTimeout = setTimeout(function(){
+                        Session.set('showMessageBox',false);
+                    },8000);
+                } else
+                    Session.set('showMessageBox',false);
 
-            //     // reSET the NEW NEWSPATH
-            //     changeWebsitesTitle(changedNewsPath);
-            //     NEWSPATH = changedNewsPath;
-            //     $('#search').val(NEWSPATH);
-
-
-            //     // -> FADE ARTICLES OUT
-            //     fadeArticlesOut(function(){
-            //         if(_.isEmpty(articleIds)) {
-
-            //             // if no articles could be found, use the search term, t look in titles of articles
-            //             Session.set('getArticlesFor',[NEWSPATH]);
-
-            //         // -> set article ids (will reload subscriptions)
-            //         } else {
-            //             articleIds.unshift(NEWSPATH);
-            //             Session.set('getArticlesFor', articleIds);
-            //         }
-            //     });
+                // reSET the NEW NEWSPATH
+                changeWebsitesTitle(changedNewsPath);
+                NEWSPATH = changedNewsPath;
+                $('#search').val(NEWSPATH);
 
 
-            // });
+                // -> FADE ARTICLES OUT
+                fadeArticlesOut(function(){
+                    if(_.isEmpty(articleIds)) {
+
+                        // if no articles could be found, use the search term, t look in titles of articles
+                        Session.set('getArticlesFor',[NEWSPATH]);
+
+                    // -> set article ids (will reload subscriptions)
+                    } else {
+                        articleIds.unshift(NEWSPATH);
+                        Session.set('getArticlesFor', articleIds);
+                    }
+                });
+
+
+            });
         }
     },
     '/article/:id/:year/:month/:day/:title': { to: 'article', and: function(id,year,month,day,title) {
