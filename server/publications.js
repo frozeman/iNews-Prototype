@@ -7,9 +7,8 @@ Meteor.publish("currentNews", function (articleIds) {
 
     var limitTo = 50,
         topNewsImportance = 500,
-        onlyArticlesFrom = moment().subtract('days',10).unix(), // 10 days to now()
+        onlyArticlesFrom = moment().subtract('days',30).unix(), // 10 days to now()
         searchValueRegex = (_.isString(articleIds[0])) ? {'title': {$regex : '.*(?:'+articleIds[0].split(' ').join('|')+').*', $options: 'i'}} : {};
-
 
     // GET TOP NEWS
     if(_.contains(articleIds, 'topNews'))
@@ -19,9 +18,6 @@ Meteor.publish("currentNews", function (articleIds) {
     else if(_.isArray(articleIds))
         return News.find({$and: [{'metaData.pubDate': {$gt: onlyArticlesFrom}}, {$or: [searchValueRegex, {'_id': {$in: articleIds}}]}]}, {limit: limitTo});
 
-    // GET ARTICLES by SEARCHING the TITLE
-    // else if(_.isString(articleIds))
-        // return News.find({$and: [{'metaData.pubDate': {$gt: onlyArticlesFrom}},{'title': {$regex : '.*(?:'+articleIds.split(' ').join('|')+').*', $options: 'i'}}]}, {limit: limitTo});
 });
 
 // publish the current article
@@ -49,18 +45,3 @@ News.allow({
         return (query.$inc && query.$inc['clusterData.importance']) ? true : false;
     }
 });
-
-
-
-// Clusters.allow({
-//   update: function () {
-//     return true;
-//   }
-// });
-
-
-
-
-// // client: this will fail
-// var party = { ... };
-// Parties.insert(party);

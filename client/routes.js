@@ -11,16 +11,15 @@ Meteor.Router.add({
 
         // only START a SEARCH when the topics changed
         if(RELOAD || (!this.init && NEWSPATH !== newsPath)) { // !this.init fix for HTML push state poly fill
-            RELOAD = false;
 
-            console.log('Route to: '+newsPath);
+            // console.log('Route to: '+newsPath);
 
             // show loading circle
             Session.set('showLoadingIcon',true);
             NEWSPATH = newsPath;
             $('#search').val(NEWSPATH);
 
-            console.log('SEARCH STARTED: '+newsPath);
+            // console.log('SEARCH STARTED: '+newsPath);
 
 
             // -> START SEARCH
@@ -28,14 +27,13 @@ Meteor.Router.add({
             * Searches in clusters for matches and returns article ids.
             * Then it fetches those articles, PLUS articles matching the search string
             */
-            console.log('Routing');
             Meteor.call('search', newsPath, function(error, result) {
                 var articleIds          = _.compact(result[0]),
                     missingArticleIds   = result[1],
                     changedNewsPath     = result[2];
 
-                console.log('SEARCH ENDED: ');
-                console.log(result);
+                // console.log('SEARCH ENDED: ');
+                // console.log(result);
 
                 // -> SHOW MESSAGE for MISSING CLUSTERS
                 if(!_.isEmpty(missingArticleIds)) {
@@ -92,7 +90,7 @@ Meteor.Router.add({
         //     title: title
         // };
 
-        console.log('Route to Article');
+        // console.log('Route to Article');
 
         // add article id of the current article, when url was only an article
         // if(id && _.isEmpty(News.findOne({_id: id},{reactive: false}))) {
@@ -103,13 +101,36 @@ Meteor.Router.add({
         Session.set('showCurrentArticle', id);
     }},
 
+    '/about': function(page){
+        Session.set('showPage', {
+            title: 'About',
+            titleText: 'page.about.title',
+            contentText: 'page.about.content',
+        });
+        return 'page';
+    },
+    '/privacy': function(page){
+        Session.set('showPage', {
+            title: 'Privacy Policy',
+            titleText: 'page.privacy.title',
+            contentText: 'page.privacy.content',
+        });
+        return 'page';
+    },
+    '/terms': function(page){
+        Session.set('showPage', {
+            title: 'Terms of Service',
+            titleText: 'page.terms.title',
+            contentText: 'page.terms.content',
+        });
+        return 'page';
+    },
 
     '*': function() {
 
         if(RELOAD || (!this.init && NEWSPATH !== '')) { // fix for HTML push state poly fill
-            RELOAD = false;
 
-            console.log('Route to topNews');
+            // console.log('Route to topNews');
 
             // show loading circle
             Session.set('showLoadingIcon',true);

@@ -28,7 +28,7 @@ Template.grid.checkTiles = function(type) {
 // get the articles
 Template.grid.tiles = function(type) {
 
-    console.log('Reload grid Data for "'+type+'"');
+    // console.log('Reload grid Data for "'+type+'"');
 
     var sortBy = {'clusterData.importance': -1, 'metaData.pubDate': -1},
         articles = News.find({'clusterData.side': type}, {sort: sortBy});

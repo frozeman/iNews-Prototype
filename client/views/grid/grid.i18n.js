@@ -5,8 +5,8 @@ Meteor.i18nMessages.grid = {
             de: 'ZUSTIMMEND'
         },
         con: {
-            en: 'NEGATING',
-            de: 'ABNEIGEND'
+            en: 'NEGATIVE',
+            de: 'ABLEHNEND'
         }
     },
     errors: {

@@ -1,0 +1,27 @@
+<template name="page">
+    <div class="dimContainer hidden" onclick="">
+        {{#each content}}
+            {{setTitle}}
+            <article class="main" role="main">
+                <button class="close"><span>×</span></button>
+                <!-- ASIDE -->
+                <aside class="left" role="complementary">
+      
+                </aside>
+                <!-- PAGE -->
+                <div class="middle">
+                    <div class="content">
+                        <header>
+                            <h1>{{translate titleText}}</h1>
+                        </header>
+                        <section>
+                            {{translate contentText}}
+                        </section>
+                    </div>
+                </div>
+            </article>
+        {{/each}}
+
+        <div class="loadingIcon icon-spin5 animate-spin"></div>
+    </div>
+</template>

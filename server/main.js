@@ -1,5 +1,5 @@
 var Fiber = Npm.require('fibers');
-var processQueueEvery = 1000 * 60 * 60 * 2, // 2 hour
+var processQueueEvery = 1000 * 60 * 60 * 8, // 2 hour
     removeQueueItemAfter = 5; // 5 minutes
 
 // Queue.remove({});
@@ -99,7 +99,7 @@ Meteor.startup(function () {
         // run immediatelly on startup
         // runQueue();
     }).run();
-    
+
     // ENSURE INDEXES
     // Clusters._ensureIndex({ "dictionary": 1 });
 
@@ -282,28 +282,28 @@ Meteor.startup(function () {
     // }
 
     // SOURCES collection
-    if(Sources.find().fetch().length === 0) {
-        Sources.insert({
-            name: 'CNN',
-            slogan: '',
-            url: 'htp://cnn.com',
-            rss: 'http://cnn.com/feed',
-            api: 'http://cnn.com/api',
-            crawlInfo: {
-                lastCheck: 1332443643
-            }
-        });
-        Sources.insert({
-            name: 'Fox News',
-            slogan: 'Fair and Balanced',
-            url: 'htp://foxnews.com',
-            rss: 'http://foxnews.com/feed',
-            api: 'http://foxnews.com/api',
-            crawlInfo: {
-                lastCheck: 1322343643
-            }
-        });
-    }
+    // if(Sources.find().fetch().length === 0) {
+    //     Sources.insert({
+    //         name: 'CNN',
+    //         slogan: '',
+    //         url: 'htp://cnn.com',
+    //         rss: 'http://cnn.com/feed',
+    //         api: 'http://cnn.com/api',
+    //         crawlInfo: {
+    //             lastCheck: 1332443643
+    //         }
+    //     });
+    //     Sources.insert({
+    //         name: 'Fox News',
+    //         slogan: 'Fair and Balanced',
+    //         url: 'htp://foxnews.com',
+    //         rss: 'http://foxnews.com/feed',
+    //         api: 'http://foxnews.com/api',
+    //         crawlInfo: {
+    //             lastCheck: 1322343643
+    //         }
+    //     });
+    // }
 
     // QUEUE collection
     // if(Queue.find().fetch().length === 0) {
@@ -315,11 +315,11 @@ Meteor.startup(function () {
     // }
 
     // CRAWL collection
-    if(Crawl.find().fetch().length === 0) {
-        Crawl.insert({
-            url: 'http://test.de/soepage',
-            time: 1322343643
-        });
-    }
+    // if(Crawl.find().fetch().length === 0) {
+    //     Crawl.insert({
+    //         url: 'http://test.de/soepage',
+    //         time: 1322343643
+    //     });
+    // }
 
 });

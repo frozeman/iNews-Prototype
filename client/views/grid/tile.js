@@ -10,8 +10,7 @@ Template.tile.rendered = function() {
     var $tile = $(this.find('.tile')),
         article = this.data;
 
-    console.log('Tile rendered');
-    // console.log($tile);
+    // console.log('Tile rendered');
 
     Meteor.defer(function(){
 
@@ -44,7 +43,7 @@ Template.tile.rendered = function() {
 
 };
 Template.tile.destroyed = function(){
-    console.log('Tile destroyed');
+    // console.log('Tile destroyed');
 };
 
 

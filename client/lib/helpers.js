@@ -31,7 +31,7 @@ logRenders = function() {
       var counter = 0;
 
       template.rendered = function () {
-        console.log(name, "render count: ", ++counter);
+        // console.log(name, "render count: ", ++counter);
         oldRender && oldRender.apply(this, arguments);
       };
     });
@@ -214,11 +214,16 @@ fadeArticlesOut = function(callback){
             // run callback
             callback();
 
-            // wait again until the new articles were loaded
-            // setTimeout(function(){
-            //     resizeTiles();
 
-            // },600);
+            if(RELOAD) {
+                RELOAD = false;
+                Session.set('showLoadingIcon',false);
+
+                setTimeout(function(){
+                    $('#mainGrid .tile').removeClass('hidden');
+                    // resizeTiles();
+                },600);
+            }
         },600);
 
     // });
