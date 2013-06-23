@@ -1,4 +1,4 @@
-Meteor.i18nMessages.page = {
+(function(){ Meteor.i18nMessages.page = {
     about: {
         title: {
             en: 'About iNews',
@@ -11,14 +11,19 @@ Meteor.i18nMessages.page = {
             'The data is coming from the <a href="newscred.com" target="_blank">newscred.com</a> API, using the test-key.<br>' +
             'In future releases articles will be fetched from a variety of different sources and will be analyzed, based on pro/con and opinion strength.' +
             '</p><p>' +
-            'You can contact me at fabian [at] frozeman.de',
+            'You can contact me at fabian [at] frozeman.de'+
+            '</p><p>' +
+            'The code can be found on <a href="https://github.com/frozeman/NEWSApp" target="_blank">github</a> and is licensed under the MIT license.',
             de: '<p>iNews ist ein news Agreggator, den ich im Zuge meiner Masterarbeit geschrieben habe.<br>' +
             'Zur Zeit ist es nur ein Interface prototype der die Artikel nur clustert, aber nicht anlysiert.<br>' +
             '</p><p>' +
             'Die Daten kommen von der <a href="newscred.com" target="_blank">newscred.com</a> API, Mithilfe des Test-Keys.<br>' +
             'In zukünftigen Versionen kommen Artikel von unterschiedlichen Quellen und werden nach dafür/dagegen und Meinunsgstärke analysiert.' +
             '</p><p>' +
-            'Du kannst mich unter fabian [at] frozeman.de kontaktieren</p>',
+            'Du kannst mich unter fabian [at] frozeman.de kontaktieren</p>'+
+            '</p><p>' +
+            'Den Quellcode findest du auf <a href="https://github.com/frozeman/NEWSApp" target="_blank">github</a> und ist unter der "MIT license" lizensiert.',
+
         }
     },
     terms: {
@@ -63,3 +68,4 @@ Meteor.i18nMessages.page = {
         }
     }
 };
+}).call(this);
