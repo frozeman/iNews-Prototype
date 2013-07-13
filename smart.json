@@ -1,8 +1,4 @@
 {
-  "meteor": {
-    "tag": "release/0.6.4",
-    "git": "https://github.com/meteor/meteor.git"
-  },
   "packages": {
     "inews-analysis": {
       "path": "/Users/frozeman/Development/Server/iNews/packages/inews-analysis"

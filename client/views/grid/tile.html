@@ -1,5 +1,6 @@
 <template name="tile">
-    <div class="tile hidden{{size}}{{flip}}{{topicColor}}">
+    <div class="tile hidden{{size}}{{flip}}{{topicColor}}{{addSizeClass}}" style="{{addSizeStyles}}">
+        {{#isolate}}
         <div class="front">
             <div class="image">{{image media.images title}}</div>
             <div class="textBox">
@@ -11,87 +12,12 @@
             <button class="cornerButton"></button>
         </div>
         <div class="back">
-            <!-- <div class="tileGrid gridContainer">
-                <div class="containerLeft">
-                    <div class="subTile large"><div></div></div>
-                    <div class="subTile large"><div></div></div>
-                    <div class="subTile large"><div></div></div>
-                    <div class="subTile large"><div></div></div>
-                    <div class="subTile large"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                </div>
-                <div class="containerRight">
-                    <div class="subTile large"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile medium"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                    <div class="subTile small"><div></div></div>
-                </div>
-            </div> -->
             <div class="textBox">
                 <a href="{{subTopicLink this}}" class="title">{{clusterData.subTopic}}</a>
                 <a href="{{subTopicLinkAdd this}}" class="addSubTopicToQueryButton toolTip" title="{{translate 'tiles.toolTips.addSubTopicToQuery'}}"><span class="icon-dot-2"></span></a>
             </div>
             <button class="cornerButton"></button>
         </div>
+        {{/isolate}}
     </div>
 </template>

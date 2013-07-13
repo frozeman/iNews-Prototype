@@ -54,6 +54,8 @@ html {
   /* 1 */
 
   -webkit-text-size-adjust: 100%;
+  /* 2 */
+
   -ms-text-size-adjust: 100%;
   /* 2 */
 
@@ -629,12 +631,6 @@ a,
 a:visited {
   text-decoration: none;
 }
-.easeBounce {
-  -webkit-transition-timing-function: cubic-bezier(0.595, 0.855, 0, 1.165);
-  -moz-transition-timing-function: cubic-bezier(0.595, 0.855, 0, 1.165);
-  -o-transition-timing-function: cubic-bezier(0.595, 0.855, 0, 1.165);
-  transition-timing-function: cubic-bezier(0.595, 0.855, 0, 1.165);
-}
 .marginPaddingReset {
   margin: 0;
   padding: 0;
@@ -695,6 +691,12 @@ a:visited {
   -moz-background-clip: padding;
   border-radius: 30px;
   background-clip: padding-box;
+}
+.easeBounce {
+  -webkit-transition-timing-function: cubic-bezier(0.595, 0.855, 0, 1.165);
+  -moz-transition-timing-function: cubic-bezier(0.595, 0.855, 0, 1.165);
+  -o-transition-timing-function: cubic-bezier(0.595, 0.855, 0, 1.165);
+  transition-timing-function: cubic-bezier(0.595, 0.855, 0, 1.165);
 }
 body {
   height: 100%;
@@ -1703,6 +1705,8 @@ div.containerRight > .tile.small .back button.cornerButton {
   z-index: 2;
   position: absolute;
   bottom: 0;
+  height: 0;
+  width: 0;
   border-style: solid;
   border-color: transparent #d6d1c9;
 }
@@ -2252,6 +2256,10 @@ header.main,
   -moz-transition-duration: 0.4s;
   -o-transition-duration: 0.4s;
   transition-duration: 0.4s;
+  -webkit-transition-delay: 0, 400ms;
+  -moz-transition-delay: 0, 400ms;
+  -o-transition-delay: 0, 400ms;
+  transition-delay: 0, 400ms;
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
   -o-transform: translateZ(0);
@@ -2407,6 +2415,13 @@ article.main div.middle a {
     -o-transform: translate3d(250px, 32px, 0);
     -ms-transform: translate3d(250px, 32px, 0);
     transform: translate3d(250px, 32px, 0);
+  }
+  .csstransforms3d .tile {
+    -webkit-transition-property: z-index, opacity;
+    -moz-transition-property: z-index, opacity;
+    -o-transition-property: z-index, opacity;
+    -ms-transition-property: z-index, opacity;
+    transition-property: z-index, opacity;
   }
 }
 header.main .pathMenu li.topicType1 a {

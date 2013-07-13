@@ -7,7 +7,7 @@ Meteor.publish("currentNews", function (articleIds) {
 
     var limitTo = 50,
         topNewsImportance = 500,
-        onlyArticlesFrom = moment().subtract('days',30).unix(), // 10 days to now()
+        onlyArticlesFrom = moment().subtract('days',5).unix(), // 10 days to now()
         searchValueRegex = (_.isString(articleIds[0])) ? {'title': {$regex : '.*(?:'+articleIds[0].split(' ').join('|')+').*', $options: 'i'}} : {};
 
     // GET TOP NEWS

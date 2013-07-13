@@ -4,6 +4,17 @@ var cornerButtonTimeOut;
 // SETTINGS
 Template.tile.preserve(['.tile']);
 
+// CREATED
+Template.tile.created = function() {
+    var article = this.data;
+
+    Meteor.defer(function(){
+        var $tile = $(this.find('.tile'));
+
+
+
+    });
+};
 
 // RENDERED
 Template.tile.rendered = function() {
@@ -12,38 +23,60 @@ Template.tile.rendered = function() {
 
     // console.log('Tile rendered');
 
-    Meteor.defer(function(){
+    centerImages($tile);
 
-        // set tile size
-        // SMALL
-        if(article.clusterData.importance < (PARTLYIMPORTANCE + CURRENTLYLOWESTIMPORTANCE))
-            $tile.addClass('small').css({'width':SMALLTILESIZE,'height':SMALLTILESIZE});
-        // MEDIUM
-        else if(article.clusterData.importance < (PARTLYIMPORTANCE * 2 + CURRENTLYLOWESTIMPORTANCE))
-            $tile.addClass('medium').css({'width':MEDIUMTILESIZE,'height':MEDIUMTILESIZE});
-        // LARGE
-        else
-            $tile.addClass('large').css({'width':LARGETILESIZE,'height':LARGETILESIZE});
+    $tile.find('.toolTip').powerTip({
+        placement: 's',
+        intentPollInterval: 200,
+        smartPlacement: true
+    });
 
+    // set default side
+    if(Session.equals('viewType', 'navigate')) {
+        $tile.addClass('flip');
+    } else
+        $tile.removeClass('flip');
+
+
+    // set timeout to prevent flickering
+    Meteor.setTimeout(function(){
 
         $tile.removeClass('hidden');
 
-        $tile.find('.toolTip').powerTip({
-            placement: 's',
-            intentPollInterval: 200,
-            smartPlacement: true
-        });
-
-        // set default side
-        if(Session.equals('viewType', 'navigate')) {
-            $tile.addClass('flip');
-        } else
-            $tile.removeClass('flip');
-    });
+    }, 500);
 
 };
 Template.tile.destroyed = function(){
     // console.log('Tile destroyed');
+};
+
+// REACTIVITY
+Template.tile.addSizeClass = function(){
+
+    // console.log(this.clusterData.importance, Session.get('CURRENTLYLOWESTIMPORTANCE'));
+
+    // set tile size
+    // SMALL
+    if(this.clusterData.importance < (Session.get('PARTLYIMPORTANCE') + Session.get('CURRENTLYLOWESTIMPORTANCE')))
+        return ' small';
+    // MEDIUM
+    else if(this.clusterData.importance < (Session.get('PARTLYIMPORTANCE') * 2 + Session.get('CURRENTLYLOWESTIMPORTANCE')))
+        return ' medium';
+    // LARGE
+    else
+        return ' large';
+};
+Template.tile.addSizeStyles = function(){
+    // set tile size
+    // SMALL
+    if(this.clusterData.importance < (Session.get('PARTLYIMPORTANCE') + Session.get('CURRENTLYLOWESTIMPORTANCE')))
+        return 'width:'+SMALLTILESIZE+'px; height:'+SMALLTILESIZE+'px';
+    // MEDIUM
+    else if(this.clusterData.importance < (Session.get('PARTLYIMPORTANCE') * 2 + Session.get('CURRENTLYLOWESTIMPORTANCE')))
+        return 'width:'+MEDIUMTILESIZE+'px; height:'+MEDIUMTILESIZE+'px';
+    // LARGE
+    else
+        return 'width:'+LARGETILESIZE+'px; height:'+LARGETILESIZE+'px';
 };
 
 

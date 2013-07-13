@@ -115,7 +115,8 @@ encodeArticlePath = function(article) {
 
 // CENTER IMAGES
 centerImages = function(container) {
-    $(container + ' .image img').each(function() {
+    var $container = (_.isString(container)) ? $(container) : container;
+    $container.find('.image img').each(function() {
         var img = $(this);
         if(img.parents('.image')) {
             img.parents('.image').css('background-image','url("' + img.attr('src') + '")');

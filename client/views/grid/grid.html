@@ -2,22 +2,20 @@
     <nav id="mainGrid" class="mainGrid gridContainer" role="navigation">
         {{#isolate}}
         <div class="containerLeft">
-            {{#if checkTiles 'pro'}}
-                {{#each tiles 'pro'}}
-                    {{> tile}}
-                {{/each}}
+            {{#each tiles 'pro'}}
+                {{> tile}}
             {{else}}
                 <p>{{translate 'grid.errors.noArticles'}}</p>
-            {{/if}}
+            {{/each}}
         </div>
+        {{/isolate}}
+        {{#isolate}}
         <div class="containerRight">
-            {{#if checkTiles 'con'}}
-                {{#each tiles 'con'}}
-                    {{> tile}}
-                {{/each}}
+            {{#each tiles 'con'}}
+                {{> tile}}
             {{else}}
                 <p>{{translate 'grid.errors.noArticles'}}</p>
-            {{/if}}
+            {{/each}}
         </div>
         {{/isolate}}
 

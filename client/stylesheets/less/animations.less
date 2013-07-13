@@ -59,6 +59,7 @@ header.main,
 .tile {
     .transition-property(z-index, opacity);
     .transition-duration(@animationDuration);
+    .transition-delay(0, 400ms);
     .translateZ(0);
     // .transition(z-index @animationDuration @animationType);
 
@@ -176,6 +177,10 @@ article.main {
             &.slideRight.slideDown {
                 .translate3d(@leftsideBarWidth,@headerHeightMobile,0);
             }
+        }
+
+        .tile {
+            .transition-property(z-index, opacity);
         }
         // .contentWrapper {
         //     &.slideRight {

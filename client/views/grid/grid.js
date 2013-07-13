@@ -11,19 +11,12 @@ Template.grid.rendered = function() {
     if(Session.equals('showMessageBox', true))
         $mainGrid.addClass('slideDown');
 
-    centerImages('#mainGrid');
-
     // hide loading circle
     // Session.set('showLoadingIcon',false);
 };
 
 
 // HELPERS
-
-// check if articles exist articles
-Template.grid.checkTiles = function(type) {
-    return (News.find({'clusterData.side': type}).count() > 0);
-};
 
 // get the articles
 Template.grid.tiles = function(type) {
@@ -34,20 +27,32 @@ Template.grid.tiles = function(type) {
         articles = News.find({'clusterData.side': type}, {sort: sortBy});
 
 
-    // SET the TILE SIZE
-    if(articles.count() > 0) {
-
-        // -> calculate the size for all given articles
-        CURRENTLYHIGHESTIMPORTANCE = _.max(articles.collection.docs, function(article){ return article.clusterData.importance; });
-        CURRENTLYHIGHESTIMPORTANCE = CURRENTLYHIGHESTIMPORTANCE.clusterData.importance;
-        CURRENTLYLOWESTIMPORTANCE  = _.min(articles.collection.docs, function(article){ return article.clusterData.importance; });
-        CURRENTLYLOWESTIMPORTANCE = CURRENTLYLOWESTIMPORTANCE.clusterData.importance;
-
-        // get partly importance, and set size (small/middle/large)
-        PARTLYIMPORTANCE = (CURRENTLYHIGHESTIMPORTANCE - CURRENTLYLOWESTIMPORTANCE) / 3;
-
-    }
 
     // get current articles
     return articles;
 };
+
+
+// AUTORUN
+Deps.autorun(function(c){
+    var articles = News.find({}).fetch();
+
+// console.log(articles)
+
+    // SET the TILE SIZE
+    if(articles.length > 0) {
+
+        // -> calculate the size for all given articles
+        CURRENTLYHIGHESTIMPORTANCE = _.max(articles, function(article){ return article.clusterData.importance; });
+        CURRENTLYHIGHESTIMPORTANCE = CURRENTLYHIGHESTIMPORTANCE.clusterData.importance;
+        CURRENTLYLOWESTIMPORTANCE  = _.min(articles, function(article){ return article.clusterData.importance; });
+        CURRENTLYLOWESTIMPORTANCE = CURRENTLYLOWESTIMPORTANCE.clusterData.importance;
+
+        Session.set('CURRENTLYHIGHESTIMPORTANCE', CURRENTLYHIGHESTIMPORTANCE);
+        Session.set('CURRENTLYLOWESTIMPORTANCE', CURRENTLYLOWESTIMPORTANCE);
+
+        // get partly importance, and set size (small/middle/large)
+        Session.set('PARTLYIMPORTANCE', (CURRENTLYHIGHESTIMPORTANCE - CURRENTLYLOWESTIMPORTANCE) / 3);
+
+    }
+});

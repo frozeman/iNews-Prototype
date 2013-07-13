@@ -42,10 +42,10 @@ Template.article.events({
             unlockViewport();
 
             // fade out
-            $('.dimContainer').fadeOut('fast',function(){
+            // $('.dimContainer').fadeOut('fast',function(){
                 Session.set('showCurrentArticle', false);
                 Meteor.Router.to(encodeNewsPath(NEWSPATH));
-            });
+            // });
         }
     },
     // ADD READING LIST
