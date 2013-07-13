@@ -1572,6 +1572,9 @@ div.containerRight > .tile.small .back button.cornerButton {
   font-size: 1.0em;
   line-height: 1.4em;
 }
+.tile.small.atTheTop .front .image:hover + .textBox {
+  top: 100% !important;
+}
 .tile.small > div {
   padding: 2px;
 }

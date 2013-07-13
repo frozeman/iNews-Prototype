@@ -43,6 +43,10 @@ Template.tile.rendered = function() {
 
         $tile.removeClass('hidden');
 
+        // add class to slide out the small tiles title to the bottom
+        if($tile.hasClass('small') && $tile.offset().top === 60)
+            $tile.addClass('atTheTop');
+
     }, 500);
 
 };
