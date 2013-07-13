@@ -3,6 +3,7 @@ addToReadingList = function(article){
 
     var readingList = JSON.parse(Meteor._localStorage.getItem('readingList'));
 
+
     // add to reading list
     if(!_.isEmpty(article) && !_.find(readingList, function(item){ return (item.id === article._id); })) {
         readingList = readingList || [];

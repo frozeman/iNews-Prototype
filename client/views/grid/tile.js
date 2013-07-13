@@ -97,6 +97,7 @@ Template.tile.events({
         e.preventDefault();
         var article = this;
 
+
         addToReadingList(article);
     },
     'mouseleave .tile': function(e){

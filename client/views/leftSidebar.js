@@ -29,11 +29,12 @@ Template.leftSidebar.events({
 
 
         if(!_.isEmpty(NEWSPATH) && !_.find(bookmarks, function(item){ return (item.text === NEWSPATH);})) {
-            bookmarks = bookmarks || [];
+            var opinionated = (LASTARTICLE) ? LASTARTICLE.clusterData.opinionated : 0;
+            bookmarks = bookmarks || [],
             bookmarks.push({
                 text: NEWSPATH,
                 link: encodeNewsPath(NEWSPATH),
-                opinionated: LASTARTICLE.clusterData.opinionated
+                opinionated: opinionated
             });
             Meteor._localStorage.setItem('bookmarks',JSON.stringify(bookmarks));
             Session.set('reloadBookmarks',true);

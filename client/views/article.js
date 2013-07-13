@@ -66,7 +66,6 @@ Template.article.events({
         if(!_.isEmpty(article) && !_.contains(importantButton, article._id)) {
             News.update({_id: article._id},{$inc: {'clusterData.importance': 1}}, function(error){
                 if(!error) {
-                    
                     importantButton = importantButton || [];
                     importantButton.push(article._id);
                     Meteor._localStorage.setItem('importantButton',JSON.stringify(importantButton));
@@ -123,10 +122,10 @@ Template.article.isOnReadingList = function (articleId) {
     var readingList = JSON.parse(Meteor._localStorage.getItem('readingList'));
 
     // allow reactivity
-    if(Session.equals('reloadReadingListButton', true))
+    if(Session.equals('reloadReadingListButton', articleId))
         Session.set('reloadReadingListButton',false);
 
-    return (_.find(readingList, function(item){ return (item.id === articleId) })) ? ' active' : '';
+    return (_.find(readingList, function(item){ return (item.id === articleId); })) ? ' active' : '';
 };
 // the same as in leftSidebar.js, tile.js
 Template.article.topicColor = function () {

@@ -1389,6 +1389,9 @@ div.divider div.con span {
 .gridContainer.mainGrid.slideDown {
   margin-top: 48px;
 }
+.gridContainer.mainGrid .loadingIcon {
+  color: #5b5345;
+}
 .gridContainer.mainGrid > div.containerLeft,
 .gridContainer.mainGrid > div.containerRight {
   position: relative;
