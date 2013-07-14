@@ -28,8 +28,10 @@ Template.grid.tiles = function(type) {
 
 
     // get current articles
-    if(Session.equals('subscriptionReady', true))
+    if(Session.equals('subscriptionReady', true)) {
+        Session.set('showLoadingIcon', false);
         return articles;
+    }
 };
 
 

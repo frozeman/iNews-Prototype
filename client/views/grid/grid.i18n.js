@@ -9,6 +9,10 @@ Meteor.i18nMessages.grid = {
             de: 'ABLEHNEND'
         }
     },
+    looking: {
+        en: 'looking for articles...',
+        de: 'suche artikel...'
+    },
     errors: {
         noArticles: {
             en: 'Sorry<br>Couldn\'t find any articles.',

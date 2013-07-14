@@ -42,11 +42,11 @@
             'Schwanseestr. 22<br>' +
             '99423 Weimar<br>' +
             'Germany</p>',
-            de: '<p>Diese Platform is Teil meiner Master Arbeit an der Bauhaus Unversität Weimar und hat keine kommerziellen Interessen.' +
+            de: '<p>Diese Plattform ist Teil meiner Master Arbeit an der Bauhaus-Unversität Weimar und verfolgt keine kommerziellen Interessen.' +
             '</p><p>' +
-            'Die Daten für die Artikel kommen von der <a href="newscred.com" target="_blank">newscred.com</a> API, Mithilfe des Test-Keys.' +
+            'Die Daten für die Artikel kommen von der <a href="newscred.com" target="_blank">newscred.com</a> API, mithilfe des Test-Keys.' +
             '</p><p>' +
-            'Sollten Sie Urheberrechtsansprüche haben und wollen Ihre Inhalte von dieser Platform entfernt haben, kontaktieren Sie mich umgehend unter fabian [at] frozeman.de.</p>' +
+            'Sollten Sie Urheberrechtsansprüche haben und wollen Ihre Inhalte von dieser Plattform entfernt haben, kontaktieren Sie mich umgehend unter fabian [at] frozeman.de.</p>' +
             '<br><br>' +
             '<p>Fabian Vogelsteller<br>' +
             'Schwanseestr. 22<br>' +
