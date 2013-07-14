@@ -29,7 +29,7 @@ Template.leftSidebar.events({
 
 
         if(!_.isEmpty(NEWSPATH) && !_.find(bookmarks, function(item){ return (item.text === NEWSPATH);})) {
-            var opinionated = (LASTARTICLE) ? LASTARTICLE.clusterData.opinionated : 0;
+            var opinionated = (LASTARTICLE && LASTARTICLE.clusterData) ? LASTARTICLE.clusterData.opinionated : 0;
             bookmarks = bookmarks || [],
             bookmarks.push({
                 text: NEWSPATH,

@@ -9,6 +9,9 @@ Meteor.Router.add({
     '/news/*': function(path) { //{as: 'news', to:
         var newsPath = decodeNewsPath(path);
 
+        // clear the subscription
+        Meteor.subscribe("currentNews", 'none');
+
         // only START a SEARCH when the topics changed
         if(RELOAD || (!this.init && NEWSPATH !== newsPath)) { // !this.init fix for HTML push state poly fill
 
@@ -73,8 +76,6 @@ Meteor.Router.add({
                         Session.set('getArticlesFor', articleIds);
                     }
                 });
-
-
             });
         }
     },
