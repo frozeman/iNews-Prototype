@@ -218,12 +218,12 @@ fadeArticlesOut = function(callback){
 
             if(RELOAD) {
                 RELOAD = false;
-                Session.set('showLoadingIcon',false);
+                // Session.set('showLoadingIcon',false);
 
-                setTimeout(function(){
-                    $('#mainGrid .tile').removeClass('hidden');
+                // setTimeout(function(){
+                    // $('#mainGrid .tile').removeClass('hidden');
                     // resizeTiles();
-                },600);
+                // },600);
             }
         },600);
 

@@ -9,8 +9,9 @@ Meteor.Router.add({
     '/news/*': function(path) { //{as: 'news', to:
         var newsPath = decodeNewsPath(path);
 
-        // clear the subscription
-        Meteor.subscribe("currentNews", 'none');
+
+        Session.set('showArticlesMissingText',false);
+
 
         // only START a SEARCH when the topics changed
         if(RELOAD || (!this.init && NEWSPATH !== newsPath)) { // !this.init fix for HTML push state poly fill
@@ -23,6 +24,10 @@ Meteor.Router.add({
             $('#search').val(NEWSPATH);
 
             // console.log('SEARCH STARTED: '+newsPath);
+
+
+            // hide current articles
+            Session.set('subscriptionReady', false);
 
 
             // -> START SEARCH

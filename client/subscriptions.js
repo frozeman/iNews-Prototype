@@ -15,12 +15,7 @@ Deps.autorun(function (who) {
         // console.log('Subscriptions ('+articleIds.length+'): '+ articleIds);
 
         // change subscription
-        Meteor.subscribe("currentNews", articleIds, {onReady: function(error){
-
-            // hide loading circle
-            Session.set('showLoadingIcon',false);
-
-        }});
+        Session.set('subscriptionReady', Meteor.subscribe("currentNews", articleIds).ready());
 
     }
 });
@@ -37,6 +32,14 @@ Deps.autorun(function (who) {
         Meteor.subscribe("currentArticle", articleId);
 
     }
+});
+
+Deps.autorun(function(){
+    // hide loading circle
+    if(_.isEmpty(News.find({}).fetch()))
+        Session.set('showArticlesMissingText',true);
+    else
+        Session.set('showArticlesMissingText',false);
 });
 
 Meteor.subscribe("currentClusters");

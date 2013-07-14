@@ -11,6 +11,9 @@ Meteor.startup(function() {
     Session.setDefault('messageBoxMessage', '');
     Session.setDefault('activateHomeButton',true);
     Session.setDefault('showLoadingIcon',true);
+    Session.setDefault('showArticlesMissingText', false);
+
+    Session.setDefault('subscriptionReady', false);
 
     // set start tile size
     setTileSize();

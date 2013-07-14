@@ -27,9 +27,14 @@ Template.grid.tiles = function(type) {
         articles = News.find({'clusterData.side': type}, {sort: sortBy});
 
 
-
     // get current articles
-    return articles;
+    if(Session.equals('subscriptionReady', true))
+        return articles;
+};
+
+
+Template.grid.articlesMissing = function(){
+    return Session.equals('showArticlesMissingText', true);
 };
 
 

@@ -5,8 +5,11 @@
             {{#each tiles 'pro'}}
                 {{> tile}}
             {{else}}
-                {{> loadingIcon}}
-                <!-- <p>{{translate 'grid.errors.noArticles'}}</p> -->
+                {{#if articlesMissing}}
+                    <p>{{translate 'grid.errors.noArticles'}}</p>
+                {{else}}
+                    {{> loadingIcon}}
+                {{/if}}
             {{/each}}
         </div>
         {{/isolate}}
@@ -15,8 +18,11 @@
             {{#each tiles 'con'}}
                 {{> tile}}
             {{else}}
-                {{> loadingIcon}}
-                <!-- <p>{{translate 'grid.errors.noArticles'}}</p> -->
+                {{#if articlesMissing}}
+                    <p>{{translate 'grid.errors.noArticles'}}</p>
+                {{else}}
+                    {{> loadingIcon}}
+                {{/if}}
             {{/each}}
         </div>
         {{/isolate}}

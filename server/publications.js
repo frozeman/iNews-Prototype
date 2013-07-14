@@ -10,10 +10,8 @@ Meteor.publish("currentNews", function (articleIds) {
         onlyArticlesFrom = moment().subtract('days',5).unix(), // 10 days to now()
         searchValueRegex = (_.isString(articleIds[0])) ? {'title': {$regex : '.*(?:'+articleIds[0].split(' ').join('|')+').*', $options: 'i'}} : {};
 
-    if(articleIds === 'none')
-        return this.stop();
     // GET TOP NEWS
-    else if(_.contains(articleIds, 'topNews'))
+    if(_.contains(articleIds, 'topNews'))
         return News.find({$and: [{'metaData.pubDate': {$gt: onlyArticlesFrom}}, {'clusterData.importance': {$gt: topNewsImportance}}]}, {limit: limitTo});
 
     // GET SPECIFIC ARTICLES from CLUSTERS by ID (use the first value as search array)
