@@ -5,13 +5,13 @@ Meteor.i18nMessages.grid = {
             de: 'ZUSTIMMEND'
         },
         con: {
-            en: 'NEGATIVE',
+            en: 'NEGATING',
             de: 'ABLEHNEND'
         }
     },
     looking: {
         en: 'looking for articles...',
-        de: 'suche artikel...'
+        de: 'Suche Artikel...'
     },
     errors: {
         noArticles: {
